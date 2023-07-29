@@ -1,6 +1,8 @@
 import React from "react";
-
+import {HiChevronRight, HiChevronLeft } from "react-icons/hi";
 export default function SliderComponent() {
+
+  
   {
     /*btn for slider start from here*/
   }
@@ -117,121 +119,128 @@ export default function SliderComponent() {
   return (
     <>
       {/*owl carousel for best of Himachal*/}
-      <div className="flex flex-col items-center text-center justify-center">
-        <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-          Best Of Himachal
-        </h2>
-        <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
-      </div>
+      <div className="text-gray-600 body-font ">
+        <div className="container px-8 mx-auto ">
+          <div className="flex flex-col items-center text-center justify-center">
+            <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
+              Best Of Himachal
+            </h2>
+            <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
+          </div>
 
-      <div className="relative flex items-center mx-20">
-        <button
-          className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2"
-          onClick={slideLeft}
-        >
-          <img src="/assets/icon/arrow-left-svgrepo-com.svg" alt="" />
-        </button>
-        <div
-          id="slider"
-          className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide "
-        >
-          {data.map((item) => (
-            <>
-            
-              <img
-                className=" w-64 h-auto inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px] "
-                src={item.img}
-                alt="/"
-              />
+          <div className="relative flex items-center md:mx-4  -mb-4 text-center  ">
+            <button
+              className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+              onClick={slideLeft}
 
-             
-            </>
-          ))}
+
+            >
+              {/* <HiChevronLeft className="h-6 w-6 " /> */}
+              <HiChevronLeft className="h-6 w-6 " />
+            </button>
+            <div
+              id="slider"
+              className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide "
+            >
+              {data.map((item) => (
+                <>
+                  <img
+                    className=" w-64 h-auto inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px] "
+                    src={item.img}
+                    alt="/"
+                  />
+                </>
+              ))}
+            </div>
+
+            <button
+              className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+              onClick={slideRight}
+            >
+              
+              <HiChevronRight className="h-6 w-6 " />
+            </button>
+          </div>
+
+          {/*carousel for best of Himachal*/}
+
+          {/*owl carousel for best of Uttrakhand start*/}
+          <div className="flex flex-col items-center text-center justify-center ">
+            <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
+              {" "}
+              Best Of Uttrakhand
+            </h2>
+            <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
+          </div>
+
+          <div className="relative flex items-center mx-20">
+            <button
+              className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+              onClick={slideLeft1}
+            >
+              <HiChevronLeft className="h-6 w-6 " />
+            </button>
+            <div
+              id="slider1"
+              className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
+            >
+              {data.map((item) => (
+                <img
+                  className=" w-64 h-auto inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px] "
+                  src={item.img}
+                  alt="/"
+                />
+              ))}
+            </div>
+            <button
+              className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+              onClick={slideRight1}
+            >
+              <HiChevronRight className="h-6 w-6 " />
+            </button>
+          </div>
+          {/*owl carousel for best of Uttrakhand end*/}
+
+          {/*owl carousel for Evergreen Uttarakhand Package*/}
+          <div className="flex flex-col items-center text-center justify-center">
+            <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
+              Evergreen Uttarakhand
+            </h2>
+            <p className="md:mb-0 text-[18px]  md:text-[30px] font-bold title-font">
+              {" "}
+              Package
+            </p>
+            <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
+          </div>
+          <div className="relative flex items-center mx-20">
+            <button
+              className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+              onClick={slideLeft2}
+            >
+              <HiChevronLeft className="h-6 w-6 " />
+            </button>
+            <div
+              id="slider2"
+              className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide "
+            >
+              {data.map((item) => (
+                <img
+                  className=" w-64 h-auto inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px] "
+                  src={item.img}
+                  alt="/"
+                />
+              ))}
+            </div>
+            <button
+              className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+              onClick={slideRight2}
+            >
+              <HiChevronRight className="h-6 w-6 " />
+            </button>
+          </div>
+          {/*owl carousel for Evergreen Uttarakhand Package ends here..*/}
         </div>
-
-        <button
-          className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2"
-          onClick={slideRight}
-        >
-          <img src="/assets/icon/arrow-right-svgrepo-com.svg" alt="" />
-        </button>
       </div>
-
-      {/*carousel for best of Himachal*/}
-
-      {/*owl carousel for best of Uttrakhand start*/}
-      <div className="flex flex-col items-center text-center justify-center ">
-        <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-          {" "}
-          Best Of Uttrakhand
-        </h2>
-        <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
-      </div>
-
-      <div className="relative flex items-center mx-20">
-        <button
-          className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2"
-          onClick={slideLeft1}
-        >
-          <img src="/assets/icon/arrow-left-svgrepo-com.svg" alt="" />
-        </button>
-        <div
-          id="slider1"
-          className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
-        >
-          {data.map((item) => (
-            <img
-              className=" w-64 h-auto inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px] "
-              src={item.img}
-              alt="/"
-            />
-          ))}
-        </div>
-        <button
-          className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2"
-          onClick={slideRight1}
-        >
-          <img src="/assets/icon/arrow-right-svgrepo-com.svg" alt="" />
-        </button>
-      </div>
-      {/*owl carousel for best of Uttrakhand end*/}
-
-      {/*owl carousel for Evergreen Uttarakhand Package*/}
-      <div className="flex flex-col items-center text-center justify-center">
-        <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-          Evergreen Uttarakhand
-        </h2>
-        <p className="md:mb-0 text-[18px]  md:text-[30px] font-bold title-font"> Package</p>
-        <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
-      </div>
-      <div className="relative flex items-center mx-20">
-        <button
-          className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2"
-          onClick={slideLeft2}
-        >
-          <img src="/assets/icon/arrow-left-svgrepo-com.svg" alt="" />
-        </button>
-        <div
-          id="slider2"
-          className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide "
-        >
-          {data.map((item) => (
-            <img
-              className=" w-64 h-auto inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px] "
-              src={item.img}
-              alt="/"
-            />
-          ))}
-        </div>
-        <button
-          className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2"
-          onClick={slideRight2}
-        >
-          <img src="/assets/icon/arrow-right-svgrepo-com.svg" alt="" />
-        </button>
-      </div>
-      {/*owl carousel for Evergreen Uttarakhand Package ends here..*/}
-
       {/*carousel starts from here */}
       <section className="text-gray-600 body-font">
         <div class="container px-12 py-7 mx-auto">
@@ -243,10 +252,16 @@ export default function SliderComponent() {
                   className="w-full"
                 />
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                  <a href="#slide4" className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2">
+                  <a
+                    href="#slide4"
+                    className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+                  >
                     ❮
                   </a>
-                  <a href="#slide2" className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2">
+                  <a
+                    href="#slide2"
+                    className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+                  >
                     ❯
                   </a>
                 </div>
@@ -257,10 +272,16 @@ export default function SliderComponent() {
                   className="w-full"
                 />
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                  <a href="#slide1" className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2">
+                  <a
+                    href="#slide1"
+                    className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+                  >
                     ❮
                   </a>
-                  <a href="#slide3" className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2">
+                  <a
+                    href="#slide3"
+                    className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+                  >
                     ❯
                   </a>
                 </div>
@@ -271,10 +292,16 @@ export default function SliderComponent() {
                   className="w-full"
                 />
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                  <a href="#slide2" className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2">
+                  <a
+                    href="#slide2"
+                    className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+                  >
                     ❮
                   </a>
-                  <a href="#slide4" className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2">
+                  <a
+                    href="#slide4"
+                    className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+                  >
                     ❯
                   </a>
                 </div>
@@ -285,10 +312,16 @@ export default function SliderComponent() {
                   className="w-full"
                 />
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                  <a href="#slide3" className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2">
+                  <a
+                    href="#slide3"
+                    className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+                  >
                     ❮
                   </a>
-                  <a href="#slide1" className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2">
+                  <a
+                    href="#slide1"
+                    className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+                  >
                     ❯
                   </a>
                 </div>
@@ -309,10 +342,10 @@ export default function SliderComponent() {
 
       <div className="relative flex items-center mx-20">
         <button
-          className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2"
+          className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
           onClick={slideLeft3}
         >
-          <img src="/assets/icon/arrow-left-svgrepo-com.svg" alt="" />
+          <HiChevronLeft className="h-6 w-6 " />
         </button>
         <div
           id="slider3"
@@ -327,10 +360,10 @@ export default function SliderComponent() {
           ))}
         </div>
         <button
-          className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2"
+          className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
           onClick={slideRight3}
         >
-          <img src="/assets/icon/arrow-right-svgrepo-com.svg" alt="" />
+          <HiChevronRight className="h-6 w-6 " />
         </button>
       </div>
       {/*owl carousel for Best Of Kashmir end here*/}
@@ -340,16 +373,19 @@ export default function SliderComponent() {
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
           Favorite Kashmir
         </h2>
-        <p className="md:mb-0 text-[18px]  md:text-[30px] font-bold title-font"> Packages</p>
+        <p className="md:mb-0 text-[18px]  md:text-[30px] font-bold title-font">
+          {" "}
+          Packages
+        </p>
         <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
       </div>
 
       <div className="relative flex items-center mx-20 pb-24">
         <button
-          className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2"
+          className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
           onClick={slideLeft4}
         >
-          <img src="/assets/icon/arrow-left-svgrepo-com.svg" alt="" />
+          <HiChevronLeft className="h-6 w-6 " />
         </button>
         <div
           id="slider4"
@@ -364,10 +400,10 @@ export default function SliderComponent() {
           ))}
         </div>
         <button
-          className="hidden md:btn md:btn-circle md:btn-outline  md:btn-primary  md:mx-2"
+          className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
           onClick={slideRight4}
         >
-          <img src="/assets/icon/arrow-right-svgrepo-com.svg" alt="" />
+          <HiChevronRight className="h-6 w-6 " />
         </button>
       </div>
       {/*owl carousel for Favorite Kashmir Packages end here*/}

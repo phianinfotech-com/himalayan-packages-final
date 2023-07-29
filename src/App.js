@@ -12,6 +12,7 @@ import { BrowserRouter , Routes, Route } from 'react-router-dom';
 
 import NotFound from "./components/pages/NotFound";
 import Upload from "./components/pages/Upload";
+import AddExplore from "./components/admin/AddExplore";
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
       <Route path="/blog" element={<Blog/>}/>
       <Route path="/AddBlog" element={<AddBlog/>}/>
       <Route path="/blog/:id/" element={<BlogDetails/>}/>
+
+      <Route path="/explore" element={<AddExplore/>}/>
+      
 
       
       

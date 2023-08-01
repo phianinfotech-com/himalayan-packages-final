@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 
+
 const AddBestOfPlace = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [category, setCategory] = useState([]);

@@ -1,6 +1,39 @@
 import React from "react";
 import { HiChevronRight, HiChevronLeft } from "react-icons/hi";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useEffect, useState } from "react";
 export default function SliderComponent() {
+  const [himachal, setHimachal] = useState([]); // for category
+
+  /// const [category, setcategory] = useState([]);
+  useEffect(() => {
+    gehimachal();
+  }, []);
+
+  function gehimachal() {
+    axios
+      .get("http://localhost/himalayan/api-hiimachal-package.php/")
+      .then(function (response) {
+        setHimachal(response.data);
+      });
+  }
+
+  /// best package of himachal
+
+  const [himachalpackage, setHimachalpackage] = useState([]); // for category
+  useEffect(() => {
+    gethimachalpackage();
+  }, []);
+
+  function gethimachalpackage() {
+    axios
+      .get("http://localhost/himalayan/api-fetch-Himachal-Pradesh.php/  ")
+      .then(function (response) {
+        setHimachalpackage(response.data);
+      });
+  }
+
   {
     /*btn for slider start from here*/
   }
@@ -119,43 +152,93 @@ export default function SliderComponent() {
       {/*owl carousel for best of Himachal*/}
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-          Best Of Himachal
+          {himachal[1]?.BName}
         </h2>
         <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
       </div>
-
       <div className="relative flex items-center md:mx-20 mx-4">
         <button
-          className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+          className="hidden md:btn md:btn-circle md:btn-outline btn-primary md:mx-2"
           onClick={slideLeft1}
         >
           <HiChevronLeft className="h-6 w-6 " />
         </button>
         <div
-          id="slider3"
+          id="slider1"
           className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide "
         >
-          {data.map((item) => (
-            <img
-              className=" w-64 h-auto inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px] "
-              src={item.img}
-              alt="/"
-            />
+          {himachal.map((item) => (
+            <div key={item.id} className="relative inline-block">
+              <img
+                className="w-64 h-auto p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
+                src={item.CImg}
+                alt={item.CAlt}
+              />
+              <div className="absolute bottom-0 left-0 w-full h-full flex items-center justify-center">
+                <p className="text-white font-bold text-3xl leading-8">
+                  {item.CAlt}
+                </p>
+              </div>
+            </div>
           ))}
-          
-        
         </div>
         <button
-          className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
+          className="hidden md:btn md:btn-circle md:btn-outline btn-primary md:mx-2"
           onClick={slideRight1}
         >
           <HiChevronRight className="h-6 w-6 " />
         </button>
       </div>
+
       {/*carousel for best of Himachal*/}
 
-          {/*owl carousel for best of Uttrakhand start*/}
-          <div className="flex flex-col items-center text-center justify-center">
+
+      {/*owl carousel for best of Himachal*/}
+      <div className="flex flex-col items-center text-center justify-center">
+        <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
+          {himachalpackage[1]?.BName}
+        </h2>
+        <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
+      </div>
+      <div className="relative flex items-center md:mx-20 mx-4">
+        <button
+          className="hidden md:btn md:btn-circle md:btn-outline btn-primary md:mx-2"
+          onClick={slideLeft1}
+        >
+          <HiChevronLeft className="h-6 w-6 " />
+        </button>
+        <div
+          id="slider1"
+          className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide "
+        >
+          {himachalpackage.map((pkg) => (
+            <div key={pkg.id} className="relative inline-block">
+              <img
+                className="w-64 h-auto p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
+                src={pkg.image_path}
+                alt={pkg.place_id}
+              />
+              <div className="absolute bottom-0 left-0 w-full h-full flex items-center justify-center">
+                <p className="text-white font-bold text-3xl leading-8">
+                  {pkg.PName}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button
+          className="hidden md:btn md:btn-circle md:btn-outline btn-primary md:mx-2"
+          onClick={slideRight1}
+        >
+          <HiChevronRight className="h-6 w-6 " />
+        </button>
+      </div>
+
+      {/*carousel for best of Himachal*/}
+
+
+      {/*owl carousel for best of Uttrakhand start*/}
+      <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
           Best Of Uttrakhand start
         </h2>
@@ -188,13 +271,13 @@ export default function SliderComponent() {
           <HiChevronRight className="h-6 w-6 " />
         </button>
       </div>
-          {/*owl carousel for best of Uttrakhand end*/}
+      {/*owl carousel for best of Uttrakhand end*/}
 
-          {/*owl carousel for Evergreen Uttarakhand Package*/}
-          
-          <div className="flex flex-col items-center text-center justify-center">
+      {/*owl carousel for Evergreen Uttarakhand Package*/}
+
+      <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-        Evergreen Uttarakhand Package
+          Evergreen Uttarakhand Package
         </h2>
         <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
       </div>
@@ -226,11 +309,10 @@ export default function SliderComponent() {
         </button>
       </div>
 
-          {/*owl carousel for Evergreen Uttarakhand Package ends here..*/}
-       
-     
+      {/*owl carousel for Evergreen Uttarakhand Package ends here..*/}
+
       {/*carousel starts from here */}
-       <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font">
         <div class="container px-12 py-7 mx-auto">
           <div class="flex flex-col text-center w-full mb-2px">
             <div className="carousel w-full  py-7">
@@ -317,7 +399,7 @@ export default function SliderComponent() {
             </div>
           </div>
         </div>
-      </section> 
+      </section>
       {/*carousel end here */}
 
       {/*owl carousel for  Best Of Kashmir*/}
@@ -346,10 +428,11 @@ export default function SliderComponent() {
               alt="/"
             />
           ))}
-           <span className="flex-grow flex flex-col pl-4">
-           <span className="title-font text-2xl text-gray-900">Kashmir kawai</span>
-           </span>
-           
+          <span className="flex-grow flex flex-col pl-4">
+            <span className="title-font text-2xl text-gray-900">
+              Kashmir kawai
+            </span>
+          </span>
         </div>
         <button
           className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
@@ -363,7 +446,7 @@ export default function SliderComponent() {
       {/*owl carousel for  start from here Favorite Kashmir Packages*/}
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-        Favorite Kashmir Packages
+          Favorite Kashmir Packages
         </h2>
         <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
       </div>
@@ -386,10 +469,11 @@ export default function SliderComponent() {
               alt="/"
             />
           ))}
-           <span className="flex-grow flex flex-col pl-4">
-           <span className="title-font text-2xl text-gray-900">Kashmir kawai</span>
-           </span>
-           
+          <span className="flex-grow flex flex-col pl-4">
+            <span className="title-font text-2xl text-gray-900">
+              Kashmir kawai
+            </span>
+          </span>
         </div>
         <button
           className="hidden md:btn md:btn-circle md:btn-outline  btn-primary  md:mx-2"
@@ -399,8 +483,6 @@ export default function SliderComponent() {
         </button>
       </div>
       {/*owl carousel for Favorite Kashmir Packages end here*/}
-
-     
     </>
   );
 }

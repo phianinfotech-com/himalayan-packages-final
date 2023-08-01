@@ -54,7 +54,7 @@ export default function Home() {
           {/*section one starts from here */}
           <div className="text-gray-600 body-font mt-20 ">
             <div className="container px-8 py-8 mx-auto ">
-              <div className="flex flex-wrap md:mx-4 -mb-10 text-center items-center border-solid border-2 border-indigo-600">
+              <div className="flex flex-wrap md:mx-4 -mb-10 text-center items-center ">
                 <div className="sm:w-1/4 mb-10 px-4">
                   <div className="flex flex-col items-center text-center justify-center">
                     <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">

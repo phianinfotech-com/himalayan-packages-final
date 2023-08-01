@@ -13,6 +13,9 @@ import { BrowserRouter , Routes, Route } from 'react-router-dom';
 import NotFound from "./components/pages/NotFound";
 import Upload from "./components/pages/Upload";
 import AddExplore from "./components/admin/AddExplore";
+import AddBestOf from "./components/admin/AddBestOf";
+import Addpackages from "./components/admin/Addpackages";
+import AddBestOfPlace from "./components/admin/AddBestOfPlace";
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
       <Route path="/blog/:id/" element={<BlogDetails/>}/>
 
       <Route path="/explore" element={<AddExplore/>}/>
+      <Route path="/bestof" element={<AddBestOf/>}/>
+      <Route path="/addpackages" element={<Addpackages />}/>
+      <Route path="/bestplace" element={<AddBestOfPlace />}/>
       
 
       

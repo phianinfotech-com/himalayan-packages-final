@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 // BlogDetails component responsible for rendering a blog post details page
 const BlogDetails = () => {
 
-  const currentURL = window.location.href;
+const currentURL = window.location.href;
 console.log(currentURL);
   const navigate = useNavigate();
 

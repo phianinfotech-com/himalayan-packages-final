@@ -58,7 +58,6 @@ function Blog() {
   // Choose which blog posts to display based on search results
   const displayBlogPosts = searchResults || currentBlogPosts;
 
-
   const parser = new Parser();
   return (
     <>
@@ -71,20 +70,18 @@ function Blog() {
           </h2>
         </section>
       </div>
-      
+
       {/* Blog Posts Section */}
       <section className="text-gray-600 body-font">
         <div className="container px-10 py-24 mx-auto">
           {/* SearchAllBlog */}
 
-         
-
-         
           <div className="flex flex-col items-center justify-center mb-8 md:flex-row md:justify-between md:mb-10">
-            <h1 className="text-4xl font-bold text-center mb-4 md:mb-0">All Blog</h1>
+            <h1 className="text-4xl font-bold text-center mb-4 md:mb-0">
+              All Blog
+            </h1>
             <div className="md:ml-4">
               <div className="form-control w-full max-w-xs">
-              
                 <SearchAllBlog handleSearch={handleSearch} />
               </div>
             </div>
@@ -109,14 +106,14 @@ function Blog() {
                       </h1>
                       {/* Display content preview */}
                       <p
-  className="leading-relaxed mb-3"
-  dangerouslySetInnerHTML={{
-    __html:
-      post.content.length > MAX_LENGTH
-        ? `${post.content.substring(0, MAX_LENGTH)}...`
-        : post.content,
-  }}
-></p>
+                        className="leading-relaxed mb-3"
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            post.content.length > MAX_LENGTH
+                              ? `${post.content.substring(0, MAX_LENGTH)}...`
+                              : post.content,
+                        }}
+                      ></p>
                       <div className="flex items-center flex-wrap ">
                         <Link
                           to={`/blog/${post.slug}/`}

@@ -10,6 +10,11 @@ import Headerfile from "../Headerfile";
 import Footer from "../Footer";
 import SliderComponent from "../SliderComponent";
 
+
+import { Parser } from "html-to-react";
+
+import { Link } from "react-router-dom";
+
 export default function Home() {
   const [memory, setMemory] = useState([]);
   useEffect(() => {
@@ -68,13 +73,22 @@ export default function Home() {
                 <div className="sm:w-3/4 mb-10">
                   <div className="carousel  ">
                     {/* {displayBlogPosts.map((post) => ( */}
+
                     {memory.map((memo) => (
                       <div className="carousel-item m-4 " key={memo.key}>
+                         <Link
+                          to={`/collections/${memo.MSlug}/`}
+                         
+                          className="text-primary inline-flex items-center text-xl md:mb-2 lg:mb-0"
+                        >
+                           {console.log(memo.MSlug)}
                         <img
                           src={memo.MImg}
                           className="w-64 h-full rounded-lg  shadow-sm transform transition duration-500 hover:scale-105"
                           alt={memo.MAlt}
+
                         />
+                       </Link>
                       </div>
                     ))}
                   </div>

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import JoditEditor from "jodit-react";
 
-export default function Blog() {
+export default function MyMyBlog() {
   const editor = useRef(null);
   const [content, setContent] = useState("");
 
@@ -15,7 +15,7 @@ export default function Blog() {
         <div className="container px-10 py-10 mx-auto">
           <div className="flex flex-col text-center w-full mb-12">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-              Add Blog
+              Add MyBlog
             </h1>
            
           </div>
@@ -24,7 +24,7 @@ export default function Blog() {
               <div className="p-2 w-full">
                 <div className="relative">
                   <label className="label">
-                    <span className="label-text">What is your Blog Title?</span>
+                    <span className="label-text">What is your MyBlog Title?</span>
                   </label>
                   <input
                     type="text"

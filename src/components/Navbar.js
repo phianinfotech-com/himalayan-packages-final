@@ -11,7 +11,7 @@ export default function Navbar() {
 
   const changeBackground = () => {
     // console.log(window.scrollY)
-    if (window.scrollY >= 10) {
+    if (window.scrollY >= 5) {
       setNavbar(true);
     } else {
       setNavbar(false);
@@ -55,7 +55,27 @@ export default function Navbar() {
             </li>
 
             <li>
-            <Link to='/'>Contact Us</Link>
+            <Link to='/AddBlog'>AddBlog</Link>
+              
+            </li>
+
+            <li>
+            <Link to='/explore'>explore</Link>
+              
+            </li>
+
+            <li>
+            <Link to='/bestof'>bestof</Link>
+              
+            </li>
+
+            <li>
+            <Link to='/addpackages'>addpackages</Link>
+              
+            </li>
+
+            <li>
+            <Link to='/bestplace'>bestplace</Link>
               
             </li>
 {/* 
@@ -82,7 +102,27 @@ export default function Navbar() {
             </li>
 
             <li>
-            <Link to='/'>Contact Us</Link>
+            <Link to='/AddBlog'>AddBlog</Link>
+              
+            </li>
+
+            <li>
+            <Link to='/explore'>explore</Link>
+              
+            </li>
+
+            <li>
+            <Link to='/bestof'>bestof</Link>
+              
+            </li>
+
+            <li>
+            <Link to='/addpackages'>addpackages</Link>
+              
+            </li>
+
+            <li>
+            <Link to='/bestplace'>bestplace</Link>
               
             </li>
 

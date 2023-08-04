@@ -14,8 +14,10 @@ import NotFound from "./components/pages/NotFound";
 import Upload from "./components/pages/Upload";
 import AddExplore from "./components/admin/AddExplore";
 import AddBestOf from "./components/admin/AddBestOf";
-import Addpackages from "./components/admin/Addpackages";
+import AddPackageForm from "./components/admin/AddPackageForm";
 import AddBestOfPlace from "./components/admin/AddBestOfPlace";
+import SinglePackage from "./components/pages/SinglePackage";
+import AllPackage from "./components/pages/AllPackage";
 
 function App() {
   return (
@@ -30,35 +32,18 @@ function App() {
       <Route path="/blog" element={<Blog/>}/>
       <Route path="/AddBlog" element={<AddBlog/>}/>
       <Route path="/blog/:id/" element={<BlogDetails/>}/>
-
       <Route path="/explore" element={<AddExplore/>}/>
       <Route path="/bestof" element={<AddBestOf/>}/>
-      <Route path="/addpackages" element={<Addpackages />}/>
+      <Route path="/addpackages" element={<AddPackageForm />}/>
       <Route path="/bestplace" element={<AddBestOfPlace />}/>
-      
-
-      
-      
+      <Route path="/tours/:id" element={<SinglePackage />}/>
+      <Route path="/collections/:id" element={<AllPackage/>}/>
+         
     </Routes>
   </BrowserRouter>
    
   
 
-      {/* <section className="bg-[url('https://images.unsplash.com/photo-1605649487212-47bdab064df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80')] w-full h-screen bg-cover bg-center bg-no-repeat mb-8 md:h-screen ">
-        <div className="w-full h-full  backdrop-brightness-75">
-
-          <Navbar />
-
-          <Headerfile />
-
-        </div>       
-      </section> */}
-      {/* <Home />
-      <SliderComponent />
-
-     */}
-     {/* <Blog />  */}
-     {/* <AddBlog /> */}
 
     </div>
     

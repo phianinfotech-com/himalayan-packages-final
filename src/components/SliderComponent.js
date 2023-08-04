@@ -34,6 +34,9 @@ export default function SliderComponent() {
       });
   }
 
+
+  
+
   {
     /*btn for slider start from here*/
   }

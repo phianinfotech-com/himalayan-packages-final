@@ -16,6 +16,9 @@ import AddExplore from "./components/admin/AddExplore";
 import AddBestOf from "./components/admin/AddBestOf";
 import Addpackages from "./components/admin/Addpackages";
 import AddBestOfPlace from "./components/admin/AddBestOfPlace";
+import Page from "./components/pages/page";
+import Addpage from "./components/admin/Addpage";
+import FetchEnquire from "./components/admin/FetchEnquire";
 
 function App() {
   return (
@@ -35,7 +38,12 @@ function App() {
       <Route path="/bestof" element={<AddBestOf/>}/>
       <Route path="/addpackages" element={<Addpackages />}/>
       <Route path="/bestplace" element={<AddBestOfPlace />}/>
+      <Route path="/page/:id" element={<Page />}/>
+      <Route path="/page/" element={<Page />}/>
+      <Route path="/addpage/" element={<Addpage />}/>
+      <Route path="/viewEnquire/" element={<FetchEnquire />}/>
       
+   
 
       
       

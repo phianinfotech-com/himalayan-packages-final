@@ -19,6 +19,8 @@ import AddBestOfPlace from "./components/admin/AddBestOfPlace";
 import Page from "./components/pages/page";
 import Addpage from "./components/admin/Addpage";
 import FetchEnquire from "./components/admin/FetchEnquire";
+import AddPackageForm from "./components/admin/Addpackageform";
+import PackageDetails from "./components/pages/PackageDetails";
 
 function App() {
   return (
@@ -42,11 +44,11 @@ function App() {
       <Route path="/page/" element={<Page />}/>
       <Route path="/addpage/" element={<Addpage />}/>
       <Route path="/viewEnquire/" element={<FetchEnquire />}/>
-      
+      <Route path="/addpackageform" element={<AddPackageForm />}/>
+      <Route path="/PackageDetails" element={<PackageDetails />}/>
    
 
-      
-      
+  
     </Routes>
   </BrowserRouter>
    

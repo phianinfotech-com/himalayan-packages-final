@@ -5,6 +5,7 @@ import Navbar from "../Navbar";
 import SearchAllBlog from "../SearchAllBlog";
 import Footer from "../Footer";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 export default function Fetch() {
 
@@ -25,44 +26,44 @@ export default function Fetch() {
   return (
     <div>
       <div className="overflow-x-auto">
-
-
-    
-  <table className="table">
+  <table className="table ">
     {/* head */}
     <thead>
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Mob</th>
-        <th>Date</th>
-        <th>People</th>
-        <th>Msg</th>
-        <th>email</th>
-        <th>slug</th>
+      <tr className="bg-indigo-400 shadow-lg shadow-indigo-500/50 font-serif  text-xl  text-white ">
+        <th className=" border font-light">Eid</th>
+        <th className=" border font-light">Name</th>
+        <th className=" border font-light">Mob</th>
+        <th className=" border font-light">Date</th>
+        <th className=" border font-light">People</th>
+        <th className=" border font-light">Msg</th>
+        <th className=" border font-light">Email</th>
+        <th className=" border font-light">slug</th>
       </tr>
     </thead>
     <tbody>
 
-
-        {/* {memory.map((memo) => (
-                      <div className="carousel-item m-4 " key={memo.key}>
-                        <img
-                          src={memo.MImg}
-                          className="w-64 h-full rounded-lg  shadow-sm transform transition duration-500 hover:scale-105"
-                          alt={memo.MAlt}
-                        />
-                      </div>
-                    ))} */}
-
     {blogPosts.map((enq) => (
       
-      <tr  key={enq.key}>
-        <th>{enq.EID}</th>
-       
-     
-        
+      <tr className="bg-indigo-50  text-sm text-slate-700 font-normal" key={enq.key}>
+        <th className="border">{enq.EID}</th>
+
+        <th className="border">{enq.E_Name}</th>
+
+        <th className="border" >{enq.Mobile_No}</th>
+
+        <th className="border">{moment(enq.Date).format("DD - MMM - YY")}</th>
+
+        <th className="border">{enq.People}</th>
+
+        <th className="border">{enq.E_msg}</th>
+
+        <th className="border">{enq.Email}</th>
+
+        <th className="border">{enq.Slug}</th>
+
       </tr>
+
+
       ))} 
     </tbody>
   </table>

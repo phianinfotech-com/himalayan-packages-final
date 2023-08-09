@@ -21,6 +21,9 @@ import Addpage from "./components/admin/Addpage";
 import FetchEnquire from "./components/admin/FetchEnquire";
 import AddPackageForm from "./components/admin/Addpackageform";
 import PackageDetails from "./components/pages/PackageDetails";
+import PageDetails  from "./components/pages/PageDetails";
+import ContactUs  from "./components/pages/ContactUs";
+
 
 function App() {
   return (
@@ -46,7 +49,8 @@ function App() {
       <Route path="/viewEnquire/" element={<FetchEnquire />}/>
       <Route path="/addpackageform" element={<AddPackageForm />}/>
       <Route path="/PackageDetails" element={<PackageDetails />}/>
-   
+      <Route path="/about-us" element={<PageDetails />}/>
+      <Route path="/contact-us" element={<ContactUs />}/>
 
   
     </Routes>

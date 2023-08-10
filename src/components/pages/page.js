@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "../Footer";
 import axios from "axios";
 import Navbar from "../Navbar";
-import Enquire from "../../Enquire";
+import Enquire from "../Enquire";
 import { useNavigate, useParams } from "react-router-dom";
 
 
@@ -21,7 +21,7 @@ const Page = () => {
   const fetchDataBySlug = async (slug) => {
     try {
       const response = await fetch(
-        `http://localhost/himalayan/api-page.php?slug=${slug}`
+        `https://himalayanpackages.com/himalayan/api-page.php?slug=${slug}`
       );
       const jsonData = await response.json();
       setData(jsonData);

@@ -19,7 +19,7 @@ const AddExplore = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost/himalayan/api_fetch_place_category.php');
+      const response = await fetch('https://himalayanpackages.com/himalayan/api_fetch_place_category.php');
       const data = await response.json();
       setCategories(data);
     } catch (error) {
@@ -43,7 +43,7 @@ const AddExplore = () => {
     formDataObj.append('EAlt', formData.EAlt);
   
     try {
-      const response = await fetch('http://localhost/himalayan/addexplore.php', {
+      const response = await fetch('https://himalayanpackages.com/himalayan/addexplore.php', {
         method: 'POST',
         body: formDataObj,
       });

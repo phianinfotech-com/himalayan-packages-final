@@ -43,7 +43,7 @@ const AddPackageForm = () => {
   
     function getcategory() {
       axios
-        .get("http://localhost/himalayan/api_fetch_category.php/")
+        .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
         .then(function (response) {
           
           setcategory(response.data);
@@ -96,6 +96,8 @@ const AddPackageForm = () => {
     setBanner1(file);
   };
 
+  
+
  
 
   const handleBannerAlt1Change = (e) => {
@@ -130,12 +132,19 @@ const AddPackageForm = () => {
   };
 
   const handleSlugChange = (e) => {
+    
     setSlug(e.target.value);
   };
   const handleCategoryIdChange = (e) => {
     setCategoryId(e.target.value);
 
   };
+
+  const handleTempChange = (e) => {
+    setTemp(e.target.value);
+
+  };
+  
 
   // Generate the slug from PTitle and update it whenever PTitle changes
   useEffect(() => {
@@ -228,7 +237,9 @@ const AddPackageForm = () => {
       if (!banner_alt4) {
         validationErrors.banner_alt4 = "banner_alt4 is required";
       }
-
+      if (!temp) {
+        validationErrors.temp = "Duration is required";
+      }
     // Add more validation for other form fields as needed
 
     if (Object.keys(validationErrors).length > 0) {
@@ -260,12 +271,13 @@ const AddPackageForm = () => {
     formData.append("banner_alt3", banner_alt3);
     formData.append("banner4", banner4);
     formData.append("banner_alt4", banner_alt4);
+    formData.append("temp", temp);
   
  
     
     try {
         // Make an HTTP POST request to your PHP API endpoint
-        const response = await axios.post("http://localhost/himalayan/api-add-pkg.php", formData);
+        const response = await axios.post("https://himalayanpackages.com/himalayan/api-add-pkg.php", formData);
     
         // Handle the response from the API as needed
         // For example, show a success message or redirect to another page
@@ -302,7 +314,7 @@ const AddPackageForm = () => {
           <h1 className="text-2xl font-bold mb-4">Add Packages</h1>
 
           <div className="flex flex-wrap -m-4">
-            <div className="lg:w-1/3 md:w-1/3 p-4 w-full">
+            <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
               <label
                 htmlFor="PTitle"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -320,7 +332,7 @@ const AddPackageForm = () => {
               />
             </div>
 
-            <div className="lg:w-1/3 md:w-1/3 p-4 w-full">
+            <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
               {/* slug */}
 
               <label
@@ -341,7 +353,7 @@ const AddPackageForm = () => {
               
             </div>
 
-            <div className="lg:w-1/3 md:w-1/3 p-4 w-full">
+            <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
               {/* Category */}
 
               <label
@@ -371,6 +383,27 @@ const AddPackageForm = () => {
                     </select>
             </div>
 
+
+            <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
+              {/* slug */}
+
+              <label
+                htmlFor="temp"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                temp
+              </label>
+              <input
+                type="text"
+                id="slug"
+                name="temp"
+                value={temp}
+                onChange={handleTempChange}
+                className="input input-bordered input-primary w-full "
+                required
+              />
+              
+            </div>
             
 
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">

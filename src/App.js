@@ -21,6 +21,10 @@ import Addpage from "./components/admin/Addpage";
 import FetchEnquire from "./components/admin/FetchEnquire";
 import AddPackageForm from "./components/admin/Addpackageform";
 import PackageDetails from "./components/pages/PackageDetails";
+import PageDetails from "./components/pages/PageDetails";
+import ContactUs from "./components/pages/ContactUs";
+import AllPackages from "./components/pages/AllPackages";
+import SinglePackage from "./components/pages/SinglePackage";
 
 function App() {
   return (
@@ -46,7 +50,10 @@ function App() {
       <Route path="/viewEnquire/" element={<FetchEnquire />}/>
       <Route path="/addpackageform" element={<AddPackageForm />}/>
       <Route path="/PackageDetails" element={<PackageDetails />}/>
-   
+      <Route path="/about" element={<PageDetails />}/>
+      <Route path="/contact-us" element={<ContactUs />}/>
+      <Route path="/tours/:id" element={<SinglePackage />}/>
+      <Route path="/collections/:id" element={<AllPackages/>}/>
 
   
     </Routes>

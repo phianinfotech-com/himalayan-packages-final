@@ -28,7 +28,7 @@ const [slug, setSlug] = useState('');
 
   function getcategory() {
     axios
-      .get("http://localhost/himalayan/api_fetch_category.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
         
         setcategory(response.data);
@@ -111,7 +111,7 @@ const [slug, setSlug] = useState('');
       try {
         // Send the blog data to the PHP API
         const response = await axios.post(
-          "http://localhost/himalayan/test.php",
+          "https://himalayanpackages.com/himalayan/test.php",
           formData
         );
 

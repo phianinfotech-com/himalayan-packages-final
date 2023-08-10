@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 
 import { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
 import Headerfile from "../Headerfile";
 
@@ -18,7 +18,7 @@ export default function Home() {
 
   function getMemory() {
     axios
-      .get("http://localhost/himalayan/api_memory.php/")
+      .get("https://himalayanpackages.com/himalayan/api_memory.php/")
       .then(function (response) {
         console.log(response.data);
         setMemory(response.data);
@@ -34,7 +34,7 @@ export default function Home() {
   const fetchExplore = async () => {
     try {
       const response = await fetch(
-        "http://localhost/himalayan/home/api-fetch-explore-himalayan.php"
+        "https://himalayanpackages.com/himalayan/home/api-fetch-explore-himalayan.php"
       );
       const data = await response.json();
       setExplore(data);
@@ -70,11 +70,13 @@ export default function Home() {
                     {/* {displayBlogPosts.map((post) => ( */}
                     {memory.map((memo) => (
                       <div className="carousel-item m-4 " key={memo.key}>
+                        <Link to={`/collections/${memo.slug}`}>
                         <img
                           src={memo.MImg}
                           className="w-64 h-full rounded-lg  shadow-sm transform transition duration-500 hover:scale-105"
                           alt={memo.MAlt}
                         />
+                        </Link>
                       </div>
                     ))}
                   </div>
@@ -95,6 +97,7 @@ export default function Home() {
                     <div className="col-span-2">
 
                     <div className="relative">
+                    <Link to={`/collections/${explore[0]?.slug}`}>
                       <img
                         src={explore[0]?.Eimg}
                         alt={explore[0]?.EAlt}
@@ -106,6 +109,7 @@ export default function Home() {
                           {explore[0]?.EName}
                         </p>
                       </div>
+                      </Link>
                     </div>
                     </div>
                     <div className="md:row-span-2 col-span-2 ">

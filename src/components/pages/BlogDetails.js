@@ -27,7 +27,7 @@ console.log(currentURL);
   const fetchDataBySlug = async (slug) => {
     try {
       const response = await fetch(
-        `http://localhost/himalayan/api-fetch-single.php?slug=${slug}`
+        `https://himalayanpackages.com/himalayan/api-fetch-single.php?slug=${slug}`
       );
       const jsonData = await response.json();
       setData(jsonData);
@@ -42,7 +42,7 @@ console.log(currentURL);
   // Fetch all blog posts when the component mounts
   useEffect(() => {
     axios
-      .get("http://localhost/himalayan/api-fetch-new-blog.php")
+      .get("https://himalayanpackages.com/himalayan/api-fetch-new-blog.php")
       .then((response) => {
         setBlogPosts(response.data);
       })

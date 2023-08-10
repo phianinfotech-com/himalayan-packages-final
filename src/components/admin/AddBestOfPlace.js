@@ -22,7 +22,7 @@ const AddBestOfPlace = () => {
 
   function getcategory() {
     axios
-      .get("http://localhost/himalayan/api_fetch_category.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
         setCategory(response.data);
       });
@@ -30,7 +30,7 @@ const AddBestOfPlace = () => {
 
   function getbest_of() {
     axios
-      .get("http://localhost/himalayan/api-fetch_bestof.php/")
+      .get("https://himalayanpackages.com/himalayan/api-fetch_bestof.php/")
       .then(function (response) {
         setBest_of(response.data);
       });
@@ -38,7 +38,7 @@ const AddBestOfPlace = () => {
 
   function getpackages() {
     axios
-      .get("http://localhost/himalayan/api-fetch-package.php/")
+      .get("https://himalayanpackages.com/himalayan/api-fetch-package.php/")
       .then(function (response) {
         setPackages(response.data);
       });
@@ -63,7 +63,7 @@ const AddBestOfPlace = () => {
  
 
     axios
-    .post("http://localhost/himalayan/api-add-best-of-place.php", formData)
+    .post("https://himalayanpackages.com/himalayan/api-add-best-of-place.php", formData)
     .then((response) => {
       console.log(response.data);
 
@@ -82,14 +82,17 @@ const AddBestOfPlace = () => {
     })
     .catch((error) => {
       console.error("Error while saving data:", error);
-    });    axios
-      .post("http://localhost/himalayan/api-add-best-of-place.php", formData)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error while saving data:", error);
-      });
+    });    
+    
+    
+    // axios
+    //   .post("https://himalayanpackages.com/himalayan/api-add-best-of-place.php", formData)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error while saving data:", error);
+    //   });
   };
 
   const handleBest_OfChange = (e) => {
@@ -97,12 +100,15 @@ const AddBestOfPlace = () => {
   };
 
   const handlePackagesChange = (e) => {
-    setPackageId(e.target.value);
+    console.log("Selected package:", e.target.value);
+    setPackageId(e.target.value); // Make sure this is updating the state
   };
 
   const handleCategoryIdChange = (e) => {
     setCategoryId(e.target.value);
   };
+
+ 
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
@@ -179,7 +185,7 @@ const AddBestOfPlace = () => {
               <select
                 className="select select-bordered w-full max-w-xs"
                 id="categoryId"
-                value={isChecked ? best_ofId : categoryId}
+                value={isChecked ? packageId : categoryId}
                 onChange={
                   isChecked ? handlePackagesChange : handleCategoryIdChange
                 }
@@ -191,7 +197,7 @@ const AddBestOfPlace = () => {
                 {isChecked
                   ? packages.map((mypkg) => (
                       <option key={mypkg.PID} value={mypkg.PID}>
-                        {mypkg.PName}
+                        {mypkg.PTitle}
                       </option>
                     ))
                   : category.map((category) => (

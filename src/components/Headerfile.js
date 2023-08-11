@@ -1,10 +1,13 @@
 import React from 'react'
 import "../App.css"
+
 export default function Headerfile() {
+
+  
   return (
     <>
   <div>
-  <div className="text-gray-600 body-font overflow-hidden p-20 m-20 py-64 md:pt-4 md:pb-32">
+  <div className="text-gray-600 body-font overflow-hidden p-20 m-20 py-64 md:pt-4 md:pb-40">
             <div className="py-1">
               <div className="md:mb-0 text-[28px] mt-8 md:text-[50px] font-normal	text-base-100 text-center">
                 Open New Dimensions for
@@ -19,16 +22,17 @@ export default function Headerfile() {
                   <span className="ap">Adventure</span>
                 </div>
               </div>
-              <div className=" mt-2 rounded-md shadow-sm md:mx-64 mx-4">
-                <input
-                  type="text"
-                  name="price"
-                  id="price"
-                  className="block w-full input-bordered rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 font-semibold focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Search Destination, Tour, Activities"
-                />
-              </div>
-            </div>
+
+              {/* search bar  */}
+             
+
+              {/* <MainSearch handleMainSearchClick={handleMainSearchClick} /> */}
+            </div> 
+
+
+            {/* search bar  */}
+
+
 
             {/* this following code for banner footer */}
 

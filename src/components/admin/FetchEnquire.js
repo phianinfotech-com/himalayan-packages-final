@@ -15,7 +15,7 @@ export default function Fetch() {
   // Function to fetch blog posts from the API using Axios
   useEffect(() => {
     axios
-      .get("https://himalayanpackages.com/himalayan/api-fetch-all-enq.php")
+      .get("http://localhost/himalayan/api-fetch-all-enq.php")
       .then((response) => {
         setBlogPosts(response.data);
       })

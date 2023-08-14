@@ -34,7 +34,7 @@ function AllPackages() {
   const fetchDataBySlug = async (slug) => {
     try {
       const response = await fetch(
-        `https://himalayanpackages.com/himalayan/api-fetch-all-package-for-memory.php?slug=${slug}`
+        `http://localhost/himalayan/api-fetch-all-package-for-memory.php?slug=${slug}`
       );
       const jsonData = await response.json();
 

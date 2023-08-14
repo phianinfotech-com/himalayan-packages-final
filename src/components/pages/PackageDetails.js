@@ -18,7 +18,7 @@ const PackageDetails = () => {
 
   function getPkg() {
     axios
-      .get("https://himalayanpackages.com/himalayan/api_fetch_packageDetail.php/")
+      .get("http://localhost/himalayan/api_fetch_packageDetail.php/")
       .then(function (response) {
         setpkg(response.data);
       })
@@ -102,7 +102,7 @@ const PackageDetails = () => {
       try {
         // Send the blog data to the PHP API
         const response = await axios.post(
-          "https://himalayanpackages.com/himalayan/api-add-pkg-details.php",
+          "http://localhost/himalayan/api-add-pkg-details.php",
           formData
         );
 

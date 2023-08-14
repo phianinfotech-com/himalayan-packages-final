@@ -23,7 +23,7 @@ function Blog() {
   // Function to fetch blog posts from the API using Axios
   useEffect(() => {
     axios
-      .get("https://himalayanpackages.com/himalayan/API_fetch_all_blog.php")
+      .get("http://localhost/himalayan/API_fetch_all_blog.php")
       .then((response) => {
         setBlogPosts(response.data);
       })

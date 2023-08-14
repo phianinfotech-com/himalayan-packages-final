@@ -43,7 +43,7 @@ const AddPackageForm = () => {
   
     function getcategory() {
       axios
-        .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
+        .get("http://localhost/himalayan/api_fetch_category.php/")
         .then(function (response) {
           
           setcategory(response.data);
@@ -277,7 +277,7 @@ const AddPackageForm = () => {
     
     try {
         // Make an HTTP POST request to your PHP API endpoint
-        const response = await axios.post("https://himalayanpackages.com/himalayan/api-add-pkg.php", formData);
+        const response = await axios.post("http://localhost/himalayan/api-add-pkg.php", formData);
     
         // Handle the response from the API as needed
         // For example, show a success message or redirect to another page

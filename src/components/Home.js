@@ -14,7 +14,7 @@ export default function Home() {
 
   function getUsers() {
     axios
-      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
+      .get("http://localhost/himalayan/api_fetch_category.php/")
       .then(function (response) {
         console.log(response.data);
         setUsers(response.data);

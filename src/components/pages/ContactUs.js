@@ -15,7 +15,7 @@ function ContactUs() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://himalayanpackages.com/himalayan/api-fetch-other-page.php?slug=contact-us`
+          `http://localhost/himalayan/api-fetch-other-page.php?slug=contact-us`
         );
         setData(response.data);
         setLoading(false);

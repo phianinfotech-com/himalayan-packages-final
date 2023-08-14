@@ -18,7 +18,7 @@ export default function Home() {
 
   function getMemory() {
     axios
-      .get("https://himalayanpackages.com/himalayan/api_memory.php/")
+      .get("http://localhost/himalayan/api_memory.php/")
       .then(function (response) {
         console.log(response.data);
         setMemory(response.data);
@@ -34,7 +34,7 @@ export default function Home() {
   const fetchExplore = async () => {
     try {
       const response = await fetch(
-        "https://himalayanpackages.com/himalayan/home/api-fetch-explore-himalayan.php"
+        "http://localhost/himalayan/home/api-fetch-explore-himalayan.php"
       );
       const data = await response.json();
       setExplore(data);

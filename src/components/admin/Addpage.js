@@ -88,7 +88,7 @@ const Addpage = () => {
 
       try {
         const response = await axios.post(
-          "https://himalayanpackages.com/himalayan/api-addpage.php",
+          "http://localhost/himalayan/api-addpage.php",
           formData
         );
         console.log("Form Data:", formData);

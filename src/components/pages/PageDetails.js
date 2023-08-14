@@ -12,7 +12,7 @@ function PageDetails() {
 
   useEffect(() => {
     axios
-      .get("https://himalayanpackages.com/himalayan/api-fetch-detailpage.php")
+      .get("http://localhost/himalayan/api-fetch-detailpage.php")
       .then((response) => {
         setData(response.data);
         setLoading(false);

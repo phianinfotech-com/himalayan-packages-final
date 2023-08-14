@@ -138,7 +138,7 @@ export default function Enquire() {
   
         try {
           const response = await axios.post(
-            "https://himalayanpackages.com/himalayan/api-enquire.php",
+            "http://localhost/himalayan/api-enquire.php",
             formData
           );
           console.log("Form Data:", formData);

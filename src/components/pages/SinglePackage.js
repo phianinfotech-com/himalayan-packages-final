@@ -32,7 +32,7 @@ export default function SinglePackage() {
   const fetchDataBySlug = async (slug) => {
     try {
       const response = await fetch(
-        `https://himalayanpackages.com/himalayan/api-fetch-single-package.php?slug=${slug}`
+        `http://localhost/himalayan/api-fetch-single-package.php?slug=${slug}`
       );
       const jsonData = await response.json();
 

@@ -13,7 +13,7 @@ const SearchBar = ({ handleBlogClick }) => {
     const fetchSuggestions = async () => {
       try {
         const response = await fetch(
-          `https://himalayanpackages.com/himalayan/search.php?term=${encodeURIComponent(
+          `http://localhost/himalayan/search.php?term=${encodeURIComponent(
             searchTerm
           )}`
         );

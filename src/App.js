@@ -1,8 +1,6 @@
-import Headerfile from "./components/Headerfile";
+
 import Home from "./components/pages/Home";
-import Navbar from "./components/Navbar";
-import SliderComponent from "./components/SliderComponent";
-import Footer from "./components/Footer";
+
 
 import Blog from "./components/pages/Blog";
 import AddBlog from "./components/pages/AddBlog";
@@ -50,7 +48,7 @@ function App() {
       <Route path="/viewEnquire/" element={<FetchEnquire />}/>
       <Route path="/addpackageform" element={<AddPackageForm />}/>
       <Route path="/PackageDetails" element={<PackageDetails />}/>
-      <Route path="/about" element={<PageDetails />}/>
+      <Route path="/About-us" element={<PageDetails />}/>
       <Route path="/contact-us" element={<ContactUs />}/>
       <Route path="/tours/:id" element={<SinglePackage />}/>
       <Route path="/collections/:id" element={<AllPackages/>}/>

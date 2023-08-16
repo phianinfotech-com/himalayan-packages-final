@@ -49,10 +49,10 @@ function ContactUs() {
         </section>
       </div>
 
-      <div class="flex flex-col text-center w-full ">
+      <div className="flex flex-col text-center w-full ">
    
-   <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"> {data[0].Page_Name}</h1>
-   <p class="lg:w-2/3 mx-auto leading-relaxed text-base">  <div
+   <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"> {data[0].Page_Name}</h1>
+   <p className="lg:w-2/3 mx-auto leading-relaxed text-base">  <div
                       dangerouslySetInnerHTML={{ __html: data[0].Page_Content }}
                     ></div></p>
   </div>
@@ -62,19 +62,26 @@ function ContactUs() {
         
         {/* Main main page of sidebar Section */}
         <div className="flex-1">
-        <section class="text-gray-600 body-font">
-  <div class="container px-5 py-5  mx-auto">
+        <section className="text-gray-600 body-font">
+  <div className="container px-5 py-5  mx-auto">
    
 
     <div className="lg:w-3/3 md:w-2/2 h-96  rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
     <iframe
-  width="100%"
+    width="100%"
   height="100%"
+  className="absolute inset-0"
   frameBorder="0"
-  style={{ border: 0 }}
-  src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(data[0].temp)}`}
+  title="map"
+  marginHeight="0"
+  marginWidth="0"
+  scrolling="no"
+  src={data[0].temp}
   allowFullScreen
 ></iframe>
+
+
+ 
 
 </div>
 <div className="bg-white relative flex flex-wrap py-10 rounded ">

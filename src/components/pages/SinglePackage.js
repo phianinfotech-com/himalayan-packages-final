@@ -5,7 +5,11 @@ import Navbar from "../Navbar";
 import SearchAllBlog from "../SearchAllBlog";
 import Footer from "../Footer";
 import Enquire from "../Enquire";
-import { HiOutlineCheck, HiOutlineClock, HiOutlineLocationMarker } from "react-icons/hi";
+import {
+  HiOutlineCheck,
+  HiOutlineClock,
+  HiOutlineLocationMarker,
+} from "react-icons/hi";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -16,6 +20,21 @@ export default function SinglePackage() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
+
+  const [policy, setpolicy] = useState([]); // for category
+
+  /// const [category, setcategory] = useState([]);
+  useEffect(() => {
+    getPolicy();
+  }, []);
+
+  function getPolicy() {
+    axios
+      .get("http://localhost/himalayan/api_fetch_policy.php/")
+      .then(function (response) {
+        setpolicy(response.data);
+      });
+  }
 
   const pageTitle = slugToCamelCase(
     window.location.pathname.split("/collections/").pop()
@@ -71,6 +90,19 @@ export default function SinglePackage() {
   const handleTabClick1 = (e) => {
     setCurrentTab(e.target.id);
   };
+  const [features, setFeatures] = useState([]); // for features
+
+  useEffect(() => {
+    getFeatures();
+  }, []);
+
+  function getFeatures() {
+    axios
+      .get("http://localhost/himalayan/api_fetch_features.php/")
+      .then(function (response) {
+        setFeatures(response.data);
+      });
+  }
 
   return (
     <div>
@@ -78,32 +110,32 @@ export default function SinglePackage() {
       {/* Navbar and Hero Section */}
       <div className="relative">
         <Navbar />
-        <div class="grid grid-cols-3 gap-4">
-          <div class="col-span-2 h-40">
+        <div className="grid grid-cols-3 gap-4">
+          <div className="col-span-2 h-40">
             <img
               alt={data ? data[0].banner_alt1 : ""}
-              class=" rounded-lg w-full h-full object-cover object-center block"
+              className=" rounded-lg w-full h-full object-cover object-center block"
               src={data ? data[0].banner1 : ""}
             />
           </div>
-          <div class="h-40">
+          <div className="h-40">
             <img
               alt={data ? data[0].banner_alt2 : ""}
-              class="rounded-lg w-full object-cover h-full object-center block"
+              className="rounded-lg w-full object-cover h-full object-center block"
               src={data ? data[0].banner2 : ""}
             />
           </div>
-          <div class="h-40">
+          <div className="h-40">
             <img
               alt={data ? data[0].banner_alt4 : ""}
-              class=" rounded-lg w-full object-cover h-full object-center block"
+              className=" rounded-lg w-full object-cover h-full object-center block"
               src={data ? data[0].banner3 : ""}
             />
           </div>
-          <div class="col-span-2 h-40">
+          <div className="col-span-2 h-40">
             <img
               alt={data ? data[0].banner_alt4 : ""}
-              class="rounded-lg w-full h-full object-cover object-center block"
+              className="rounded-lg w-full h-full object-cover object-center block"
               src={data ? data[0].banner4 : ""}
             />
           </div>
@@ -116,99 +148,110 @@ export default function SinglePackage() {
         {/* Main main page of sidebar Section */}
         <div className="flex-1">
           <section className="text-gray-600 body-font">
+            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden">
+              <div className="h-25 w-auto mx-auto py-4 h-auto">
+                <p className="md:text-4xl text-left	font-bold text-black pl-2 ">
+                  {data ? data[0].PTitle : ""}
+                </p>
 
-          <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden">
-            <div className="h-25 w-auto mx-auto py-4 h-auto">
-                          <p class="md:text-4xl text-left	font-bold text-black pl-2 ">
-                            {data ? data[0].PTitle : ""}
-                          </p>
+                <div className="flex justify-center space-x-4 p-2">
+                  <HiOutlineClock className="h-8 w-8 my-2" />
+                  <div className="py-2">
+                    <p>{data ? data[0].Duration : ""}</p>
+                  </div>
+                  <HiOutlineLocationMarker className="h-8 w-8 my-2" />
+                  <div className="py-2">
+                    <p>{data ? data[0].CName : ""}</p>
+                  </div>
+                </div>
+                {/* day-night-sun-moon-cycle */}
 
-                          <div className="flex justify-center space-x-4 p-2">
-                          <HiOutlineClock className="h-8 w-8 my-2" />
-                            <div className="py-2">
-                              <p>{data ? data[0].Duration : ""}</p>
-                            </div>
-                            <HiOutlineLocationMarker className="h-8 w-8 my-2" />
-                            <div className="py-2">
-                              <p>{data ? data[0].CName : ""}</p>
-                            </div>
+                <div className="grid grid-cols-4 gap-4 px-4">
+                  {features.length > 0 &&  // Conditionally render based on features availability
+                    features.map((feature, index) => (
+                      <div key={index} className="p-2 relative">
+                        <div className="flex flex-col items-center">
+                          <img
+                            alt={feature.Key_Alt}
+                            className="rounded-lg md:w-20 md:h-20 w-10 h-10 object-cover object-center block mb-2"
+                            src={feature.Key_Img}
+                          />
+                          <div className="text-black text-center py-2 opacity-75">
+                            {feature.Key_Name}
                           </div>
-                          {/* day-night-sun-moon-cycle */}
-                    
-   
-                        <div className="grid grid-cols-4 gap-4 px-4">
-                          {data &&
-                            data.length > 0 &&
-                            [1, 2, 3, 4].map((imgIndex) => {
-                              const imgKey = `key_img${imgIndex}`;
-                              const imgAltKey = `key_img_alt${imgIndex}`;
-                              return data[0][imgKey] ? (
-                                <div key={imgIndex} className="p-2 relative">
-                                  <div className="flex flex-col items-center">
-                                    <img
-                                      alt={data[0][imgAltKey]}
-                                      className="rounded-lg md:w-20 md:h-20  w-10 h-10  object-cover object-center block mb-2"
-                                      src={data[0][imgKey]}
-                                    />
-                                    <div className=" text-black text-center py-2 opacity-75">
-                                      {data[0][imgAltKey]}
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : null;
-                            })}
                         </div>
-
                       </div>
+                    ))}
+                </div>
+              </div>
             </div>
 
-            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden mb-10 md:mb-20">
-            <div className="h-25 w-auto mx-auto py-4 h-auto">
-                          <p class="text-2xl text-left	font-bold  pl-2 my-4 ">
-                            Select Package Options{" "}
-                          </p>
+            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden mb-4 md:mb-6">
+              <div className="h-25 w-auto mx-auto py-4 h-auto">
+                <p className="text-2xl text-left	font-bold  pl-2 my-4 ">
+                  Select Package Options{" "}
+                </p>
 
-                          <div className="container mx-auto px-4 ">
-                            <div className="flex  mb-4">
-                              {data &&
-                                data.map((tab, index) => (
-                                  <button
-                                    key={index}
-                                    className={`px-4 py-2 mr-2 md:w-36 h-auto w-24   ${
-                                      activeTab === index
-                                        ? "btn btn-outline btn-primary"
-                                        : "btn btn-outline "
-                                    }`}
-                                    onClick={() => handleTabClick(index)}
-                                  >
-                                    {tab.PTitle} for {tab.Duration}
-                                  </button>
-                                ))}
-                            </div>
-                            <div>
-                              {/* Display content based on active tab */}
-                              {data &&
-                                data.map((tab, index) => (
-                                  <div
-                                    key={index}
-                                    className={
-                                      activeTab === index ? "block" : "hidden"
-                                    }
-                                  >
-                                    <div className="mx-4"
-                                      dangerouslySetInnerHTML={{
-                                        __html: tab.Content,
-                                      }}
-                                    />
-                                  </div>
-                                ))}
-                            </div>
-                          </div>
+                <div className="container mx-auto px-4 ">
+                  <div className="flex  mb-4">
+                    {data &&
+                      data.map((tab, index) => (
+                        <button
+                          key={index}
+                          className={`px-4 py-2 mr-2 md:w-36 h-auto w-24   ${
+                            activeTab === index
+                              ? "btn btn-outline btn-primary"
+                              : "btn btn-outline "
+                          }`}
+                          onClick={() => handleTabClick(index)}
+                        >
+                          {tab.PTitle} for {tab.Duration}
+                        </button>
+                      ))}
+                  </div>
+                  <div>
+                    {/* Display content based on active tab */}
+                    {data &&
+                      data.map((tab, index) => (
+                        <div
+                          key={index}
+                          className={activeTab === index ? "block" : "hidden"}
+                        >
+                          <div
+                            className="mx-4"
+                            dangerouslySetInnerHTML={{
+                              __html: tab.Content,
+                            }}
+                          />
                         </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
             </div>
 
+            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2 mb-10 md:mb-20">
+              <div className="h-25 w-auto mx-auto py-4 h-auto">
+                <p className="text-2xl text-left	font-bold  pl-2 my-2 ">
+                  Policies
+                </p>
 
+                <div className="container mx-auto px-4 ">
+                  {policy.map((item, index) => (
+                    <div key={index}>
+                      {/* render each policy item */}
+                      <div className="mx-4 font-bold py-1"> {item.Policy}</div>
+                      <div className="mx-4 text-justify pb-2">
+                        {item.Content}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </section>
+
+          <div></div>
         </div>
 
         {/* side bar code */}

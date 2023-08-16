@@ -69,14 +69,14 @@ export default function Home() {
               <div className="pt-2 grid grid-rows-3 grid-flow-col gap-4 pl-20 ">
                 <div className="col-span-2">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/explore-himalayan-ranges.webp"
+                    src="http://localhost/assets/images/imag/explore-himalayan-ranges.webp"
                     alt=""
                     className="w-full h-44 rounded-xl"
                   />
                 </div>
                 <div className="row-span-2 col-span-2 ">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/rohtang-pass.webp"
+                    src="http://localhost/assets/images/imag/rohtang-pass.webp"
                     alt=""
                     className="w-full h-88 rounded-xl"
                   />
@@ -88,14 +88,14 @@ export default function Home() {
               <div className="grid grid-rows-3 grid-flow-col gap-4">
                 <div className="row-start-1 row-end-4 ">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/tibetan-culture.webp"
+                    src="http://localhost/assets/images/imag/tibetan-culture.webp"
                     alt=""
                     className="rounded-xl w-36 h-52"
                   />
                 </div>
                 <div className="row-start-1 row-end-4 ">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/atal-tunnel.webp"
+                    src="http://localhost/assets/images/imag/atal-tunnel.webp"
                     alt=""
                     className="rounded-xl w-36 h-36"
                   />
@@ -103,7 +103,7 @@ export default function Home() {
 
                 <div className="row-start-1 row-end-4 ">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/jim-corbett-national-park.webp"
+                    src="http://localhost/assets/images/imag/jim-corbett-national-park.webp"
                     alt=""
                     className="rounded-xl w-36 h-52"
                   />
@@ -113,14 +113,14 @@ export default function Home() {
               <div className="grid grid-rows-3 grid-flow-col gap-4 py-4">
                 <div className="row-start-1 row-end-4 ">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/mcleod-ganj.webp"
+                    src="http://localhost/assets/images/imag/mcleod-ganj.webp"
                     alt=""
                     className="rounded-xl w-36 h-36"
                   />
                 </div>
                 <div className="row-start-1 row-end-4 -mt-[65px] ">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/bhimtal-lake.webp"
+                    src="http://localhost/assets/images/imag/bhimtal-lake.webp"
                     alt=""
                     className="rounded-xl w-36 h-52"
                   />
@@ -128,7 +128,7 @@ export default function Home() {
 
                 <div className="row-start-1 row-end-4  ">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/vaishno-devi-temple.webp"
+                    src="http://localhost/assets/images/imag/vaishno-devi-temple.webp"
                     alt=""
                     className="rounded-xl w-36 h-36"
                   />
@@ -138,14 +138,14 @@ export default function Home() {
               <div className="grid grid-rows-3 grid-flow-col gap-4 ">
                 <div className="row-start-1 row-end-4 ">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/solang-valley.webp"
+                    src="http://localhost/assets/images/imag/solang-valley.webp"
                     alt=""
                     className="rounded-xl w-36 h-36"
                   />
                 </div>
                 <div className="row-start-1 row-end-4 ">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/naina-devi-temple.webp"
+                    src="http://localhost/assets/images/imag/naina-devi-temple.webp"
                     alt=""
                     className="rounded-xl w-36 h-36"
                   />
@@ -153,7 +153,7 @@ export default function Home() {
 
                 <div className="row-start-1 row-end-4 ">
                   <img
-                    src="https://himalayanpackages.com/assets/images/imag/srinagar.webp"
+                    src="http://localhost/assets/images/imag/srinagar.webp"
                     alt=""
                     className="rounded-xl w-36 h-36"
                   />

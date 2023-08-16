@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 import Footer from "../Footer";
-import axios from "axios";
+
 import Navbar from "../Navbar";
 import Enquire from "../Enquire";
-import { useNavigate, useParams } from "react-router-dom";
+
 
 
 
@@ -12,7 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const Page = () => {
   const currentURL = window.location.href;
   console.log(currentURL);
-  const navigate = useNavigate();
+ 
 
   // State to store the blog post data
   const [data, setData] = useState(null);
@@ -39,9 +39,7 @@ const Page = () => {
   }, []);
 
   // Function to handle click on a blog post in the list
-  const handleBlogClick = (slug) => {
-    fetchDataBySlug(slug);
-  };
+
 
   return (
     <div>

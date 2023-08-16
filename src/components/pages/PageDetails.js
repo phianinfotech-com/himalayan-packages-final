@@ -66,15 +66,15 @@ function PageDetails() {
                 </div>
               </div>
 
-              <div class="container px-5 py-10 mx-auto">
-                <div class="flex flex-wrap -m-4">
+              <div className="container px-5 py-10 mx-auto">
+                <div className="flex flex-wrap -m-4">
                   {/* following are the coiunter */}
                   {/* {data && data.map((Showdetails) => ( */}
 
                   {Array.isArray(data) && data.map((Showdetails) => (
-                      <div class="p-4 lg:w-1/4">
-                        <div class="shadow-xl  border-2 rounded-xl bg-opacity-75 px-8 pt-16 pb-24 overflow-hidden text-center relative">
-                          <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
+                      <div className="p-4 lg:w-1/4">
+                        <div className="shadow-xl  border-2 rounded-xl bg-opacity-75 px-8 pt-16 pb-24 overflow-hidden text-center relative">
+                          <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
                             {Showdetails.Key_value}
                           </h1>
                           <p>{Showdetails.Key_name}</p>
@@ -89,27 +89,27 @@ function PageDetails() {
               {/* following for counter create in loop */}
 
               {/* slider code ends here*/}
-              <div class="container px-5 py-10 mx-auto">
-  <div class="flex flex-wrap -m-4">
+              <div className="container px-5 py-10 mx-auto">
+  <div className="flex flex-wrap -m-4">
     {/* Check if data exists before mapping */}
     {/* {data && data.map((Pdetails) => ( */}
        {data && data.map((Pdetails) => (
       
         // Conditionally render if Fimg value is not null
         Pdetails.Fimg !== null && (
-          <div class="p-4 md:w-1/3" key={Pdetails.PID}>
-            <div class="h-full shadow-xl border-2 rounded-xl overflow-hidden">
+          <div className="p-4 md:w-1/3" key={Pdetails.PID}>
+            <div className="h-full shadow-xl border-2 rounded-xl overflow-hidden">
               <img
-                class="lg:h-48 md:h-36 w-full object-cover object-center"
+                className="lg:h-48 md:h-36 w-full object-cover object-center"
                 src={Pdetails.Fimg}
                 alt={Pdetails.Falt}
               />
-              <div class="p-6">
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
+              <div className="p-6">
+                <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
                   {Pdetails.Fname}
                 </h1>
                 <p
-                  class="leading-relaxed mb-3"
+                  className="leading-relaxed mb-3"
                   dangerouslySetInnerHTML={{
                     __html: Pdetails.Finfo,
                   }}

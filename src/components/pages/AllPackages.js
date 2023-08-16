@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Parser } from "html-to-react";
+
 import Navbar from "../Navbar";
-import SearchAllBlog from "../SearchAllBlog";
+
 import Footer from "../Footer";
 import Enquire from "../Enquire";
-import { HiOutlineCheck, HiOutlineClock } from "react-icons/hi";
-import { useNavigate, useParams } from "react-router-dom";
+import SearchPackage from "../SearchPackage";
+import { HiOutlineClock } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
 
 function AllPackages() {
   // Function to convert slug to camel case text with all first letters uppercase
@@ -41,7 +41,8 @@ function AllPackages() {
       // Check if the response contains an error
       if (jsonData.error) {
         // Redirect to a different route
-        navigate("/"); // Replace "/error-page" with the actual route you want to redirect to
+
+        return <p>loading...</p>;
       } else {
         setData(jsonData);
       }
@@ -50,9 +51,6 @@ function AllPackages() {
     }
   };
 
-
-  
-  
   // Fetch blog post data when the component mounts or the slug changes in the URL
   useEffect(() => {
     const urlSlug = window.location.pathname.split("/collections/").pop();
@@ -63,6 +61,63 @@ function AllPackages() {
   // Function to handle click on a blog post in the list
   const handleBlogClick = (slug) => {
     fetchDataBySlug(slug);
+  };
+
+  const [features, setFeatures] = useState([]); // for features\
+
+  useEffect(() => {
+    getFeatures();
+    getcategory();
+    getDuration();
+  }, []);
+
+  function getFeatures() {
+    axios
+      .get("http://localhost/himalayan/api_fetch_features.php/")
+      .then(function (response) {
+        setFeatures(response.data);
+      });
+  }
+
+  const [cat, setCat] = useState([]); // for category
+
+  function getcategory() {
+    axios
+      .get("http://localhost/himalayan/api_fetch_category.php/")
+      .then(function (response) {
+        setCat(response.data);
+      });
+  }
+
+  const [dur, setDuration] = useState([]); // for category
+
+  function getDuration() {
+    axios
+      .get("http://localhost/himalayan/api_fetch_by_duration.php/")
+      .then(function (response) {
+        setDuration(response.data);
+      });
+  }
+  const [location, setLocation] = useState([]); // for category
+
+  const handleLocationChange = (e) => {
+    const selectedLocation = e.target.value;
+    setLocation(selectedLocation);
+
+    // Update the slug using the selected location
+    const updatedSlug = selectedLocation.toLowerCase().replace(/\s+/g, "-");
+    fetchDataBySlug(updatedSlug); // Call the fetchDataBySlug function with the updated slug
+  };
+
+  const [selectedDuration, setSelectedDuration] = useState(""); // Initialize selectedDuration as an empty string
+
+  const handleDurationChange = (e) => {
+    const selectedValue = e.target.value;
+    setSelectedDuration(selectedValue);
+
+    // Update the slug using the selected duration value
+    const updatedSlug = selectedValue.toLowerCase().replace(/\s+/g, "-");
+    fetchDataBySlug(updatedSlug); // Call the fetchDataBySlug function with the updated slug
   };
 
   return (
@@ -92,50 +147,124 @@ function AllPackages() {
               <div className="flex-wrap -m-4 grid md:grid-cols-1 md:gap-3">
                 {data && data.error ? (
                   <div className="text-center text-red-500">{data.error}</div>
+                ) : data && data.length > 0 ? (
+                  <div className="p-4 text-justify font-semibold">
+                    {data[0].content}
+                  </div>
+                ) : (
+                  <div className="text-center text-gray-500">Loading...</div>
+                )}
+
+                <div className="mx-4 shadow-xl border-2 h-auto rounded-xl	flex">
+                  <div className="py-4 px-2  w-1/3">
+                    <SearchPackage handleBlogClick={handleBlogClick} />
+                  </div>
+                  <div className="py-4 px-2  w-1/3">
+                    <select
+                      className="select select-primary w-full max-w-xs"
+                      value={location}
+                      onChange={handleLocationChange}
+                    >
+                      <option disabled value="">
+                        Select Location
+                      </option>
+                      {cat.map((category, index) => (
+                        <option
+                          key={`${category.CID}-${index}`}
+                          value={category.CName}
+                        >
+                          {category.CName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="py-4 px-2 w-1/3">
+                    <select
+                      className="select select-primary w-full max-w-xs"
+                      value={selectedDuration}
+                      onChange={handleDurationChange}
+                    >
+                      <option disabled value="">
+                        Select Duration
+                      </option>
+
+                      {dur.map((items, index) => (
+                        <option
+                          key={`${items.PID}-${index}`}
+                          value={items.temp}
+                        >
+                          {items.temp}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* this is card */}
+                {data && data.error ? (
+                  <div className="text-center text-red-500">{data.error}</div>
                 ) : data ? (
                   data.map((post) => (
-                    <div key={post.PID} className="md:w-full">
-                      <div className="p-4">
-                        <div className="card w-auto bg-base-100 shadow-xl h-full border-2  overflow-hidden">
+                    <div key={post.PID} className="md:w-full p-4 ">
+                      <div className="card lg:card-side bg-base-100 shadow-xl border-2 ">
+                        <figure>
                           <img
-                            className="lg:h-96 md:h-96 w-full object-cover object-center"
                             src={post.banner1} // Assuming the image URL is in the 'MImg' property
                             alt={post.banner_alt1} // Assuming the image alt text is in the 'MAlt' property
+                            className="h-full md:w-96 w-full"
                           />
+                        </figure>
+                        <div className="card-body">
+                          <h2 className="card-title"> {post.PTitle}</h2>
 
-                          <div className="p-6 border-l-4  border-l-secondary">
-                            <h1 className="title-font font-semibold text-2xl text-gray-900 mb-3">
-                              {post.PTitle}{" "}
-                              {/* Display the name of the package */}
-                            </h1>
-                            {/* Display content preview */}
-
-                            <div className="flex items-center justify-between ">
-                              <div className="flex items-center text-primary hover:text-secondary ">
-                                <HiOutlineClock className="h-8 w-8 m-2" />
-                                <div className="text-xl md:mb-2 lg:mb-0">
-                                  {post.temp}{" "}
-                                  {/* Display the duration of the package */}
+                          <div className="card-actions justify-center">
+                            {features.length > 0 &&
+                              features.map((feature, index) => (
+                                <div
+                                  key={`feature-${index}`}
+                                  className="p-2 relative"
+                                >
+                                  <div className="flex flex-col items-center">
+                                    <img
+                                      alt={feature.Key_Alt}
+                                      className="rounded-full border-2 border-primary md:w-16  md:h-16 w-10 h-10 object-cover object-center block mb-2"
+                                      src={feature.Key_Img}
+                                    />
+                                    <div className="text-black text-center py-2 opacity-75">
+                                      {feature.Key_Name}
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="flex items-center">
-                                <div className="text-xl md:mb-2 lg:mb-0">
-                                  <span className="text-2xl font-bold text-black-500">
-                                    {/* ₹ 129999 */}
-                                    {/* Display the price of the package */}
-                                  </span>
+                              ))}
+                          </div>
 
-                                  <span className="text-gray-500">
-                                    {/* per adult */}
-                                  </span>
-                                </div>
+                          <div className="card-actions justify-end">
+                            <div className="flex items-center text-primary hover:text-secondary ">
+                              <HiOutlineClock className="h-8 w-8 m-2" />
+                              <div className="text-xl md:mb-2 lg:mb-0">
+                                {post.temp}{" "}
+                                {/* Display the duration of the package */}
                               </div>
-                              <Link to={`/tours/${post.slug}/`}>
-                                <button className="text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-secondary rounded-xl text-lg">
-                                  Learn More
-                                </button>
-                              </Link>
                             </div>
+
+                            <div className="flex items-center">
+                              <div className="text-xl md:mb-2 lg:mb-0">
+                                <span className="text-2xl font-bold text-black-500">
+                                  {/* ₹ 129999 */}
+                                  {/* Display the price of the package */}
+                                </span>
+
+                                <span className="text-gray-500">
+                                  {/* per adult */}
+                                </span>
+                              </div>
+                            </div>
+                            <Link to={`/tours/${post.slug}/`}>
+                              <button className="text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-secondary rounded-xl text-lg">
+                                Learn More
+                              </button>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -144,6 +273,7 @@ function AllPackages() {
                 ) : (
                   <div className="text-center text-gray-500">Loading...</div>
                 )}
+                {/* this is card */}
               </div>
 
               {/* Pagination */}

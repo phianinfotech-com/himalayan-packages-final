@@ -275,7 +275,7 @@ export default function SliderComponent() {
           <div className="relative">
             <img
               className="w-64 h-80 p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
-              src={"http://localhost/himalayan/uploads/"+hpkg.banner1}
+              src={hpkg.banner1}
               alt={hpkg.banner_alt1}
             />
             <div className="absolute bottom-0 left-0 p-4">

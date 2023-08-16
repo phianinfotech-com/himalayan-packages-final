@@ -31,7 +31,7 @@ const PackageDetails = () => {
 
   const [Title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [Price, setPrice] = useState("");
+  const [type, setType] = useState("");
   const [pkg, setpkg] = useState("");
   const [Duration, setDuration] = useState("");
 
@@ -49,8 +49,8 @@ const PackageDetails = () => {
   };
 
 
-  const handlePriceChange = (e) => {
-    setPrice(e.target.value);
+  const handletypeChange = (e) => {
+    setType(e.target.value);
   };
 
   
@@ -77,8 +77,8 @@ const PackageDetails = () => {
     }
 
 
-    if (Price.trim() === "") {
-      errors.Price = "Price is required";
+    if (type.trim() === "") {
+      errors.type = "type is required";
     }
 
 
@@ -95,7 +95,7 @@ const PackageDetails = () => {
       formData.append("Duration", Duration);
       
 
-      formData.append("Price", Price);
+      formData.append("type", type);
       formData.append("PID", pkgId);
     
 
@@ -113,7 +113,7 @@ const PackageDetails = () => {
         // Reset the form fields
         setTitle("");
         setContent("");
-        setPrice("");
+        setType("");
         
 
 
@@ -233,15 +233,15 @@ const PackageDetails = () => {
                 <div className="p-2 w-1/2">
                   <div className="relative">
                     <label className="label">
-                      <span className="label-text">Price </span>
+                      <span className="label-text">type </span>
                     </label>
                     <input
                       type="text"
                       placeholder="Rs"
                       className="input input-bordered w-full max-w-xl"
-                      id="Price"
-                      value={Price}
-                      onChange={handlePriceChange}
+                      id="type"
+                      value={type}
+                      onChange={handletypeChange}
                     />
                   </div>
                 </div>

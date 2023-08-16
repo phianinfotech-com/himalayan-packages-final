@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="flex items-center justify-center">
   <div className="m-2 max-w-5xl items-center">  
     <div className="flex flex-col items-center">
-      <img className="flex m-1 w-20 h-auto" src="/assets/logo.png" />{" "}
+      <img className="flex m-1 w-20 h-auto" src="/himalayan/uploads/assets/logo.png" />{" "}
       <div className="m-2">
       <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
               <a className="text-white">

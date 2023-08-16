@@ -104,6 +104,14 @@ export default function SinglePackage() {
       });
   }
 
+
+    // Accordion
+    const [activeAccordionTab, setActiveAccordionTab] = useState(null);
+
+    const handleAccordionTabClick = (index) => {
+      setActiveAccordionTab(index === activeAccordionTab ? null : index);
+    };
+
   return (
     <div>
       {/* this is gallary code */}
@@ -185,6 +193,7 @@ export default function SinglePackage() {
                 </div>
               </div>
             </div>
+            
 
             <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden mb-4 md:mb-6">
               <div className="h-25 w-auto mx-auto py-4 h-auto">
@@ -205,7 +214,7 @@ export default function SinglePackage() {
                           }`}
                           onClick={() => handleTabClick(index)}
                         >
-                          {tab.PTitle} for {tab.Duration}
+                          {tab.type} for {tab.Duration}
                         </button>
                       ))}
                   </div>

@@ -42,7 +42,7 @@ export default function Headerfile() {
                     <div className="flex items-c  enter flex-wrap ">
                       <span className=" inline-flex items-center  leading-none text-sm ">
                         <img
-                          src="./assets/icon/customer_support.svg"
+                          src="/himalayan/uploads/assets/icon/customer_support.svg"
                           className="w-10 h-auto px-2 "
                           alt="ap"
                         />
@@ -60,7 +60,7 @@ export default function Headerfile() {
                     <div className="flex items-center flex-wrap ">
                       <span className="inline-flex items-center leading-none text-sm">
                         <img
-                          src="./assets/icon/globe.svg"
+                          src="/himalayan/uploads/assets/icon/globe.svg"
                           className="w-10 h-auto px-2"
                           alt="ap"
                         />
@@ -78,7 +78,7 @@ export default function Headerfile() {
                     <div className="flex items-center flex-wrap ">
                       <span className="inline-flex items-center leading-none text-sm">
                         <img
-                          src="./assets/icon/people.svg"
+                          src="/himalayan/uploads/assets/icon/people.svg"
                           className="w-10 h-auto px-2"
                           alt="ap"
                         />
@@ -96,7 +96,7 @@ export default function Headerfile() {
                     <div className="flex items-center flex-wrap text-white ">
                       <span className="inline-flex items-center leading-none text-sm">
                         <img
-                          src="./assets/icon/money_bag_rupee.svg"
+                          src="/himalayan/uploads/assets/icon/money_bag_rupee.svg"
                           className="w-10 h-auto px-2"
                           alt="ap"
                         />

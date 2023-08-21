@@ -21,7 +21,7 @@ const AddPackages = () => {
 
   function getCategories() {
     axios
-      .get("http://localhost/himalayan/api_fetch_category.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
         setCategory(response.data);
       });
@@ -29,7 +29,7 @@ const AddPackages = () => {
 
   function getMultilocation() {
     axios
-      .get("http://localhost/himalayan/api_fetch_category.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
         setMultiLocation(response.data);
       });
@@ -170,7 +170,7 @@ const AddPackages = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost/himalayan/api-add-package.php",
+          "https://himalayanpackages.com/himalayan/api-add-package.php",
           formData
         );
         console.log("Form Data:", formData);

@@ -28,7 +28,7 @@ const AddBestOf = () => {
     formDataObj.append('BAlt', formData.BAlt);
   
     try {
-      const response = await fetch('http://localhost/himalayan/api-addbestof.php', {
+      const response = await fetch('https://himalayanpackages.com/himalayan/api-addbestof.php', {
         method: 'POST',
         body: formDataObj,
       });

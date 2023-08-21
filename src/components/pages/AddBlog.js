@@ -4,20 +4,15 @@ import Swal from "sweetalert2";
 import { useEffect } from "react";
 import JoditEditor from "jodit-react";
 import { HiPlusCircle, HiExclamationCircle } from "react-icons/hi";
-import slugify from 'slugify';
+import slugify from "slugify";
 
 const AddBlogPage = () => {
-
- 
-
-const [slug, setSlug] = useState('');
-
-
+  const [slug, setSlug] = useState("");
 
   const convertToSlug = () => {
-    const convertedSlug = slugify(slug,{ lower: true });
+    const convertedSlug = slugify(slug, { lower: true });
     setSlug(convertedSlug);
-  }; 
+  };
 
   const [category, setcategory] = useState([]); // for category
 
@@ -28,9 +23,8 @@ const [slug, setSlug] = useState('');
 
   function getcategory() {
     axios
-      .get("http://localhost/himalayan/api_fetch_category.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
-        
         setcategory(response.data);
       });
   }
@@ -48,7 +42,6 @@ const [slug, setSlug] = useState('');
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
     setSlug(e.target.value);
-   
   };
 
   const handleContentChange = (value) => {
@@ -66,7 +59,6 @@ const [slug, setSlug] = useState('');
 
   const handleCategoryIdChange = (e) => {
     setCategoryId(e.target.value);
-
   };
 
   const validateForm = () => {
@@ -95,14 +87,16 @@ const [slug, setSlug] = useState('');
     return errors;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+
     const errors = validateForm();
 
     if (Object.keys(errors).length === 0) {
       const formData = new FormData();
       formData.append("BName", title);
       formData.append("content", content);
-      
+
       formData.append("image", image);
       formData.append("BAlt", altTag);
       formData.append("CID", categoryId);
@@ -111,14 +105,18 @@ const [slug, setSlug] = useState('');
       try {
         // Send the blog data to the PHP API
         const response = await axios.post(
-          "http://localhost/himalayan/test.php",
+          "https://himalayanpackages.com/himalayan/test.php",
           formData
         );
 
- 
-
-      
-
+        if (response.status === "true") {
+          // Show success message with SweetAlert2
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: "Blog added successfully",
+          });
+          
         // Reset the form fields
         setTitle("");
         setContent("");
@@ -126,20 +124,11 @@ const [slug, setSlug] = useState('');
         setAltTag("");
         setCategoryId("");
 
-
-       
-
         // Reset the image input
         if (imageInputRef.current) {
           imageInputRef.current.value = "";
         }
-
-        // Show success message with SweetAlert2
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: "Blog added successfully",
-        });
+        }
       } catch (error) {
         console.error(error);
         // Show error message with SweetAlert2
@@ -161,8 +150,6 @@ const [slug, setSlug] = useState('');
     }
   };
 
- 
-
   return (
     <div>
       <section className="text-gray-600 body-font relative">
@@ -170,7 +157,6 @@ const [slug, setSlug] = useState('');
           <div className="flex flex-col text-center w-full mb-12">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
               Add Blog
-          
             </h1>
           </div>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
@@ -196,9 +182,7 @@ const [slug, setSlug] = useState('');
                 <div className="p-2 w-2/3">
                   <div className="relative">
                     <label className="label">
-                      <span className="label-text">
-                        SEO Friendly Slug
-                      </span>
+                      <span className="label-text">SEO Friendly Slug</span>
                     </label>
                     <input
                       type="text"
@@ -208,33 +192,21 @@ const [slug, setSlug] = useState('');
                       value={slug}
                       onChange={handleTitleChange}
                     />
-                    
                   </div>
                 </div>
 
                 <div className="p-2 w-1/3">
                   <div className="relative">
-                    <label className="label">
-                 
-                    </label>
+                    <label className="label"></label>
                     <a
-                      
                       className="btn btn-outline btn-primary mt-5"
                       onClick={convertToSlug}
                     >
                       <HiPlusCircle className="h-6 w-6 " />
                       Ok
                     </a>
-                    
                   </div>
                 </div>
-
-
-
-
-                
-
-
 
                 <div className="p-2 w-full">
                   <div className="relative">
@@ -269,9 +241,7 @@ const [slug, setSlug] = useState('');
                       {category.map((category) => (
                         <option key={category.CID} value={category.CID}>
                           {category.CName}
-                          
                         </option>
-                      
                       ))}
                     </select>
                   </div>

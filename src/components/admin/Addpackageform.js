@@ -39,7 +39,7 @@ const AddPackageForm = () => {
 
   function getFeatures() {
     axios
-      .get("http://localhost/himalayan/api_fetch_features.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_features.php/")
       .then(function (response) {
         setFeatures(response.data);
       });
@@ -55,7 +55,7 @@ const AddPackageForm = () => {
 
   function getcategory() {
     axios
-      .get("http://localhost/himalayan/api_fetch_category.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
         setcategory(response.data);
       });
@@ -247,7 +247,7 @@ const AddPackageForm = () => {
     try {
       // Make an HTTP POST request to your PHP API endpoint
       const response = await axios.post(
-        "http://localhost/himalayan/api-add-pkg.php",
+        "https://himalayanpackages.com/himalayan/api-add-pkg.php",
         formData
       );
 

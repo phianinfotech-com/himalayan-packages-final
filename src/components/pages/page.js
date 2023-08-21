@@ -21,7 +21,7 @@ const Page = () => {
   const fetchDataBySlug = async (slug) => {
     try {
       const response = await fetch(
-        `http://localhost/himalayan/api-page.php?slug=${slug}`
+        `https://himalayanpackages.com/himalayan/api-page.php?slug=${slug}`
       );
       const jsonData = await response.json();
       setData(jsonData);

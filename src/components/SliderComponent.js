@@ -10,7 +10,7 @@ export default function SliderComponent() {
 
   useEffect(() => {
     // Fetch image URLs from the API
-    fetch("http://localhost/himalayan/api-fetch-get_images.php")
+    fetch("https://himalayanpackages.com/himalayan/api-fetch-get_images.php")
       .then((response) => response.json())
       .then((data) => setImageUrls(data))
       .catch((error) => console.error("Error fetching images:", error));
@@ -23,7 +23,7 @@ export default function SliderComponent() {
 
   function getHimachal() {
     axios
-      .get("http://localhost/himalayan/api-hiimachal-package.php")
+      .get("https://himalayanpackages.com/himalayan/api-hiimachal-package.php")
       .then(function (response) {
         setHimachal(response.data);
       })
@@ -40,7 +40,7 @@ export default function SliderComponent() {
 
   function gethimachalpackage() {
     axios
-      .get("http://localhost/himalayan/api-best-of-himachal-package.php")
+      .get("https://himalayanpackages.com/himalayan/api-best-of-himachal-package.php")
       .then(function (response) {
         setHimachalpackage(response.data);
       })
@@ -57,7 +57,7 @@ export default function SliderComponent() {
 
   function getuttrakhand() {
     axios
-      .get("http://localhost/himalayan/api-best-of-Uttrakhand.php")
+      .get("https://himalayanpackages.com/himalayan/api-best-of-Uttrakhand.php")
       .then(function (response) {
         setUttrakhand(response.data);
       })
@@ -74,7 +74,7 @@ export default function SliderComponent() {
 
   function getuttrakhandpackage() {
     axios
-      .get("http://localhost/himalayan/api-fetch-uttrakhand-package.php")
+      .get("https://himalayanpackages.com/himalayan/api-fetch-uttrakhand-package.php")
       .then(function (response) {
         setUttrakhandpackage(response.data);
       })
@@ -91,7 +91,7 @@ export default function SliderComponent() {
 
   function getkashmir() {
     axios
-      .get("http://localhost/himalayan/api-best-of-kashmir.php")
+      .get("https://himalayanpackages.com/himalayan/api-best-of-kashmir.php")
       .then(function (response) {
         setKashmir(response.data);
       })
@@ -108,7 +108,7 @@ export default function SliderComponent() {
 
   function getkashmirpackage() {
     axios
-      .get("http://localhost/himalayan/api-fetch-kashmir-package.php")
+      .get("https://himalayanpackages.com/himalayan/api-fetch-kashmir-package.php")
       .then(function (response) {
         setKashmirpackage(response.data);
       })

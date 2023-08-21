@@ -30,7 +30,7 @@ export default function SinglePackage() {
 
   function getPolicy() {
     axios
-      .get("http://localhost/himalayan/api_fetch_policy.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_policy.php/")
       .then(function (response) {
         setpolicy(response.data);
       });
@@ -51,14 +51,15 @@ export default function SinglePackage() {
   const fetchDataBySlug = async (slug) => {
     try {
       const response = await fetch(
-        `http://localhost/himalayan/api-fetch-single-package.php?slug=${slug}`
+        `https://himalayanpackages.com/himalayan/api-fetch-single-package.php?slug=${slug}`
       );
       const jsonData = await response.json();
 
       // Check if the response contains an error
       if (jsonData.error) {
         // Redirect to a different route
-        navigate("/"); // Replace "/error-page" with the actual route you want to redirect to
+        // navigate("/"); // Replace "/error-page" with the actual route you want to redirect to
+        console.log(jsonData.error);
       } else {
         setData(jsonData);
       }
@@ -98,7 +99,7 @@ export default function SinglePackage() {
 
   function getFeatures() {
     axios
-      .get("http://localhost/himalayan/api_fetch_features.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_features.php/")
       .then(function (response) {
         setFeatures(response.data);
       });

@@ -20,7 +20,7 @@ const PostBlogPage = () => {
       formData.append("CID", CID);
 
       const response = await axios.post(
-        "http://localhost/himalayan/upload_file.php",
+        "https://himalayanpackages.com/himalayan/upload_file.php",
         formData
       );
       console.log(response.data);

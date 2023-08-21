@@ -34,7 +34,7 @@ function AllPackages() {
   const fetchDataBySlug = async (slug) => {
     try {
       const response = await fetch(
-        `http://localhost/himalayan/api-fetch-all-package-for-memory.php?slug=${slug}`
+        `https://himalayanpackages.com/himalayan/api-fetch-all-package-for-memory.php?slug=${slug}`
       );
       const jsonData = await response.json();
 
@@ -73,7 +73,7 @@ function AllPackages() {
 
   function getFeatures() {
     axios
-      .get("http://localhost/himalayan/api_fetch_features.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_features.php/")
       .then(function (response) {
         setFeatures(response.data);
       });
@@ -83,7 +83,7 @@ function AllPackages() {
 
   function getcategory() {
     axios
-      .get("http://localhost/himalayan/api_fetch_category.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
         setCat(response.data);
       });
@@ -93,7 +93,7 @@ function AllPackages() {
 
   function getDuration() {
     axios
-      .get("http://localhost/himalayan/api_fetch_by_duration.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_by_duration.php/")
       .then(function (response) {
         setDuration(response.data);
       });

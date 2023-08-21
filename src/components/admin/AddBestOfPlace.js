@@ -22,7 +22,7 @@ const AddBestOfPlace = () => {
 
   function getcategory() {
     axios
-      .get("http://localhost/himalayan/api_fetch_category.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
         setCategory(response.data);
       });
@@ -30,7 +30,7 @@ const AddBestOfPlace = () => {
 
   function getbest_of() {
     axios
-      .get("http://localhost/himalayan/api-fetch_bestof.php/")
+      .get("https://himalayanpackages.com/himalayan/api-fetch_bestof.php/")
       .then(function (response) {
         setBest_of(response.data);
       });
@@ -38,7 +38,7 @@ const AddBestOfPlace = () => {
 
   function getpackages() {
     axios
-      .get("http://localhost/himalayan/api-fetch-package.php/")
+      .get("https://himalayanpackages.com/himalayan/api-fetch-package.php/")
       .then(function (response) {
         setPackages(response.data);
       });
@@ -63,7 +63,7 @@ const AddBestOfPlace = () => {
  
 
     axios
-    .post("http://localhost/himalayan/api-add-best-of-place.php", formData)
+    .post("https://himalayanpackages.com/himalayan/api-add-best-of-place.php", formData)
     .then((response) => {
       console.log(response.data);
 
@@ -86,7 +86,7 @@ const AddBestOfPlace = () => {
     
     
     // axios
-    //   .post("http://localhost/himalayan/api-add-best-of-place.php", formData)
+    //   .post("https://himalayanpackages.com/himalayan/api-add-best-of-place.php", formData)
     //   .then((response) => {
     //     console.log(response.data);
     //   })

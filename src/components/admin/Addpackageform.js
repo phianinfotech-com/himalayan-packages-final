@@ -10,14 +10,8 @@ const AddPackageForm = () => {
   const [slug, setSlug] = useState("");
   const [PTitle, setPTitle] = useState("");
 
-  const [feature1, setFeature1] = useState("");
-  
-  const [feature2, setFeature2] = useState("");
-  
-  const [feature3, setFeature3] = useState("");
-  
-  const [feature4, setFeature4] = useState("");
-  
+
+
   const [banner1, setBanner1] = useState("");
   const [temp, setTemp] = useState("");
   const [banner_alt1, setBannerAlt1] = useState("");
@@ -27,64 +21,59 @@ const AddPackageForm = () => {
   const [banner_alt3, setBannerAlt3] = useState("");
   const [banner4, setBanner4] = useState("");
   const [banner_alt4, setBannerAlt4] = useState("");
-  
-  const [categoryId, setCategoryId] = useState("");
-  const [category, setcategory] = useState([]); // for category
 
-  const [features, setFeatures] = useState([]); // for features
+  const [categoryId, setCategoryId] = useState("");
+  
+  const [multilocationid, setMultiLocationId] = useState("");
+  
+  const [multilocation, setMultiLocation] = useState([]);
+
+  const [selectedMultilocations, setSelectedMultilocations] = useState([]);
 
   useEffect(() => {
-    getFeatures();
+   
+    getMultilocation();
   }, []);
 
-  function getFeatures() {
+
+
+  function getMultilocation() {
     axios
-      .get("https://himalayanpackages.com/himalayan/api_fetch_features.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
-        setFeatures(response.data);
+        setMultiLocation(response.data);
       });
   }
 
   // Add state variables for form validation
   const [errors, setErrors] = useState({});
 
-  /// const [category, setcategory] = useState([]);
-  useEffect(() => {
-    getcategory();
-  }, []);
 
-  function getcategory() {
-    axios
-      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
-      .then(function (response) {
-        setcategory(response.data);
-      });
-  }
-  // Rest of the code...
+  const handlemultilocationidChange = (e) => {
+    const selectedMultilocationId = e.target.value;
+    const selectedMultilocationName = multilocation.find(
+      (location) => location.CID === selectedMultilocationId
+    ).CName;
+    setSelectedMultilocations((prevSelectedMultilocations) => [
+      ...prevSelectedMultilocations,
+      selectedMultilocationName,
+     
+    ]);
+    setMultiLocationId(selectedMultilocationId);
+    
+  };
+
+  const removeSelectedMultilocation = (locationName) => {
+    setSelectedMultilocations((prevSelectedMultilocations) =>
+      prevSelectedMultilocations.filter((location) => location !== locationName)
+    );
+  };
 
   const handlePTitleChange = (e) => {
     setPTitle(e.target.value);
   };
 
  
-  const handlefeature1Change = (e) => {
-    setFeature1(e.target.value);
-  };
-
-
-  const handlefeature2Change = (e) => {
-    setFeature2(e.target.value);
-  };
-
-
-  const handlefeature3Change = (e) => {
-    setFeature3(e.target.value);
-  };
-
-  const handlefeature4Change = (e) => {
-    setFeature4(e.target.value);
-  };
-
   const handleBanner1Change = (e) => {
     const file = e.target.files[0];
     setBanner1(file);
@@ -152,28 +141,10 @@ const AddPackageForm = () => {
       validationErrors.PTitle = "Package title is required";
     }
 
-    if (!categoryId) {
-      validationErrors.categoryId = "Category is required";
-    }
+
 
     if (!slug) {
       validationErrors.slug = "slug is required";
-    }
-
-    if (!feature1) {
-      validationErrors.feature1 = "feature1 is required";
-    }
-
-    if (!feature2) {
-      validationErrors.feature2 = "feature2 is required";
-    }
-
-    if (!feature3) {
-      validationErrors.feature3 = "feature3 is required";
-    }
-
-    if (!feature4) {
-      validationErrors.feature4 = "feature4 is required";
     }
 
 
@@ -223,17 +194,8 @@ const AddPackageForm = () => {
     // Create a FormData object to hold the form data
     const formData = new FormData();
     formData.append("PTitle", PTitle);
-    formData.append("CID", categoryId);
-    formData.append("slug", slug);
 
-    formData.append("feature1", feature1);
-    
-    formData.append("feature2", feature2);
-    
-    formData.append("feature3", feature3);
-    
-    formData.append("feature4", feature4);
-    
+    formData.append("slug", slug);
     formData.append("banner1", banner1);
     formData.append("banner_alt1", banner_alt1);
     formData.append("banner2", banner2);
@@ -244,12 +206,18 @@ const AddPackageForm = () => {
     formData.append("banner_alt4", banner_alt4);
     formData.append("temp", temp);
 
+    selectedMultilocations.forEach((locationName) => {
+      formData.append("multilocation[]", locationName);
+    });
+
     try {
       // Make an HTTP POST request to your PHP API endpoint
       const response = await axios.post(
         "https://himalayanpackages.com/himalayan/api-add-pkg.php",
         formData
       );
+
+      console.log("Form Data:", formData);
 
       // Handle the response from the API as needed
       // For example, show a success message or redirect to another page
@@ -259,14 +227,8 @@ const AddPackageForm = () => {
       setPTitle("");
       setSlug("");
       setCategoryId("");
-      setFeature1("");
-      
-      setFeature2("");
-      
-      setFeature3("");
-      
-      setFeature4("");
-      
+ 
+
       setBanner1("");
       setBannerAlt1("");
       setBanner2("");
@@ -310,7 +272,7 @@ const AddPackageForm = () => {
           <h1 className="text-2xl font-bold mb-4">Add Packages</h1>
 
           <div className="flex flex-wrap -m-4">
-            <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
+            <div className="lg:w-1/2 md:w-1/2 p-4 w-full">
               <label
                 htmlFor="PTitle"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -328,7 +290,7 @@ const AddPackageForm = () => {
               />
             </div>
 
-            <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
+            <div className="lg:w-1/2 md:w-1/2 p-4 w-full">
               {/* slug */}
 
               <label
@@ -349,41 +311,13 @@ const AddPackageForm = () => {
             </div>
 
             <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
-              {/* Category */}
-
-              <label
-                htmlFor="Category"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Location
-              </label>
-
-              <select
-                className="select input-primary w-full max-w-xs"
-                id="categoryId"
-                value={categoryId}
-                onChange={handleCategoryIdChange}
-              >
-                <option selected value={0}>
-                  Select
-                </option>
-
-                {category.map((category) => (
-                  <option key={category.CID} value={category.CID}>
-                    {category.CName}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
-              {/* slug */}
+              {/* Price */}
 
               <label
                 htmlFor="temp"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Duration
+                Price
               </label>
               <input
                 type="text"
@@ -396,134 +330,64 @@ const AddPackageForm = () => {
               />
             </div>
 
+            {/* Category for location */}
             <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
-              {/* Category */}
-
               <label
-                htmlFor="Feature1"
+                htmlFor="Category"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Feature 1
+                Location
               </label>
 
               <select
-                className="select select-primary w-full max-w-xs"
-                id="Feature1"
-                value={feature1}
-                onChange={handlefeature1Change}
+                className="select input-primary w-full max-w-xs"
+                id="multilocationid"
+                value={multilocationid}
+                onChange={handlemultilocationidChange}
               >
-                <option value={0}>Select</option>
-
-                {features.map((feature, index) => (
-                  <option
-                    key={feature.FID}
-                    value={feature.FID}
-                    className="py-2"
-                    selected={index === 0} // Set selected attribute for the first option
-                  >
-                    {feature.Key_Name}
-                  </option>
-                ))}
+                <option value="">
+                  {selectedMultilocations.length > 0
+                    ? "Select another category"
+                    : "Select another category"}
+                </option>
+                {multilocation.map(
+                  (location) =>
+                    !selectedMultilocations.includes(location.CName) && (
+                      <option key={location.CID} value={location.CID}>
+                        {location.CName}
+                      </option>
+                    )
+                )}
               </select>
             </div>
-
-            
-            <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
-              {/* Category */}
-
+            {/* Multilocations */}
+            <div className="lg:w-1/2 md:w-1/2 p-4 w-full">
               <label
-                htmlFor="Feature2"
+                htmlFor="selectedMultilocations"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Feature 2
+                Selected Multilocations
               </label>
 
-              <select
-                className="select select-primary w-full max-w-xs"
-                id="Feature2"
-                value={feature2}
-                onChange={handlefeature2Change}
-              >
-                <option value={0}>Select</option>
-
-                {features.map((feature, index) => (
-                  <option
-                    key={feature.FID}
-                    value={feature.FID}
-                    className="py-2"
-                    selected={index === 0} // Set selected attribute for the first option
+              <div className="flex flex-wrap">
+                {selectedMultilocations.map((location, index) => (
+                  <div
+                    key={index}
+                    className="rounded-md bg-blue-100 px-2 py-1 m-1 flex items-center"
                   >
-                    {feature.Key_Name}
-                  </option>
+                    {location}
+                    <button
+                      type="button"
+                      onClick={() => removeSelectedMultilocation(location)}
+                      className="ml-2 text-red-600"
+                    >
+                      &#x2715;
+                    </button>
+                  </div>
                 ))}
-              </select>
+              </div>
             </div>
 
-            
-            <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
-              {/* Category */}
-
-              <label
-                htmlFor="Feature3"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Feature 3
-              </label>
-
-              <select
-                className="select select-primary w-full max-w-xs"
-                id="Feature3"
-                value={feature3}
-                onChange={handlefeature3Change}
-              >
-                <option value={0}>Select</option>
-
-                {features.map((feature, index) => (
-                  <option
-                    key={feature.FID}
-                    value={feature.FID}
-                    className="py-2"
-                    selected={index === 0} // Set selected attribute for the first option
-                  >
-                    {feature.Key_Name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            
-            <div className="lg:w-1/4 md:w-1/4 p-4 w-full">
-              {/* Category */}
-
-              <label
-                htmlFor="Feature4"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Feature 4
-              </label>
-
-              <select
-                className="select select-primary w-full max-w-xs"
-                id="Feature4"
-                value={feature4}
-                onChange={handlefeature4Change}
-              >
-                <option value={0}>Select</option>
-
-                {features.map((feature, index) => (
-                  <option
-                    key={feature.FID}
-                    value={feature.FID}
-                    className="py-2"
-                    selected={index === 0} // Set selected attribute for the first option
-                  >
-                    {feature.Key_Name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-  
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
               {/* banner1 */}
 

@@ -206,7 +206,7 @@ export default function SliderComponent() {
       {/*owl carousel for best of Himachal*/}
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-          {himachal[1]?.BName}
+          {himachal[0]?.BName}
         </h2>
         <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
       </div>
@@ -256,7 +256,7 @@ export default function SliderComponent() {
 
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-          {himachalpackage[1]?.BName}
+          {himachalpackage[0]?.BName}
         </h2>
         <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
       </div>
@@ -278,11 +278,11 @@ export default function SliderComponent() {
               src={hpkg.banner1}
               alt={hpkg.banner_alt1}
             />
-            <div className="absolute bottom-0 left-0 p-4">
+            {/* <div className="absolute bottom-0 left-0 p-4">
               <p className="text-white font-bold text-3xl leading-8">
                 {hpkg.temp}
               </p>
-            </div>
+            </div> */}
           </div>
           <div className="w-64 font-bold text-xl">
             <p className="whitespace-pre-line">{hpkg.PTitle}</p>
@@ -305,7 +305,7 @@ export default function SliderComponent() {
       {/*owl carousel for best of uttrakhand*/}
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-          {uttrakhand[5]?.BName}
+          {uttrakhand[0]?.BName}
         </h2>
         <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
       </div>
@@ -349,7 +349,7 @@ export default function SliderComponent() {
 
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-          {uttrakhandpackage[1]?.BName}
+          {uttrakhandpackage[0]?.BName}
         </h2>
         <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
       </div>
@@ -371,11 +371,11 @@ export default function SliderComponent() {
               src={ukpkg.banner1}
               alt={ukpkg.banner_alt1}
             />
-            <div className="absolute bottom-0 left-0 p-4">
+            {/* <div className="absolute bottom-0 left-0 p-4">
               <p className="text-white font-bold text-3xl leading-8">
                 {ukpkg.temp}
               </p>
-            </div>
+            </div> */}
           </div>
           <div className="w-64 font-bold text-xl">
             <p className="whitespace-pre-line">{ukpkg.PTitle}</p>
@@ -401,7 +401,7 @@ export default function SliderComponent() {
       {/*owl carousel for best of kashmir*/}
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-          {kashmir[3]?.BName}
+          {kashmir[0]?.BName}
         </h2>
         <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
       </div>
@@ -449,7 +449,7 @@ export default function SliderComponent() {
 
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
-          {uttrakhandpackage[1]?.BName}
+          {kashmirpackage[0]?.BName}
         </h2>
         <div className="w-14 h-1 bg-primary rounded mt-1 mb-8"></div>
       </div>
@@ -471,11 +471,11 @@ export default function SliderComponent() {
               src={kkpkg.banner1}
               alt={kkpkg.banner_alt1}
             />
-            <div className="absolute bottom-0 left-0 p-4">
+            {/* <div className="absolute bottom-0 left-0 p-4">
               <p className="text-white font-bold text-3xl leading-8">
                 {kkpkg.temp}
               </p>
-            </div>
+            </div> */}
           </div>
           <div className="w-64 font-bold text-xl">
             <p className="whitespace-pre-line">{kkpkg.PTitle}</p>

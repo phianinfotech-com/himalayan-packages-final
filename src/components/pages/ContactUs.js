@@ -49,12 +49,10 @@ function ContactUs() {
         </section>
       </div>
 
-      <div className="flex flex-col text-center w-full ">
+      <div className="flex flex-col text-center w-full pt-10 ">
    
    <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"> {data[0].Page_Name}</h1>
-   <p className="lg:w-2/3 mx-auto leading-relaxed text-base">  <div
-                      dangerouslySetInnerHTML={{ __html: data[0].Page_Content }}
-                    ></div></p>
+ 
   </div>
 
       {/* Main Body  Section */}

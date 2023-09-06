@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-
 import Swal from "sweetalert2";
 import axios from "axios";
-
 
 const AddBestOfPlace = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -11,7 +9,7 @@ const AddBestOfPlace = () => {
   const [packages, setPackages] = useState([]);
   const [categoryId, setCategoryId] = useState("");
   const [best_ofId, setBest_ofId] = useState("");
-  const [packageId, setPackageId] = useState(""); // Initialize as an empty string
+  const [packageId, setPackageId] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -58,41 +56,29 @@ const AddBestOfPlace = () => {
     const formData = new FormData();
     formData.append("best_of_id", best_ofId);
     formData.append("package_id", packageId);
-    formData.append("categoryId", categoryId);
-
- 
+    formData.append("categoryId", isChecked ? category : categoryId);
 
     axios
-    .post("https://himalayanpackages.com/himalayan/api-add-best-of-place.php", formData)
-    .then((response) => {
-      console.log(response.data);
+      .post("https://himalayanpackages.com/himalayan/api-add-best-of-place.php", formData)
+      .then((response) => {
+        console.log(response.data);
 
-      // Show SweetAlert on successful submission
-      Swal.fire({
-        icon: "success",
-        title: "Success!",
-        text: "Form submitted successfully.",
+        // Show SweetAlert on successful submission
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Form submitted successfully.",
+        });
+
+        // Reset the form after successful submission
+        setBest_ofId("");
+        setPackageId("");
+        setCategoryId("");
+        setIsChecked(false);
+      })
+      .catch((error) => {
+        console.error("Error while saving data:", error);
       });
-
-      // Reset the form after successful submission
-      setBest_ofId("");
-      setPackageId("");
-      setCategoryId("");
-      setIsChecked(false);
-    })
-    .catch((error) => {
-      console.error("Error while saving data:", error);
-    });    
-    
-    
-    // axios
-    //   .post("https://himalayanpackages.com/himalayan/api-add-best-of-place.php", formData)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error while saving data:", error);
-    //   });
   };
 
   const handleBest_OfChange = (e) => {
@@ -107,8 +93,6 @@ const AddBestOfPlace = () => {
   const handleCategoryIdChange = (e) => {
     setCategoryId(e.target.value);
   };
-
- 
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
@@ -201,7 +185,7 @@ const AddBestOfPlace = () => {
                       </option>
                     ))
                   : category.map((category) => (
-                      <option key={category.CID} value={category.CID}>
+                      <option key={category.CID} value={category.CName}>
                         {category.CName}
                       </option>
                     ))}

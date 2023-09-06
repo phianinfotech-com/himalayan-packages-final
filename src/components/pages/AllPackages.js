@@ -260,7 +260,7 @@ function AllPackages() {
                                 </span>
                               </div>
                             </div>
-                            <Link to={`/tours/${post.slug}/`}>
+                            <Link to={`/tours/${post.pkg_slug}/`}>
                               <button className="text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-secondary rounded-xl text-lg">
                                 Learn More
                               </button>

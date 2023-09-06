@@ -1,12 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import MobileMenuToggle from './MobileMenuToggle';
+import MobileMenu from './MobileMenu';
 export default function Footer() {
 
 
 
   return (
     <>
+
+
+
+      {/* Mobile menu button */}
+      <MobileMenu />
       {/*footer starts from here */}
       <footer className="text-gray-600 body-font bg-neutral mt-20">
       <div className="flex items-center justify-center">
@@ -89,20 +96,22 @@ export default function Footer() {
         <p className="hover:text-primary text-white font-medium m-2">
         <ul>
            <Link to='/page/terms'>Terms and condition</Link> 
+
+           
         </ul>
-        </p>{" "}
+        </p>
         <p className="hover:text-primary text-white font-medium m-2">
         <ul>
            <Link to='/Contact-Us'>Contact Us  </Link> 
         </ul>
-        </p>{" "}
+        </p>
         <p className="hover:text-primary text-white font-medium m-2">
         <ul>
-           <Link to='/page/policy'> Privacy Policy</Link> 
+           <Link  to='/page/policy'>Privacy Policy</Link> 
         </ul>
           
-        </p>{" "}
-      </div>{" "}
+        </p>
+      </div>
       <div className="text-white font-medium mt-4 text-xs">
   {" "}
   ©2023 himalayanpackages.com All rights reserved.{" "}

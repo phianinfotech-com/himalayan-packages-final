@@ -14,18 +14,17 @@ const AddBlogPage = () => {
     setSlug(convertedSlug);
   };
 
-  const [category, setcategory] = useState([]); // for category
+  const [category, setCategory] = useState([]);
 
-  /// const [category, setcategory] = useState([]);
   useEffect(() => {
-    getcategory();
+    getCategories();
   }, []);
 
-  function getcategory() {
+  function getCategories() {
     axios
       .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
-        setcategory(response.data);
+        setCategory(response.data);
       });
   }
 
@@ -88,50 +87,55 @@ const AddBlogPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     const errors = validateForm();
 
     if (Object.keys(errors).length === 0) {
+      const selectedCategory = category.find((cat) => cat.CID === categoryId);
+
+      if (!selectedCategory) {
+        Swal.fire({
+          icon: "error",
+          title: "Category not found",
+          text: "Please select a valid category",
+        });
+        return;
+      }
+
       const formData = new FormData();
       formData.append("BName", title);
       formData.append("content", content);
-
       formData.append("image", image);
       formData.append("BAlt", altTag);
-      formData.append("CID", categoryId);
+      formData.append("CID", selectedCategory.CName); // Send CName instead of CID
       formData.append("slug", slug);
 
       try {
-        // Send the blog data to the PHP API
         const response = await axios.post(
           "https://himalayanpackages.com/himalayan/test.php",
           formData
         );
 
-        if (response.status === "true") {
-          // Show success message with SweetAlert2
+        if (response.status === 200) {
           Swal.fire({
             icon: "success",
             title: "Success!",
             text: "Blog added successfully",
           });
-          
-        // Reset the form fields
-        setTitle("");
-        setContent("");
-        setImage("");
-        setAltTag("");
-        setCategoryId("");
 
-        // Reset the image input
-        if (imageInputRef.current) {
-          imageInputRef.current.value = "";
-        }
+          setTitle("");
+          setContent("");
+          setImage("");
+          setAltTag("");
+          setCategoryId("");
+
+          if (imageInputRef.current) {
+            imageInputRef.current.value = "";
+          }
         }
       } catch (error) {
         console.error(error);
-        // Show error message with SweetAlert2
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -139,7 +143,6 @@ const AddBlogPage = () => {
         });
       }
     } else {
-      // Show validation error messages with SweetAlert2
       Swal.fire({
         icon: "error",
         title: "Submission Error",
@@ -238,9 +241,9 @@ const AddBlogPage = () => {
                         Select
                       </option>
 
-                      {category.map((category) => (
-                        <option key={category.CID} value={category.CID}>
-                          {category.CName}
+                      {category.map((cat) => (
+                        <option key={cat.CID} value={cat.CID}>
+                          {cat.CName}
                         </option>
                       ))}
                     </select>
@@ -274,8 +277,8 @@ const AddBlogPage = () => {
                     <JoditEditor
                       ref={editor}
                       value={content}
-                      tabIndex={1} // tabIndex of textarea
-                      onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content htmlFor perhtmlFormance reasons
+                      tabIndex={1}
+                      onBlur={(newContent) => setContent(newContent)}
                       onChange={handleContentChange}
                     />
                   </div>

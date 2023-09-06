@@ -4,7 +4,7 @@ import slugify from 'slugify';
 
 const AddExplore = () => {
   const [formData, setFormData] = useState({
-    CID: '',
+    CName: '', // Store the category name instead of CID
     slug: '',
     Eimg: null,
     EName: '',
@@ -26,36 +26,40 @@ const AddExplore = () => {
       console.error('Error fetching categories:', error);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Validate form fields
-    if (!formData.CID || !formData.EName || !formData.slug || !formData.Eimg || !formData.EAlt) {
-      Swal.fire('Error', 'Please fill in all the fields.', 'error');
-      return;
-    }
-  
+
+  // Find the selected category object based on CName
+  const selectedCategory = categories.find((category) => category.CName === formData.CName);
+
+  // Validate form fields
+  if (!selectedCategory || !formData.EName || !formData.slug || !formData.Eimg || !formData.EAlt) {
+    Swal.fire('Error', 'Please fill in all the fields.', 'error');
+    return;
+  }
+
     const formDataObj = new FormData();
-    formDataObj.append('CID', formData.CID);
+    formDataObj.append('CID', selectedCategory.CName); // Send CName instead of CID
     formDataObj.append('slug', formData.slug);
     formDataObj.append('Eimg', formData.Eimg);
     formDataObj.append('EName', formData.EName);
     formDataObj.append('EAlt', formData.EAlt);
-  
+
     try {
       const response = await fetch('https://himalayanpackages.com/himalayan/addexplore.php', {
         method: 'POST',
         body: formDataObj,
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         Swal.fire('Success', 'Form submitted successfully!', 'success');
         console.log(data);
-  
+
         // Clear form fields after successful submission except Explore Image
         setFormData({
-          CID: '',
+          CName: '',
           slug: '',
           Eimg: null,
           EName: '',
@@ -90,18 +94,18 @@ const AddExplore = () => {
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-md p-6">
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="CID">
+        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="CName">
           Category
         </label>
         <select
-          name="CID"
-          value={formData.CID}
+          name="CName"
+          value={formData.CName}
           onChange={handleChange}
           className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
         >
-          <option value={0}>Select a category</option>
+          <option value="">Select a category</option>
           {categories.map((category) => (
-            <option key={category.CID} value={category.CID}>
+            <option key={category.CID} value={category.CName}>
               {category.CName}
             </option>
           ))}

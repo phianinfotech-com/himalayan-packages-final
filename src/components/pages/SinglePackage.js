@@ -5,6 +5,7 @@ import Navbar from "../Navbar";
 import SearchAllBlog from "../SearchAllBlog";
 import Footer from "../Footer";
 import Enquire from "../Enquire";
+import MobileMenuToggle from "../MobileMenuToggle";
 import {
   HiOutlineCheck,
   HiOutlineClock,
@@ -12,6 +13,7 @@ import {
 } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import MobileMenu from "../MobileMenu";
 
 export default function SinglePackage() {
   const slugToCamelCase = (slug) => {
@@ -105,13 +107,12 @@ export default function SinglePackage() {
       });
   }
 
+  // Accordion
+  const [activeAccordionTab, setActiveAccordionTab] = useState(null);
 
-    // Accordion
-    const [activeAccordionTab, setActiveAccordionTab] = useState(null);
-
-    const handleAccordionTabClick = (index) => {
-      setActiveAccordionTab(index === activeAccordionTab ? null : index);
-    };
+  const handleAccordionTabClick = (index) => {
+    setActiveAccordionTab(index === activeAccordionTab ? null : index);
+  };
 
   return (
     <div>
@@ -119,7 +120,8 @@ export default function SinglePackage() {
       {/* Navbar and Hero Section */}
       <div className="relative">
         <Navbar />
-        <div className="grid grid-cols-3 gap-4">
+
+        <div className="grid grid-cols-3 gap-4 md:-m-2 -m-1 -pt-10 pb-4 pr-4 pl-4">
           <div className="col-span-2 h-40">
             <img
               alt={data ? data[0].banner_alt1 : ""}
@@ -153,36 +155,32 @@ export default function SinglePackage() {
 
       {/* Blog Posts Section */}
       {/* Main Body  Section */}
-      <div className="flex md:mx-10 mx-1 py-10">
+      <div className="flex md:mx-10 py-10">
         {/* Main main page of sidebar Section */}
         <div className="flex-1">
           <section className="text-gray-600 body-font">
             <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden">
               <div className="h-25 w-auto mx-auto py-4 h-auto">
-                <p className="md:text-4xl text-left	font-bold text-black pl-2 ">
+                <p className="text-2xl text-left	font-bold text-black pl-2 ">
                   {data ? data[0].PTitle : ""}
                 </p>
 
-                <div className="flex justify-center space-x-4 p-2">
-                  <HiOutlineClock className="h-8 w-8 my-2" />
+                <div className="flex justify-center space-x-4 p-2 text-secondary">
+                  <HiOutlineLocationMarker className="h-6 w-6 md:h-8 md:w-8 my-2" />
                   <div className="py-2">
-                    <p>{data ? data[0].Duration : ""}</p>
-                  </div>
-                  <HiOutlineLocationMarker className="h-8 w-8 my-2" />
-                  <div className="py-2">
-                    <p>{data ? data[0].CName : ""}</p>
+                    <p className="md:text-xl">{data ? data[0].CName : ""}</p>
                   </div>
                 </div>
                 {/* day-night-sun-moon-cycle */}
 
                 <div className="grid grid-cols-4 gap-4 px-4">
-                  {features.length > 0 &&  // Conditionally render based on features availability
+                  {features.length > 0 && // Conditionally render based on features availability
                     features.map((feature, index) => (
                       <div key={index} className="p-2 relative">
                         <div className="flex flex-col items-center">
                           <img
                             alt={feature.Key_Alt}
-                            className="rounded-lg md:w-20 md:h-20 w-10 h-10 object-cover object-center block mb-2"
+                            className="rounded-full border-2 border-primary md:w-16  md:h-16 w-10 h-10 object-cover object-center block mb-2"
                             src={feature.Key_Img}
                           />
                           <div className="text-black text-center py-2 opacity-75">
@@ -194,28 +192,27 @@ export default function SinglePackage() {
                 </div>
               </div>
             </div>
-            
 
             <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden mb-4 md:mb-6">
               <div className="h-25 w-auto mx-auto py-4 h-auto">
-                <p className="text-2xl text-left	font-bold  pl-2 my-4 ">
+                <p className="md:text-2xl text-left	font-bold  pl-2 my-4 sm:text-xl ">
                   Select Package Options{" "}
                 </p>
 
-                <div className="container mx-auto px-4 ">
-                  <div className="flex  mb-4">
+                <div className="container mx-auto px-4 my-6">
+                  <div className="flex flex-wrap mb-4">
                     {data &&
                       data.map((tab, index) => (
                         <button
                           key={index}
-                          className={`px-4 py-2 mr-2 md:w-36 h-auto w-24   ${
+                          className={`px-4 my-2 mr-2 md:w-36 h-auto w-24   ${
                             activeTab === index
                               ? "btn btn-outline btn-primary"
                               : "btn btn-outline "
                           }`}
                           onClick={() => handleTabClick(index)}
                         >
-                          {tab.type} for {tab.Duration}
+                          {tab.type}
                         </button>
                       ))}
                   </div>
@@ -225,7 +222,9 @@ export default function SinglePackage() {
                       data.map((tab, index) => (
                         <div
                           key={index}
-                          className={activeTab === index ? "block" : "hidden"}
+                          className={`md:mx-4 ${
+                            activeTab === index ? "block" : "hidden"
+                          }`}
                         >
                           <div
                             className="mx-4"
@@ -265,13 +264,11 @@ export default function SinglePackage() {
         </div>
 
         {/* side bar code */}
-        <div className="hidden md:flex sticky top-0 h-screen w-1/4 md:mt-3 md:mr-10 md:mb-20">
+        <div className="hidden xl:flex sticky top-0 h-screen w-1/4 md:mt-3 md:mr-10 md:mb-20">
           <Enquire />
         </div>
         {/* side bar code */}
       </div>
-
-      {/* End of the Gallary Code */}
 
       <Footer />
     </div>

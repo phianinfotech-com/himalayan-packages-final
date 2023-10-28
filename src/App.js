@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import PreloaderWrapper from './components/PreloaderWrapper';
 import Home from "./components/pages/Home";
 import Blog from "./components/pages/Blog";
@@ -20,6 +20,14 @@ import PageDetails from "./components/pages/PageDetails";
 import ContactUs from "./components/pages/ContactUs";
 import AllPackages from "./components/pages/AllPackages";
 import SinglePackage from "./components/pages/SinglePackage";
+import MasterSearch from './components/MasterSearch';
+import VisitorCount from "./components/VisitorCount";
+
+import TopPackages from './components/pages/TopPackages';
+import SelectedPackages from './components/pages/SelectedPackages';
+import Bestpackages from './components/pages/Bestpackages'
+import ImageGrid from './components/pages/ap/ImageGrid';
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -33,17 +41,21 @@ function App() {
 
   return (
     <div>
+       
       <BrowserRouter>
+      
         <Routes>
           <Route element={<PreloaderWrapper />}>
+         
             <Route index element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/upload" element={<Upload />} />
+            
+            <Route path="/search/:id" element={<MasterSearch />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/AddBlog" element={<AddBlog />} />
             <Route path="/blog/:id/" element={<BlogDetails />} />
-
             <Route path="/explore" element={<AddExplore />} />
             <Route path="/bestof" element={<AddBestOf />} />
             <Route path="/addpackages" element={<Addpackages />} />
@@ -53,11 +65,20 @@ function App() {
             <Route path="/addpage/" element={<Addpage />} />
             <Route path="/viewEnquire/" element={<FetchEnquire />} />
             <Route path="/addpackageform" element={<AddPackageForm />} />
-            <Route path="/PackageDetails" element={<PackageDetails />} />
-            <Route path="/About-us" element={<PageDetails />} />
+            <Route path="/packageDetails" element={<PackageDetails />} />
+            <Route path="/about-us" element={<PageDetails />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/tours/:id" element={<SinglePackage />} />
             <Route path="/collections/:id" element={<AllPackages />} />
+            <Route path="/toppackages/:id" element={<TopPackages />} />
+            <Route path="/selectedpackages/:id" element={<SelectedPackages />} />
+            <Route path="/bestpackages/:id" element={<Bestpackages />} />
+            <Route path="/count" element={<VisitorCount />} />
+            <Route path="/abhi" element={<ImageGrid />} />
+
+
+           
+
           </Route>
         </Routes>
       </BrowserRouter>
@@ -66,3 +87,5 @@ function App() {
 }
 
 export default App;
+
+

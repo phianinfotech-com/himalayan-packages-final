@@ -5,6 +5,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS CSS
+import TitleInCamelCase from "./TitleInCamelCase";
+
 export default function SliderComponent() {
   const [imageUrls, setImageUrls] = useState([]);
 
@@ -19,6 +23,7 @@ export default function SliderComponent() {
   const [himachal, setHimachal] = useState([]);
   useEffect(() => {
     getHimachal();
+    AOS.init({ duration: 1000 });
   }, []);
 
   function getHimachal() {
@@ -40,7 +45,9 @@ export default function SliderComponent() {
 
   function gethimachalpackage() {
     axios
-      .get("https://himalayanpackages.com/himalayan/api-best-of-himachal-package.php")
+      .get(
+        "https://himalayanpackages.com/himalayan/api-best-of-himachal-package.php"
+      )
       .then(function (response) {
         setHimachalpackage(response.data);
       })
@@ -74,7 +81,9 @@ export default function SliderComponent() {
 
   function getuttrakhandpackage() {
     axios
-      .get("https://himalayanpackages.com/himalayan/api-fetch-uttrakhand-package.php")
+      .get(
+        "https://himalayanpackages.com/himalayan/api-fetch-uttrakhand-package.php"
+      )
       .then(function (response) {
         setUttrakhandpackage(response.data);
       })
@@ -108,7 +117,9 @@ export default function SliderComponent() {
 
   function getkashmirpackage() {
     axios
-      .get("https://himalayanpackages.com/himalayan/api-fetch-kashmir-package.php")
+      .get(
+        "https://himalayanpackages.com/himalayan/api-fetch-kashmir-package.php"
+      )
       .then(function (response) {
         setKashmirpackage(response.data);
       })
@@ -180,7 +191,6 @@ export default function SliderComponent() {
     slider.scrollLeft = slider.scrollLeft + 500;
   };
 
-
   const slideLeft7 = () => {
     var slider = document.getElementById("slider7");
     slider.scrollLeft = slider.scrollLeft - 500;
@@ -189,8 +199,6 @@ export default function SliderComponent() {
     var slider = document.getElementById("slider7");
     slider.scrollLeft = slider.scrollLeft + 500;
   };
-
-
 
   const slideLeft8 = () => {
     var slider = document.getElementById("slider8");
@@ -202,7 +210,7 @@ export default function SliderComponent() {
   };
 
   return (
-    <>
+    <div className="mb-10">
       {/*owl carousel for best of Himachal*/}
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
@@ -217,16 +225,16 @@ export default function SliderComponent() {
         >
           <HiChevronLeft className="h-6 w-6 " />
         </button>
+
         <div
           id="slider"
           className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide "
+          data-aos="zoom-in-up"
         >
           {Array.isArray(himachal) &&
             himachal.map((hp) => (
               <div key={hp.id} className="relative inline-block">
                 <Link to={`/collections/${hp.category_slug}`}>
-
-                
                   <img
                     className="w-64 h-auto p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
                     src={hp.CImg}
@@ -234,7 +242,8 @@ export default function SliderComponent() {
                   />
                   <div className="absolute bottom-0 left-0 w-full h-full flex items-center justify-center">
                     <p className="text-white font-bold text-3xl leading-8">
-                      {hp.CName}
+                      
+                      <TitleInCamelCase title={hp.CName} />
                     </p>
                   </div>
                 </Link>
@@ -249,11 +258,6 @@ export default function SliderComponent() {
         </button>
       </div>
 
-
-
-
-
-
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
           {himachalpackage[0]?.BName}
@@ -267,30 +271,36 @@ export default function SliderComponent() {
         >
           <HiChevronLeft className="h-6 w-6 " />
         </button>
-        <div id="slider6" className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide">
-  {Array.isArray(himachalpackage) &&
-    himachalpackage.map((hpkg) => (
-      <div key={hpkg.pkg_PID} className="relative inline-block">
-        <Link to={`/tours/${hpkg.pkg_slug}`}>
-          <div className="relative">
-            <img
-              className="w-64 h-80 p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
-              src={hpkg.banner1}
-              alt={hpkg.banner_alt1}
-            />
-            {/* <div className="absolute bottom-0 left-0 p-4">
-              <p className="text-white font-bold text-3xl leading-8">
-                {hpkg.temp}
-              </p>
-            </div> */}
-          </div>
-          <div className="w-64 font-bold text-xl">
-            <p className="whitespace-pre-line">{hpkg.PTitle}</p>
-          </div>
-        </Link>
-      </div>
-    ))}
-</div>
+        <div
+          id="slider6"
+          className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
+          data-aos="zoom-in-up"
+        >
+          {Array.isArray(himachalpackage) &&
+            himachalpackage.map((hpkg) => (
+              <div key={hpkg.pkg_PID} className="relative inline-block">
+                <Link to={`/tours/${hpkg.pkg_slug}`}>
+                  <div className="relative">
+                    <div className="">
+                      <img
+                        className="w-64 h-80 p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
+                        src={hpkg.banner1}
+                        alt={hpkg.banner_alt1}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-64 font-bold text-xl">
+                    <p className="whitespace-pre-line mx-2">
+                    <TitleInCamelCase title={hpkg.PTitle.length > 20
+                        ? `${hpkg.PTitle.substring(0, 38)}...`
+                        : hpkg.PTitle} />
+                      
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            ))}
+        </div>
 
         <button
           className="hidden md:btn md:btn-circle md:btn-outline btn-primary md:mx-2"
@@ -319,21 +329,23 @@ export default function SliderComponent() {
         <div
           id="slider2"
           className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide "
+          data-aos="zoom-in-up"
         >
           {Array.isArray(uttrakhand) &&
             uttrakhand.map((uk) => (
               <div key={uk.id} className="relative inline-block">
-                 <Link to={`/collections/${uk.category_slug}`}>
-                <img
-                  className="w-64 h-auto p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
-                  src={uk.CImg}
-                  alt={uk.CAlt}
-                />
-                <div className="absolute bottom-0 left-0 w-full h-full flex items-center justify-center">
-                  <p className="text-white font-bold text-3xl leading-8">
-                    {uk.CName}
-                  </p>
-                </div>
+                <Link to={`/collections/${uk.category_slug}`}>
+                  <img
+                    className="w-64 h-auto p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
+                    src={uk.CImg}
+                    alt={uk.CAlt}
+                  />
+                  <div className="absolute bottom-0 left-0 w-full h-full flex items-center justify-center">
+                    <p className="text-white font-bold text-3xl leading-8">
+                    <TitleInCamelCase title={uk.CName} />
+                      
+                    </p>
+                  </div>
                 </Link>
               </div>
             ))}
@@ -345,7 +357,7 @@ export default function SliderComponent() {
           <HiChevronRight className="h-6 w-6 " />
         </button>
       </div>
-{/* uttarakhand start package */}
+      {/* uttarakhand start package */}
 
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
@@ -360,30 +372,39 @@ export default function SliderComponent() {
         >
           <HiChevronLeft className="h-6 w-6 " />
         </button>
-        <div id="slider7" className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide">
-  {Array.isArray(uttrakhandpackage) &&
-    uttrakhandpackage.map((ukpkg) => (
-      <div key={ukpkg.pkg_PID} className="relative inline-block">
-        <Link to={`/tours/${ukpkg.pkg_slug}`}>
-          <div className="relative">
-            <img
-              className="w-64 h-80 p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
-              src={ukpkg.banner1}
-              alt={ukpkg.banner_alt1}
-            />
-            {/* <div className="absolute bottom-0 left-0 p-4">
+        <div
+          id="slider7"
+          className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
+          data-aos="zoom-in-up"
+        >
+          {Array.isArray(uttrakhandpackage) &&
+            uttrakhandpackage.map((ukpkg) => (
+              <div key={ukpkg.pkg_PID} className="relative inline-block">
+                <Link to={`/tours/${ukpkg.pkg_slug}`}>
+                  <div className="relative">
+                    <img
+                      className="w-64 h-80 p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
+                      src={ukpkg.banner1}
+                      alt={ukpkg.banner_alt1}
+                    />
+                    {/* <div className="absolute bottom-0 left-0 p-4">
               <p className="text-white font-bold text-3xl leading-8">
                 {ukpkg.temp}
               </p>
             </div> */}
-          </div>
-          <div className="w-64 font-bold text-xl">
-            <p className="whitespace-pre-line">{ukpkg.PTitle}</p>
-          </div>
-        </Link>
-      </div>
-    ))}
-</div>
+                  </div>
+                  <div className="w-64 font-bold text-xl">
+                    <p className="whitespace-pre-line mx-2">
+                    <TitleInCamelCase title=  {ukpkg.PTitle.length > 20
+                        ? `${ukpkg.PTitle.substring(0, 38)}...`
+                        : ukpkg.PTitle} />
+                    
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            ))}
+        </div>
 
         <button
           className="hidden md:btn md:btn-circle md:btn-outline btn-primary md:mx-2"
@@ -392,9 +413,6 @@ export default function SliderComponent() {
           <HiChevronRight className="h-6 w-6 " />
         </button>
       </div>
-
-
-
 
       {/*carousel for best of Himachal*/}
 
@@ -415,21 +433,23 @@ export default function SliderComponent() {
         <div
           id="slider4"
           className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide "
+          data-aos="zoom-in-up"
         >
           {Array.isArray(kashmir) &&
             kashmir.map((k) => (
               <div key={k.id} className="relative inline-block">
-                    <Link to={`/collections/${k.category_slug}`}>
-                <img
-                  className="w-64 h-auto p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
-                  src={k.CImg}
-                  alt={k.CAlt}
-                />
-                <div className="absolute bottom-0 left-0 w-full h-full flex items-center justify-center">
-                  <p className="text-white font-bold text-3xl leading-8">
-                    {k.CName}
-                  </p>
-                </div>
+                <Link to={`/collections/${k.category_slug}`}>
+                  <img
+                    className="w-64 h-auto p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
+                    src={k.CImg}
+                    alt={k.CAlt}
+                  />
+                  <div className="absolute bottom-0 left-0 w-full h-full flex items-center justify-center">
+                    <p className="text-white font-bold text-3xl leading-8">
+                    <TitleInCamelCase title={k.CName} />
+                      
+                    </p>
+                  </div>
                 </Link>
               </div>
             ))}
@@ -442,10 +462,6 @@ export default function SliderComponent() {
         </button>
       </div>
       {/*carousel for best of kashmir*/}
-
-  
-
-
 
       <div className="flex flex-col items-center text-center justify-center">
         <h2 className="md:mb-0 text-[18px] mt-8 md:text-[30px] font-bold title-font ">
@@ -460,30 +476,39 @@ export default function SliderComponent() {
         >
           <HiChevronLeft className="h-6 w-6 " />
         </button>
-        <div id="slider8" className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide">
-  {Array.isArray(kashmirpackage) &&
-    kashmirpackage.map((kkpkg) => (
-      <div key={kkpkg.pkg_PID} className="relative inline-block">
-        <Link to={`/tours/${kkpkg.pkg_slug}`}>
-          <div className="relative">
-            <img
-              className="w-64 h-80 p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
-              src={kkpkg.banner1}
-              alt={kkpkg.banner_alt1}
-            />
-            {/* <div className="absolute bottom-0 left-0 p-4">
+        <div
+          id="slider8"
+          className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
+          data-aos="zoom-in-up"
+        >
+          {Array.isArray(kashmirpackage) &&
+            kashmirpackage.map((kkpkg) => (
+              <div key={kkpkg.pkg_PID} className="relative inline-block">
+                <Link to={`/tours/${kkpkg.pkg_slug}`}>
+                  <div className="relative">
+                    <img
+                      className="w-64 h-80 p-2 cursor-pointer hover:scale-105 ease-in-out duration-300 rounded-[20px]"
+                      src={kkpkg.banner1}
+                      alt={kkpkg.banner_alt1}
+                    />
+                    {/* <div className="absolute bottom-0 left-0 p-4">
               <p className="text-white font-bold text-3xl leading-8">
                 {kkpkg.temp}
               </p>
             </div> */}
-          </div>
-          <div className="w-64 font-bold text-xl">
-            <p className="whitespace-pre-line">{kkpkg.PTitle}</p>
-          </div>
-        </Link>
-      </div>
-    ))}
-</div>
+                  </div>
+                  <div className="w-64 font-bold text-xl">
+                    <p className="whitespace-pre-line mx-2">
+                    <TitleInCamelCase title= {kkpkg.PTitle.length > 20
+                        ? `${kkpkg.PTitle.substring(0, 38)}...`
+                        : kkpkg.PTitle}/>
+                     
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            ))}
+        </div>
 
         <button
           className="hidden md:btn md:btn-circle md:btn-outline btn-primary md:mx-2"
@@ -494,6 +519,6 @@ export default function SliderComponent() {
       </div>
 
       {/*carousel for best of kashmir*/}
-    </>
+    </div>
   );
 }

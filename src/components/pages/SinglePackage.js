@@ -5,15 +5,24 @@ import Navbar from "../Navbar";
 import SearchAllBlog from "../SearchAllBlog";
 import Footer from "../Footer";
 import Enquire from "../Enquire";
-import MobileMenuToggle from "../MobileMenuToggle";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS
+
+
+import TitleInCamelCase from "../TitleInCamelCase";
+import "photoswipe/dist/photoswipe.css";
+
+import { Gallery, Item } from "react-photoswipe-gallery";
+
 import {
-  HiOutlineCheck,
-  HiOutlineClock,
+  
   HiOutlineLocationMarker,
 } from "react-icons/hi";
+
 import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import MobileMenu from "../MobileMenu";
+
+
+
 
 export default function SinglePackage() {
   const slugToCamelCase = (slug) => {
@@ -28,6 +37,7 @@ export default function SinglePackage() {
   /// const [category, setcategory] = useState([]);
   useEffect(() => {
     getPolicy();
+    AOS.init({ duration: 1000 });
   }, []);
 
   function getPolicy() {
@@ -115,10 +125,96 @@ export default function SinglePackage() {
   };
 
   return (
-    <div>
+    <div className=" bg-[#f3f9ed]">
+
+
+<div className="relative">
+     
+
+<Navbar />     
+<Gallery   className="w-full h-96 bg-cover bg-center ">
+
+        <div className="flex md:-mt-16 -mt-8">
+          <div className="w-1/2">
+            <div className=" w-full md:h-20 md:py-1  ">
+              <Item
+                original={data ? data[0].banner1 : ""}
+                thumbnail={data ? data[0].banner1 : ""}
+                width="923"
+                height="600"
+              >
+                {({ ref, open }) => (
+                  <img ref={ref} onClick={open} src={data ? data[0].banner1 : ""} />
+                )}
+              </Item>
+            </div>
+          </div>
+          <div className="w-1/2">
+            <div className="grid grid-cols-2">
+              <div className="w-full  py-1  pl-1  ">
+
+              <Item
+                  original={data ? data[0].banner2 : ""}
+                  thumbnail={data ? data[0].banner2 : ""}
+                  width="923"
+                  height="600"
+                >
+                  {({ ref, open }) => (
+                    <img ref={ref} onClick={open} src={data ? data[0].banner2 : ""} />
+                  )}
+                </Item>
+
+              
+              </div>
+              <div className="w-full py-1 pl-1">
+                <Item
+                  original={data ? data[0].banner3 : ""}
+                  thumbnail={data ? data[0].banner3 : ""}
+                  width="923"
+                  height="600"
+                >
+                  {({ ref, open }) => (
+                    <img ref={ref} onClick={open} src={data ? data[0].banner3 : ""} />
+                  )}
+                </Item>
+              </div>
+              <div className="w-full pl-1">
+                <Item
+                  original={data ? data[0].banner4 : ""}
+                  thumbnail={data ? data[0].banner4 : ""}
+                  width="923"
+                  height="600"
+                >
+                  {({ ref, open }) => (
+                    <img ref={ref} onClick={open} src={data ? data[0].banner4 : ""} />
+                  )}
+                </Item>
+              </div>
+              <div className="w-full  pb-1 pl-1">
+                <Item
+                  original={data ? data[0].banner5 : ""}
+                  thumbnail={data ? data[0].banner5 : ""}
+                  width="923"
+                  height="600"
+                >
+                  {({ ref, open }) => (
+                    <img ref={ref} onClick={open} src={data ? data[0].banner5 : ""} />
+                  )}
+                </Item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Gallery>
+          
+        
+      </div>
+
+
+      
       {/* this is gallary code */}
       {/* Navbar and Hero Section */}
-      <div className="relative">
+      {/* <div className="relative">
         <Navbar />
 
         <div className="grid grid-cols-3 gap-4 md:-m-2 -m-1 -pt-10 pb-4 pr-4 pl-4">
@@ -151,24 +247,31 @@ export default function SinglePackage() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Blog Posts Section */}
       {/* Main Body  Section */}
-      <div className="flex md:mx-10 py-10">
+      <div className="flex md:mx-10 py-10 ">
         {/* Main main page of sidebar Section */}
         <div className="flex-1">
           <section className="text-gray-600 body-font">
-            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden">
+            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden ">
               <div className="h-25 w-auto mx-auto py-4 h-auto">
-                <p className="text-2xl text-left	font-bold text-black pl-2 ">
-                  {data ? data[0].PTitle : ""}
+                <p className="text-2xl text-left	font-bold text-black pl-2  ">
+
+                <TitleInCamelCase title={data ? data[0].PTitle : ""} />
+                  
                 </p>
 
                 <div className="flex justify-center space-x-4 p-2 text-secondary">
                   <HiOutlineLocationMarker className="h-6 w-6 md:h-8 md:w-8 my-2" />
                   <div className="py-2">
-                    <p className="md:text-xl">{data ? data[0].CName : ""}</p>
+                    <p className="md:text-xl">
+
+                    <TitleInCamelCase title={data ? data[0].CName : ""} />
+                      
+                      
+                      </p>
                   </div>
                 </div>
                 {/* day-night-sun-moon-cycle */}
@@ -184,7 +287,8 @@ export default function SinglePackage() {
                             src={feature.Key_Img}
                           />
                           <div className="text-black text-center py-2 opacity-75">
-                            {feature.Key_Name}
+                          <TitleInCamelCase title={feature.Key_Name} />
+                            
                           </div>
                         </div>
                       </div>
@@ -193,10 +297,10 @@ export default function SinglePackage() {
               </div>
             </div>
 
-            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden mb-4 md:mb-6">
+            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden mb-4 md:mb-6" data-aos="zoom-in-up">
               <div className="h-25 w-auto mx-auto py-4 h-auto">
                 <p className="md:text-2xl text-left	font-bold  pl-2 my-4 sm:text-xl ">
-                  Select Package Options{" "}
+                  Select Package Options
                 </p>
 
                 <div className="container mx-auto px-4 my-6">
@@ -212,7 +316,8 @@ export default function SinglePackage() {
                           }`}
                           onClick={() => handleTabClick(index)}
                         >
-                          {tab.type}
+                          <TitleInCamelCase title={tab.type}/>
+                         
                         </button>
                       ))}
                   </div>
@@ -239,10 +344,10 @@ export default function SinglePackage() {
               </div>
             </div>
 
-            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2 mb-10 md:mb-20">
+            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2 mb-10 md:mb-20" data-aos="zoom-in-up">
               <div className="h-25 w-auto mx-auto py-4 h-auto">
                 <p className="text-2xl text-left	font-bold  pl-2 my-2 ">
-                  Policies
+                Privacy & Policy 
                 </p>
 
                 <div className="container mx-auto px-4 ">

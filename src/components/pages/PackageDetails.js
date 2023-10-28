@@ -4,21 +4,25 @@ import Swal from "sweetalert2";
 import { useEffect } from "react";
 import JoditEditor from "jodit-react";
 import { HiPlusCircle, HiExclamationCircle } from "react-icons/hi";
-import slugify from 'slugify';
+import slugify from "slugify";
+
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS CSS
 
 const PackageDetails = () => {
-
- 
   const [pkgId, setpkgId] = useState([]); // for pkg
 
   /// const [package, setpackage] = useState([]);
   useEffect(() => {
     getPkg();
+    AOS.init({ duration: 1000 });
   }, []);
 
   function getPkg() {
     axios
-      .get("https://himalayanpackages.com/himalayan/api_fetch_packageDetail.php/")
+      .get(
+        "https://himalayanpackages.com/himalayan/api_fetch_packageDetail.php/"
+      )
       .then(function (response) {
         setpkg(response.data);
       })
@@ -35,34 +39,26 @@ const PackageDetails = () => {
   const [pkg, setpkg] = useState("");
   const [Duration, setDuration] = useState("");
 
-
-
   const imageInputRef = useRef(null);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
-   
   };
 
   const handleContentChange = (value) => {
     setContent(value);
   };
 
-
   const handletypeChange = (e) => {
     setType(e.target.value);
   };
 
-  
-
   const handlepkgIdChange = (e) => {
     setpkgId(e.target.value);
-
   };
 
   const handleDurationChange = (e) => {
     setDuration(e.target.value);
-
   };
 
   const validateForm = () => {
@@ -76,11 +72,9 @@ const PackageDetails = () => {
       errors.content = "Content is required";
     }
 
-
     if (type.trim() === "") {
       errors.type = "type is required";
     }
-
 
     return errors;
   };
@@ -93,11 +87,9 @@ const PackageDetails = () => {
       formData.append("title", Title);
       formData.append("content", content);
       formData.append("Duration", Duration);
-      
 
       formData.append("type", type);
       formData.append("PID", pkgId);
-    
 
       try {
         // Send the blog data to the PHP API
@@ -106,18 +98,10 @@ const PackageDetails = () => {
           formData
         );
 
- 
-
-      
-
         // Reset the form fields
         setTitle("");
         setContent("");
         setType("");
-        
-
-
-       
 
         // Reset the image input
         if (imageInputRef.current) {
@@ -151,19 +135,17 @@ const PackageDetails = () => {
     }
   };
 
- 
-
   return (
-    <div>
+    <div className=" bg-[#f3f9ed]">
       <section className="text-gray-600 body-font relative">
         <div className="container px-10 py-10 mx-auto">
           <div className="flex flex-col text-center w-full mb-12">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
               Add Package
-          
             </h1>
           </div>
-          <div className="lg:w-1/3 md:w-2/3 mx-auto">
+          {/* <div className="lg:w-1/3 md:w-2/3 mx-auto"> */}
+          <div className="mx-auto">
             <form>
               <div className="flex flex-wrap -m-2">
                 <div className="p-2 w-full">
@@ -181,53 +163,49 @@ const PackageDetails = () => {
                       value={Title}
                       onChange={handleTitleChange}
                     />
-                    
+
                     <div className="flex flex-wrap -m-2">
-                <div className="p-2 w-full">
-                  <div className="relative">
-                    <label className="label">
-                      <span className="label-text">
-                        Duration
-                      </span>
-                    </label>
-                    <input
-                      type="text"
-                      id="Bnane"
-                      placeholder="Package Title "
-                      className="input input-bordered w-full max-w-xl"
-                      value={Duration}
-                      onChange={handleDurationChange}
-                    />
-                    </div>
-                    </div>
+                      <div className="p-2 w-full">
+                        <div className="relative">
+                          <label className="label">
+                            <span className="label-text">Duration</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="Bnane"
+                            placeholder="Package Title "
+                            className="input input-bordered w-full max-w-xl"
+                            value={Duration}
+                            onChange={handleDurationChange}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
-                 </div>
-                
-                
+                </div>
 
                 <div className="p-2 w-1/2">
-                <div className="relative">
-                <label className="label">
-                <span className="label-text"> package pkg</span>
-                </label>
-                <select
-                 className="select select-bordered w-full max-w-xs"
-                 id="pkgId"
-                 value={pkgId}
-                 onChange={handlepkgIdChange}
-                  >
-                 <option disabled value={0}>
-                  Select
-                 </option>
+                  <div className="relative">
+                    <label className="label">
+                      <span className="label-text"> package pkg</span>
+                    </label>
+                    <select
+                      className="select select-bordered w-full max-w-xs"
+                      id="pkgId"
+                      value={pkgId}
+                      onChange={handlepkgIdChange}
+                    >
+                      <option disabled value={0}>
+                        Select
+                      </option>
 
-            {Array.isArray(pkg) && // Add this conditional check
-              pkg.map((pkgItem) => (
-                <option key={pkgItem.PID} value={pkgItem.PID}>
-                  {pkgItem.PTitle}
-                </option>
-              ))}
-          </select>
+                      {Array.isArray(pkg) && // Add this conditional check
+                        pkg.map((pkgItem) => (
+                          <option key={pkgItem.PID} value={pkgItem.PID}>
+                            {pkgItem.PTitle}
+                          </option>
+                        ))}
+                    </select>
                   </div>
                 </div>
                 <div className="p-2 w-1/2">
@@ -294,5 +272,3 @@ const PackageDetails = () => {
 };
 
 export default PackageDetails;
-
-  

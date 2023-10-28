@@ -140,10 +140,11 @@ const MobileMenu = () => {
     }
   };
 
+
   return (
     <>
       <div className="fixed bottom-0 left-0 w-full">
-        <button className="xl:hidden bg-secondary text-white p-4 rounded-t-lg w-full"  onClick={handleButtonClick}>
+        <button className="xl:hidden bg-primary text-white p-4 rounded-t-lg w-full"  onClick={handleButtonClick}>
           {/* Your menu content goes here */}
        
          Send Enquiry
@@ -158,7 +159,7 @@ const MobileMenu = () => {
 
           {/* Modal Content */}
           <div className="z-50 bg-white m-4 rounded-lg shadow-lg relative">
-            <span className="m-4 badge badge-primary" onClick={closeModal}> x </span>
+            <span className="m-4 badge badge-secoudary" onClick={closeModal}> x </span>
             <div className="h-auto p-5 card overflow-hidden relative">
               <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
                 Enquire Now!

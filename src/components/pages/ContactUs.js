@@ -69,17 +69,15 @@ function ContactUs() {
     width="100%"
   height="100%"
   className="absolute inset-0"
-  frameBorder="0"
+ 
   title="map"
-  marginHeight="0"
-  marginWidth="0"
-  scrolling="no"
+  
   src={data[0].temp}
   allowFullScreen
 ></iframe>
+{/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.9677448737248!2d79.04307897412052!3d21.113852084852745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4bfd3f5e81cb3%3A0x869c0d28bb253af5!2sNature&#39;s%20Sprout%20-%20Wildlife%20Resorts%20%26%20Hotels%20at%20Pench%20%7C%20Kanha%20%7C%20Bandhavgarh%20%7C%20Tadoba%20Jungle%20Safari!5e0!3m2!1sen!2sin!4v1697551610281!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-
- 
+  */}
 
 </div>
 <div className="bg-white relative flex flex-wrap py-10 rounded ">

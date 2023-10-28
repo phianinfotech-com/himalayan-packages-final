@@ -3,6 +3,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { HiOutlineCheck } from "react-icons/hi";
 import DatePicker from "./DatePicker"; // Make sure the import path is correct
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS
+import WhatsappBtn from "./WhatsappBtn";
 
 export default function Enquire() {
   const [E_Name, setE_Name] = useState("");
@@ -127,10 +130,12 @@ export default function Enquire() {
 
   return (
     <div>
-      <div className="h-auto p-5 card lg:shadow-xl lg:border-2 lg:rounded-xl overflow-hidden relative">
+  
+      <div className="h-auto p-4  mt-2 mx-auto card lg:shadow-xl lg:border-2 lg:rounded-xl overflow-hidden relative bg-white">
         <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
           Enquire Now!
         </h2>
+        
 
         <div className="relative mb-2">
           <input

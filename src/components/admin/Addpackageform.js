@@ -317,7 +317,7 @@ const AddPackageForm = () => {
                 htmlFor="temp"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Price
+                Group Type
               </label>
               <input
                 type="text"

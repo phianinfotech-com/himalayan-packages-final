@@ -10,6 +10,11 @@ import { HiOutlineClock } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+import TitleInCamelCase from "../TitleInCamelCase";
+
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS CSS
+
 function AllPackages() {
   // Function to convert slug to camel case text with all first letters uppercase
   const slugToCamelCase = (slug) => {
@@ -56,6 +61,7 @@ function AllPackages() {
     const urlSlug = window.location.pathname.split("/collections/").pop();
     const withoutslash = urlSlug.replace(/\/$/, "");
     fetchDataBySlug(withoutslash);
+    AOS.init({ duration: 1000 });
   }, []);
 
   // Function to handle click on a blog post in the list
@@ -69,6 +75,7 @@ function AllPackages() {
     getFeatures();
     getcategory();
     getDuration();
+    getTypeof();
   }, []);
 
   function getFeatures() {
@@ -120,12 +127,33 @@ function AllPackages() {
     fetchDataBySlug(updatedSlug); // Call the fetchDataBySlug function with the updated slug
   };
 
+  const [mytypesof, setMytypeof] = useState([]); // for category
+
+  function getTypeof() {
+    axios
+      .get("https://himalayanpackages.com/himalayan/api_fetch_by_type.php/")
+      .then(function (response) {
+        setMytypeof(response.data);
+      });
+  }
+
+  const [SelectedTypeof, setSelectedTypeof] = useState(""); // Initialize selectedDuration as an empty string
+
+  const handleTypeofChange = (e) => {
+    const selectedValue = e.target.value;
+    setSelectedTypeof(selectedValue);
+
+    // Update the slug using the selected duration value
+    const updatedSlug = selectedValue.toLowerCase().replace(/\s+/g, "-");
+    fetchDataBySlug(updatedSlug); // Call the fetchDataBySlug function with the updated slug
+  };
+
   return (
     <>
       {/* Navbar and Hero Section */}
       <div className="relative">
         <section className="bg-[url('https://images.thrillophilia.com/image/upload/s--_XQ_pqQH--/c_fill,g_auto,h_642,w_1400/dpr_1.0/v1/collections/images/015/120/655/original/1655472205_shutterstock_1141239563.jpg.jpg')] w-full h-96 bg-cover bg-center relative">
-          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-10"></div>{" "}
+          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-10"></div>
           {/* Black overlay */}
           <Navbar />
           <h2 className="text-3xl md:text-5xl text-white font-semibold absolute bottom-5 text-center left-1/2 transform -translate-x-1/2 p-4 z-10">
@@ -136,8 +164,9 @@ function AllPackages() {
 
       {/* Blog Posts Section */}
       {/* Main Body  Section */}
-      <div className="flex">
+      <div className="flex bg-[#F5FBEF]">
         {/* Main main page of sidebar Section */}
+
         <div className="flex-1">
           <section className="text-gray-600 body-font">
             <div className="container px-10 mt-5 mb-20 mx-auto">
@@ -145,17 +174,25 @@ function AllPackages() {
 
               {/* Display the blog posts */}
               <div className="flex-wrap -m-4 grid md:grid-cols-1 md:gap-3">
-                {data && data.error ? (
-                  <div className="text-center text-red-500">{data.error}</div>
-                ) : data && data.length > 0 ? (
-                  <div className="p-4 text-justify font-semibold">
-                    {data[0].content}
-                  </div>
-                ) : (
-                  <div className="text-center text-gray-500">Loading...</div>
-                )}
+                <div
+                  className="m-4 shadow-xl border-2 h-auto rounded-xl	flex bg-white "
+                  data-aos="zoom-in-up"
+                >
+                  {data && data.error ? (
+                    <div className="text-center text-red-500">{data.error}</div>
+                  ) : data && data.length > 0 ? (
+                    <div className="p-4 text-justify font-semibold">
+                      {data[0].content}
+                    </div>
+                  ) : (
+                    <div className="text-center text-gray-500">Loading...</div>
+                  )}
+                </div>
 
-                <div className="mx-4 shadow-xl border-2 h-auto rounded-xl	flex">
+                <div
+                  className="mx-4 shadow-xl border-2 h-auto rounded-xl	flex bg-white"
+                  data-aos="zoom-in-up"
+                >
                   <div className="py-4 px-2  w-1/3">
                     <SearchPackage handleBlogClick={handleBlogClick} />
                   </div>
@@ -173,7 +210,7 @@ function AllPackages() {
                           key={`${category.CID}-${index}`}
                           value={category.CName}
                         >
-                          {category.CName}
+                          <TitleInCamelCase title={category.CName} />
                         </option>
                       ))}
                     </select>
@@ -199,6 +236,27 @@ function AllPackages() {
                       ))}
                     </select>
                   </div>
+                  {/* 
+                  <div className="py-4 px-2 w-1/3">
+                    <select
+                      className="select select-primary w-full max-w-xs"
+                      value={SelectedTypeof}
+                      onChange={handleTypeofChange}
+                    >
+                      <option disabled value="">
+                        Select Type
+                      </option>
+
+                      {mytypesof.map((aptype, index) => (
+                        <option
+                          key={`${aptype.PID}-${index}`}
+                          value={aptype.type}
+                        >
+                          {aptype.type}
+                        </option>
+                      ))}
+                    </select>
+                  </div> */}
                 </div>
 
                 {/* this is card */}
@@ -206,7 +264,11 @@ function AllPackages() {
                   <div className="text-center text-red-500">{data.error}</div>
                 ) : data ? (
                   data.map((post) => (
-                    <div key={post.PID} className="md:w-full p-4 ">
+                    <div
+                      key={post.PID}
+                      className="md:w-full p-4 "
+                      data-aos="zoom-in-up"
+                    >
                       <div className="card lg:card-side bg-base-100 shadow-xl border-2 ">
                         <figure>
                           <img
@@ -216,7 +278,9 @@ function AllPackages() {
                           />
                         </figure>
                         <div className="card-body">
-                          <h2 className="card-title"> {post.PTitle}</h2>
+                          <h2 className="card-title">
+                            <TitleInCamelCase title={post.PTitle} />
+                          </h2>
 
                           <div className="card-actions justify-center">
                             {features.length > 0 &&
@@ -282,9 +346,112 @@ function AllPackages() {
         </div>
 
         {/* side bar code */}
-        <div className="hidden md:flex sticky top-0 h-screen w-1/4 md:mt-5 md:mr-10 md:mb-20">
-          <Enquire />
+        <div className="hidden md:flex sticky top-0  w-1/4 md:mt-5 md:mr-10 md:mb-20">
+          <div className="h-auto p-4 w-full  mt-2 mx-auto card lg:shadow-xl lg:border-2 lg:rounded-xl overflow-hidden relative bg-white">
+            <div className="flex flex-wrap">
+              <div className="w-1/2 ">
+                <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
+                  Filter
+                </h2>
+              </div>
+
+              <div className="w-1/2 ">
+                <button className="text-white bg-primary border-0 px-6 m-2 focus:outline-none hover:bg-secondary rounded-xl text-lg">
+                  Reset
+                </button>
+              </div>
+            </div>
+
+            <div className="form-control">
+              <hr />
+             
+
+              <div className="sm:p-2">
+                <h5 className="text-gray-900 text-md   mb-1 font-medium title-font ">Destinations</h5>
+                <div className="flex flex-wrap">
+    {cat.map((category, index) => (
+      <div className="w-auto">
+        <div className="label cursor-pointer">
+          <input
+            type="checkbox"
+            key={`${category.CID}-${index}`}
+            value={category.CName}
+            onChange={handleLocationChange}
+            className="m-2 checkbox checkbox-primary"
+          />
+          <span className="label-text">{category.CName} </span>
         </div>
+      </div>
+    ))}
+  </div>
+              </div>
+              <hr />
+
+              <div className="sm:p-2">
+  Category
+
+
+  <div className="flex flex-wrap">
+  {mytypesof.map((aptype, index) => (
+      <div className="w-auto">
+        <div className="label cursor-pointer">
+          <input
+            type="checkbox"
+            key={`${aptype.PID}-${index}`}
+            onChange={handleTypeofChange}
+            value={aptype.type}
+            className="m-2 checkbox checkbox-primary"
+          />
+          <span className="label-text">{aptype.type}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+</div>
+
+
+              <hr />
+
+         
+
+              <hr />
+              <div className="sm:p-2">
+
+
+        
+
+              <h4>Number of Nights
+</h4> 
+                <div className="flex flex-wrap">
+                {dur.map((items, index) => (
+                  <div className="w-1/3 ">
+                 
+                    <div className="label cursor-pointer">
+
+                      <input
+                        type="checkbox"
+                        onChange={handleDurationChange}
+                        className="m-2 checkbox checkbox-primary"
+
+                        key={`${items.PID}-${index}`}
+                        value={items.temp}
+                      />
+                      <span className="label-text">{items.temp}</span>
+                    </div>
+                    
+                  </div>
+  ))}
+ 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="hidden md:flex sticky top-0 h-screen w-1/4 md:mt-5 md:mr-10 md:mb-20">
+          <Enquire />
+        </div> */}
         {/* side bar code */}
       </div>
 

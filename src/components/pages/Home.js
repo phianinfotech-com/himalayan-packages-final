@@ -2,6 +2,9 @@ import React from "react";
 
 import axios from "axios";
 
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
@@ -9,11 +12,13 @@ import Headerfile from "../Headerfile";
 
 import Footer from "../Footer";
 import SliderComponent from "../SliderComponent";
+import TitleInCamelCase from "../TitleInCamelCase";
 
 export default function Home() {
   const [memory, setMemory] = useState([]);
   useEffect(() => {
     getMemory();
+    AOS.init({ duration: 1000 });
   }, []);
 
   function getMemory() {
@@ -52,23 +57,29 @@ export default function Home() {
           <Headerfile />
         </div>
         {/*section one starts from here */}
-        <div className="text-gray-600 body-font mt-10 ">
+        <div className="text-gray-600 body-font mt-10 " data-aos="zoom-in-up">
           <div className="container px-8 py-8 mx-auto ">
             <div className="flex flex-wrap md:mx-4 -mb-10 text-center items-center ">
               <div className="sm:w-1/4 mb-10 px-4 flex flex-col items-center justify-center h-full">
                 <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">
-                  Weaving Way to Perfect Gateway
+                 
+                  <TitleInCamelCase title="Weaving Way to Perfect Gate a way"/>
                 </h2>
                 <div className="w-14 h-1 bg-primary rounded mt-1 mb-1"></div>
-                <p className="text-base">Memories for Life Time</p>
+                <p className="text-base">
+                <TitleInCamelCase title="Memories for Life Time"/></p>
               </div>
 
               <div className="sm:w-3/4 mb-10">
                 <div className="carousel  ">
                   {/* {displayBlogPosts.map((post) => ( */}
+                  {/* SELECT m.Mid, m.MName, m.MSlug, m.MImg, m.MAlt, c.CName, c.slug
+FROM memories_for_life_time m
+JOIN category c ON m.CName = c.CName"; */}
+
                   {memory.map((memo) => (
                     <div className="carousel-item m-4 " key={memo.key}>
-                      <Link to={`/collections/${memo.slug}`}>
+                      <Link to={`${memo.MSlug}`}>
                         <img
                           src={memo.MImg}
                           className="w-64 h-full rounded-lg  shadow-sm transform transition duration-500 hover:scale-105"
@@ -85,14 +96,14 @@ export default function Home() {
         {/*section one ends here */}
 
         {/*section two starts from here */}
-        <section className="text-gray-600 body-font overflow-hidden">
+        <section className="text-gray-600 body-font overflow-hidden" data-aos="zoom-in-up">
           <div className="container px-8 py-8 mx-auto md:px-8 ">
             <div className="flex flex-wrap -mb-10  md:mx-4  ">
               <div className="p-3 md:w-1/2 flex flex-col items-start md:pl-10 ">
                 <div className="pt-2 grid md:grid-rows-3 grid-flow-col grid-rows-2 gap-4  ">
                   <div className="col-span-2">
                     <div className="relative">
-                      <Link to={`/collections/${explore[0]?.slug}`}>
+                      
                         <img
                           src={explore[0]?.Eimg}
                           alt={explore[0]?.EAlt}
@@ -104,12 +115,12 @@ export default function Home() {
                             {explore[0]?.EName}
                           </p>
                         </div>
-                      </Link>
+                      
                     </div>
                   </div>
                   <div className="md:row-span-2 col-span-2 ">
                     <div className="relative">
-<Link to={`/collections/${explore[1]?.slug}`}>
+                          
                       <img
                         src={explore[1]?.Eimg}
                         alt={explore[1]?.EAlt}
@@ -120,13 +131,13 @@ export default function Home() {
                           {explore[1]?.EName}
                         </p>
                       </div>
-                      </Link> 
+                      
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="p-3 md:w-1/2 flex flex-col items-start pt-5 ">
+              <div className="p-3 md:w-1/2 flex flex-col items-start pt-5 " data-aos="zoom-in-up">
                 <div className="grid grid-rows-3 grid-flow-col gap-4 mp-4 ">
                   <div className="row-start-1 row-end-4">
                     <div className="relative">
@@ -146,7 +157,7 @@ export default function Home() {
                   </div>
                   <div className="row-start-1 row-end-4">
                     <div className="relative">
-<Link to={`/collections/${explore[3]?.slug}`}>
+                      <Link to={`/collections/${explore[3]?.slug}`}>
                       <img
                         src={explore[3]?.Eimg}
                         alt={explore[3]?.EAlt}

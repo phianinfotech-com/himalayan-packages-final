@@ -6,16 +6,13 @@ import SearchAllBlog from "../SearchAllBlog";
 import Footer from "../Footer";
 import { Link } from "react-router-dom";
 
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS CSS
-
 function Blog() {
   // State to store blog posts fetched from the API
   const [blogPosts, setBlogPosts] = useState([]);
 
   // State to manage pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9; // Number of blog posts to display per page
+  const itemsPerPage = 3; // Number of blog posts to display per page
 
   // Max length for content preview
   const MAX_LENGTH = 250;
@@ -26,14 +23,13 @@ function Blog() {
   // Function to fetch blog posts from the API using Axios
   useEffect(() => {
     axios
-      .get("https://himalayanpackages.com/himalayan/API_fetch_all_blog.php")
+      .get("http://localhost/himalayan/API_fetch_all_blog.php")
       .then((response) => {
         setBlogPosts(response.data);
       })
       .catch((error) => {
         console.error("Error fetching blog data:", error);
       });
-      AOS.init({ duration: 1000 });
   }, []);
 
   // Calculate the index of the first and last items to display on the current page
@@ -62,6 +58,7 @@ function Blog() {
   // Choose which blog posts to display based on search results
   const displayBlogPosts = searchResults || currentBlogPosts;
 
+
   const parser = new Parser();
   return (
     <>
@@ -74,28 +71,30 @@ function Blog() {
           </h2>
         </section>
       </div>
-
+      
       {/* Blog Posts Section */}
-      <section className="text-gray-600 body-font bg-[#f3f9ed]" >
+      <section className="text-gray-600 body-font">
         <div className="container px-10 py-24 mx-auto">
           {/* SearchAllBlog */}
 
+         
+
+         
           <div className="flex flex-col items-center justify-center mb-8 md:flex-row md:justify-between md:mb-10">
-            <h1 className="text-4xl font-bold text-center mb-4 md:mb-0">
-              All Blog
-            </h1>
+            <h1 className="text-4xl font-bold text-center mb-4 md:mb-0">All Blog</h1>
             <div className="md:ml-4">
               <div className="form-control w-full max-w-xs">
+              
                 <SearchAllBlog handleSearch={handleSearch} />
               </div>
             </div>
           </div>
           {/* Display the blog posts */}
-          <div className="flex-wrap -m-4 grid md:grid-cols-3 md:gap-3" >
+          <div className="flex-wrap -m-4 grid md:grid-cols-3 md:gap-3">
             {displayBlogPosts.map((post) => (
-              <div key={post.BID} className="md:w-full" >
+              <div key={post.BID} className="md:w-full">
                 <div className="p-4">
-                  <div className="card w-auto bg-base-100 shadow-xl h-full border-2  overflow-hidden" data-aos="zoom-in-up">
+                  <div className="card w-auto bg-base-100 shadow-xl h-full border-2  overflow-hidden">
                     <img
                       className="lg:h-48 md:h-36 w-full object-cover object-center"
                       src={post.image}
@@ -110,14 +109,14 @@ function Blog() {
                       </h1>
                       {/* Display content preview */}
                       <p
-                        className="leading-relaxed mb-3"
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            post.content.length > MAX_LENGTH
-                              ? `${post.content.substring(0, MAX_LENGTH)}...`
-                              : post.content,
-                        }}
-                      ></p>
+  className="leading-relaxed mb-3"
+  dangerouslySetInnerHTML={{
+    __html:
+      post.content.length > MAX_LENGTH
+        ? `${post.content.substring(0, MAX_LENGTH)}...`
+        : post.content,
+  }}
+></p>
                       <div className="flex items-center flex-wrap ">
                         <Link
                           to={`/blog/${post.slug}/`}
@@ -146,7 +145,7 @@ function Blog() {
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center mt-4" >
+          <div className="flex justify-center mt-4">
             {/* Previous Button */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}

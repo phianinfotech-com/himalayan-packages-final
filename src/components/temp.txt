@@ -1,0 +1,55 @@
+import React, { useEffect, useState } from 'react';
+
+function VisitorCounter() {
+    const [visitorCount, setVisitorCount] = useState(0);
+
+    // Function to fetch the visitor count from the PHP backend
+    const fetchVisitorCount = async () => {
+        try {
+            const response = await fetch('https://himalayanpackages.com/himalayan/visitorcount.php');
+            const data = await response.json();
+            setVisitorCount(data.count);
+        } catch (error) {
+            console.error('Error fetching visitor count:', error);
+        }
+    };
+
+    // Function to increment the visitor count on the PHP backend
+    const incrementVisitorCount = async () => {
+        try {
+            const response = await fetch('https://himalayanpackages.com/himalayan/visitorcount.php', {
+                method: 'POST',
+            });
+            const data = await response.json();
+            setVisitorCount(data.count);
+        } catch (error) {
+            console.error('Error incrementing visitor count:', error);
+        }
+    };
+
+    useEffect(() => {
+        // Fetch the initial visitor count when the component mounts (page load)
+        fetchVisitorCount();
+
+        // Set up an interval to fetch the count every second
+        const intervalId = setInterval(fetchVisitorCount, 1000);
+
+        // Clear the interval when the component unmounts
+        return () => clearInterval(intervalId);
+    }, []);
+
+    // Function to handle link clicks and increment the visitor count
+    const handleLinkClick = () => {
+        // Increment the count by sending a POST request
+        incrementVisitorCount();
+    };
+
+    return (
+        <div>
+            <h1>Visitor Count: {visitorCount}</h1>
+            <a href="/next-page" >Go to Next Page</a>
+        </div>
+    );
+}
+
+export default VisitorCounter;

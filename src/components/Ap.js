@@ -52,7 +52,7 @@ window.addEventListener('scroll', changeBackground);
           <li><a>Item 3</a></li>
         </ul>
       </div>
-      <img src="/assets/logo.png" className="w-20 h-auto" alt="" />
+      <img src="/himalayan/uploads/assets/logo.png" className="w-20 h-auto" alt="" />
       
     </div>
     <div className="navbar-center hidden lg:flex  ">

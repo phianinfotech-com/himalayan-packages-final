@@ -1,15 +1,10 @@
-import Headerfile from "./components/Headerfile";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import PreloaderWrapper from './components/PreloaderWrapper';
 import Home from "./components/pages/Home";
-import Navbar from "./components/Navbar";
-import SliderComponent from "./components/SliderComponent";
-import Footer from "./components/Footer";
-
 import Blog from "./components/pages/Blog";
 import AddBlog from "./components/pages/AddBlog";
 import BlogDetails from "./components/pages/BlogDetails";
-
-import { BrowserRouter , Routes, Route } from 'react-router-dom';
-
 import NotFound from "./components/pages/NotFound";
 import Upload from "./components/pages/Upload";
 import AddExplore from "./components/admin/AddExplore";
@@ -21,62 +16,81 @@ import Addpage from "./components/admin/Addpage";
 import FetchEnquire from "./components/admin/FetchEnquire";
 import AddPackageForm from "./components/admin/Addpackageform";
 import PackageDetails from "./components/pages/PackageDetails";
-import PageDetails  from "./components/pages/PageDetails";
-import ContactUs  from "./components/pages/ContactUs";
+import PageDetails from "./components/pages/PageDetails";
+import ContactUs from "./components/pages/ContactUs";
+import AllPackages from "./components/pages/AllPackages";
+import SinglePackage from "./components/pages/SinglePackage";
+import MasterSearch from './components/MasterSearch';
+import VisitorCount from "./components/VisitorCount";
+
+import TopPackages from './components/pages/TopPackages';
+import SelectedPackages from './components/pages/SelectedPackages';
+import Bestpackages from './components/pages/Bestpackages'
+import ImageGrid from './components/pages/ap/ImageGrid';
+import Login from './components/sadmin/Login';
+import Dashboard from './components/sadmin/Dashboard';
 
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading data (replace with your actual loading logic)
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Simulate a 2-second loading delay
+  }, []);
+
   return (
     <div>
+       
+      <BrowserRouter>
+      
+        <Routes>
+          <Route element={<PreloaderWrapper />}>
+         
+            <Route index element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/upload" element={<Upload />} />
+            
+            <Route path="/search/:id" element={<MasterSearch />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/AddBlog" element={<AddBlog />} />
+            <Route path="/blog/:id/" element={<BlogDetails />} />
+            <Route path="/explore" element={<AddExplore />} />
+            <Route path="/bestof" element={<AddBestOf />} />
+            <Route path="/addpackages" element={<Addpackages />} />
+            <Route path="/bestplace" element={<AddBestOfPlace />} />
+            <Route path="/page/:id" element={<Page />} />
+            <Route path="/page/" element={<Page />} />
+            <Route path="/addpage/" element={<Addpage />} />
+            <Route path="/viewEnquire/" element={<FetchEnquire />} />
+            <Route path="/addpackageform" element={<AddPackageForm />} />
+            <Route path="/packageDetails" element={<PackageDetails />} />
+            <Route path="/about-us" element={<PageDetails />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/tours/:id" element={<SinglePackage />} />
+            <Route path="/collections/:id" element={<AllPackages />} />
+            <Route path="/toppackages/:id" element={<TopPackages />} />
+            <Route path="/selectedpackages/:id" element={<SelectedPackages />} />
+            <Route path="/bestpackages/:id" element={<Bestpackages />} />
+            <Route path="/count" element={<VisitorCount />} />
+            <Route path="/abhi" element={<ImageGrid />} />
+            <Route path="/login/" element={<Login />} />
+            <Route path="/dashboard/" element={<Dashboard />} />
 
-<BrowserRouter>
-    <Routes>
-      <Route index element={<Home/>}/>
-      <Route path="/home" element={<Home/>}/>
-      <Route path="*" element={<NotFound/>}/>
-      <Route path="/upload" element={<Upload/>}/>
-      <Route path="/blog" element={<Blog/>}/>
-      <Route path="/AddBlog" element={<AddBlog/>}/>
-      <Route path="/blog/:id/" element={<BlogDetails/>}/>
 
-      <Route path="/explore" element={<AddExplore/>}/>
-      <Route path="/bestof" element={<AddBestOf/>}/>
-      <Route path="/addpackages" element={<Addpackages />}/>
-      <Route path="/bestplace" element={<AddBestOfPlace />}/>
-      <Route path="/page/:id" element={<Page />}/>
-      <Route path="/page/" element={<Page />}/>
-      <Route path="/addpage/" element={<Addpage />}/>
-      <Route path="/viewEnquire/" element={<FetchEnquire />}/>
-      <Route path="/addpackageform" element={<AddPackageForm />}/>
-      <Route path="/PackageDetails" element={<PackageDetails />}/>
-      <Route path="/about-us" element={<PageDetails />}/>
-      <Route path="/contact-us" element={<ContactUs />}/>
 
-  
-    </Routes>
-  </BrowserRouter>
-   
-  
+           
 
-      {/* <section className="bg-[url('https://images.unsplash.com/photo-1605649487212-47bdab064df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80')] w-full h-screen bg-cover bg-center bg-no-repeat mb-8 md:h-screen ">
-        <div className="w-full h-full  backdrop-brightness-75">
-
-          <Navbar />
-
-          <Headerfile />
-
-        </div>       
-      </section> */}
-      {/* <Home />
-      <SliderComponent />
-
-     */}
-     {/* <Blog />  */}
-     {/* <AddBlog /> */}
-
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
-    
   );
 }
 
 export default App;
+
+

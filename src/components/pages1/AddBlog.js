@@ -4,27 +4,34 @@ import Swal from "sweetalert2";
 import { useEffect } from "react";
 import JoditEditor from "jodit-react";
 import { HiPlusCircle, HiExclamationCircle } from "react-icons/hi";
-import slugify from "slugify";
+import slugify from 'slugify';
 
 const AddBlogPage = () => {
-  const [slug, setSlug] = useState("");
+
+ 
+
+const [slug, setSlug] = useState('');
+
+
 
   const convertToSlug = () => {
-    const convertedSlug = slugify(slug, { lower: true });
+    const convertedSlug = slugify(slug,{ lower: true });
     setSlug(convertedSlug);
-  };
+  }; 
 
-  const [category, setCategory] = useState([]);
+  const [category, setcategory] = useState([]); // for category
 
+  /// const [category, setcategory] = useState([]);
   useEffect(() => {
-    getCategories();
+    getcategory();
   }, []);
 
-  function getCategories() {
+  function getcategory() {
     axios
-      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
+      .get("http://localhost/himalayan/api_fetch_category.php/")
       .then(function (response) {
-        setCategory(response.data);
+        
+        setcategory(response.data);
       });
   }
 
@@ -41,6 +48,7 @@ const AddBlogPage = () => {
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
     setSlug(e.target.value);
+   
   };
 
   const handleContentChange = (value) => {
@@ -58,6 +66,7 @@ const AddBlogPage = () => {
 
   const handleCategoryIdChange = (e) => {
     setCategoryId(e.target.value);
+
   };
 
   const validateForm = () => {
@@ -86,56 +95,54 @@ const AddBlogPage = () => {
     return errors;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     const errors = validateForm();
 
     if (Object.keys(errors).length === 0) {
-      const selectedCategory = category.find((cat) => cat.CID === categoryId);
-
-      if (!selectedCategory) {
-        Swal.fire({
-          icon: "error",
-          title: "Category not found",
-          text: "Please select a valid category",
-        });
-        return;
-      }
-
       const formData = new FormData();
       formData.append("BName", title);
       formData.append("content", content);
+      
       formData.append("image", image);
       formData.append("BAlt", altTag);
-      formData.append("CID", selectedCategory.CName); // Send CName instead of CID
+      formData.append("CID", categoryId);
       formData.append("slug", slug);
 
       try {
+        // Send the blog data to the PHP API
         const response = await axios.post(
-          "https://himalayanpackages.com/himalayan/test.php",
+          "http://localhost/himalayan/test.php",
           formData
         );
 
-        if (response.status === 200) {
-          Swal.fire({
-            icon: "success",
-            title: "Success!",
-            text: "Blog added successfully",
-          });
+ 
 
-          setTitle("");
-          setContent("");
-          setImage("");
-          setAltTag("");
-          setCategoryId("");
+      
 
-          if (imageInputRef.current) {
-            imageInputRef.current.value = "";
-          }
+        // Reset the form fields
+        setTitle("");
+        setContent("");
+        setImage("");
+        setAltTag("");
+        setCategoryId("");
+
+
+       
+
+        // Reset the image input
+        if (imageInputRef.current) {
+          imageInputRef.current.value = "";
         }
+
+        // Show success message with SweetAlert2
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Blog added successfully",
+        });
       } catch (error) {
         console.error(error);
+        // Show error message with SweetAlert2
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -143,6 +150,7 @@ const AddBlogPage = () => {
         });
       }
     } else {
+      // Show validation error messages with SweetAlert2
       Swal.fire({
         icon: "error",
         title: "Submission Error",
@@ -153,6 +161,8 @@ const AddBlogPage = () => {
     }
   };
 
+ 
+
   return (
     <div>
       <section className="text-gray-600 body-font relative">
@@ -160,6 +170,7 @@ const AddBlogPage = () => {
           <div className="flex flex-col text-center w-full mb-12">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
               Add Blog
+          
             </h1>
           </div>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
@@ -185,7 +196,9 @@ const AddBlogPage = () => {
                 <div className="p-2 w-2/3">
                   <div className="relative">
                     <label className="label">
-                      <span className="label-text">SEO Friendly Slug</span>
+                      <span className="label-text">
+                        SEO Friendly Slug
+                      </span>
                     </label>
                     <input
                       type="text"
@@ -195,21 +208,33 @@ const AddBlogPage = () => {
                       value={slug}
                       onChange={handleTitleChange}
                     />
+                    
                   </div>
                 </div>
 
                 <div className="p-2 w-1/3">
                   <div className="relative">
-                    <label className="label"></label>
+                    <label className="label">
+                 
+                    </label>
                     <a
+                      
                       className="btn btn-outline btn-primary mt-5"
                       onClick={convertToSlug}
                     >
                       <HiPlusCircle className="h-6 w-6 " />
                       Ok
                     </a>
+                    
                   </div>
                 </div>
+
+
+
+
+                
+
+
 
                 <div className="p-2 w-full">
                   <div className="relative">
@@ -241,10 +266,12 @@ const AddBlogPage = () => {
                         Select
                       </option>
 
-                      {category.map((cat) => (
-                        <option key={cat.CID} value={cat.CID}>
-                          {cat.CName}
+                      {category.map((category) => (
+                        <option key={category.CID} value={category.CID}>
+                          {category.CName}
+                          
                         </option>
+                      
                       ))}
                     </select>
                   </div>
@@ -277,8 +304,8 @@ const AddBlogPage = () => {
                     <JoditEditor
                       ref={editor}
                       value={content}
-                      tabIndex={1}
-                      onBlur={(newContent) => setContent(newContent)}
+                      tabIndex={1} // tabIndex of textarea
+                      onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content htmlFor perhtmlFormance reasons
                       onChange={handleContentChange}
                     />
                   </div>

@@ -1,6 +1,7 @@
-// Login.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -8,10 +9,11 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const navigate = useNavigate();
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Check if email and password are not empty
     if (!email || !password) {
       setError('Email and password are required');
       return;
@@ -29,13 +31,19 @@ const Login = () => {
 
       if (token) {
         console.log('Token:', token);
-        setError(''); // Clear any previous errors
+        setError('');
+
+        // Store the token in a cookie
+        Cookies.set('token', token, { expires: 7 }); // Set expiration as needed
+
+        // Redirect to the dashboard after successful login
+        navigate('/dashboard');
       } else {
         setError('Login failed. Token not received.');
       }
     } catch (error) {
       console.error('Login failed:', error.message);
-      setError('Login failed. Please try again.'); // Provide a generic error message
+      setError('Login failed. Please try again.');
     } finally {
       setLoading(false);
     }

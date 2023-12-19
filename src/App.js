@@ -77,8 +77,8 @@ function App() {
             <Route path="/bestpackages/:id" element={<Bestpackages />} />
             <Route path="/count" element={<VisitorCount />} />
             <Route path="/abhi" element={<ImageGrid />} />
-            <Route path="/login/" element={<Login />} />
-            <Route path="/dashboard/" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 
 
 

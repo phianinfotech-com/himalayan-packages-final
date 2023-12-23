@@ -5,6 +5,38 @@
   margin-left: 20%;
 }
 
+.confirmation-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000;
+  }
+  
+  .confirmation-popup p {
+    margin-bottom: 15px;
+  }
+  
+  .confirmation-popup button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .confirmation-popup button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .confirmation-popup button:active {
+    background-color: #ccc;
+  }
+  
+
 
 :before,
 *:after{
@@ -53,6 +85,19 @@
 }
 
 
+
+
+
+/* Initial style for the image */
+.image-filter {
+  filter: none; /* No filter by default */
+  transition: filter 0.3s ease; /* Add a smooth transition effect */
+}
+
+/* Apply a filter when hovering over the image */
+.image-filter:hover {
+  filter: invert(100%) hue-rotate(240deg); /* Change the filter effect on hover to invert and set the hue-rotate to 240 degrees for the specified color */
+}
 
 
 

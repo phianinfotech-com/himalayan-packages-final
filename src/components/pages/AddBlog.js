@@ -156,16 +156,12 @@ const AddBlogPage = () => {
   return (
     <div>
       <section className="text-gray-600 body-font relative">
-        <div className="container px-10 py-10 mx-auto">
-          <div className="flex flex-col text-center w-full mb-12">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-              Add Blog
-            </h1>
-          </div>
-          <div className="lg:w-1/2 md:w-2/3 mx-auto">
+        <div className="container p-10 mx-auto">
+         
+          <div className=" mx-auto">
             <form>
               <div className="flex flex-wrap -m-2">
-                <div className="p-2 w-full">
+                <div className="p-2 w-3/6">
                   <div className="relative">
                     <label className="label">
                       <span className="label-text">
@@ -182,7 +178,7 @@ const AddBlogPage = () => {
                     />
                   </div>
                 </div>
-                <div className="p-2 w-2/3">
+                <div className="p-2 w-2/6">
                   <div className="relative">
                     <label className="label">
                       <span className="label-text">SEO Friendly Slug</span>
@@ -198,7 +194,7 @@ const AddBlogPage = () => {
                   </div>
                 </div>
 
-                <div className="p-2 w-1/3">
+                <div className="p-2 w-1/6">
                   <div className="relative">
                     <label className="label"></label>
                     <a
@@ -211,7 +207,7 @@ const AddBlogPage = () => {
                   </div>
                 </div>
 
-                <div className="p-2 w-full">
+                <div className="p-2 w-2/6">
                   <div className="relative">
                     <label className="label">
                       <span className="label-text">Select Banner Image</span>
@@ -226,7 +222,23 @@ const AddBlogPage = () => {
                   </div>
                 </div>
 
-                <div className="p-2 w-1/2">
+                <div className="p-2 w-2/6">
+                  <div className="relative">
+                    <label className="label">
+                      <span className="label-text">Alt Tag </span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      className="input input-bordered w-full max-w-xl"
+                      id="altTag"
+                      value={altTag}
+                      onChange={handleAltTagChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="p-2 w-2/6">
                   <div className="relative">
                     <label className="label">
                       <span className="label-text">Select Category</span>
@@ -249,21 +261,7 @@ const AddBlogPage = () => {
                     </select>
                   </div>
                 </div>
-                <div className="p-2 w-1/2">
-                  <div className="relative">
-                    <label className="label">
-                      <span className="label-text">Alt Tag </span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Type here"
-                      className="input input-bordered w-full max-w-xl"
-                      id="altTag"
-                      value={altTag}
-                      onChange={handleAltTagChange}
-                    />
-                  </div>
-                </div>
+              
 
                 <div className="p-2 w-full">
                   <div className="relative">
@@ -271,7 +269,7 @@ const AddBlogPage = () => {
                       htmlFor="message"
                       className="leading-7 text-sm text-gray-600"
                     >
-                      Message
+                      Content
                     </label>
 
                     <JoditEditor
@@ -280,6 +278,7 @@ const AddBlogPage = () => {
                       tabIndex={1}
                       onBlur={(newContent) => setContent(newContent)}
                       onChange={handleContentChange}
+                      
                     />
                   </div>
                 </div>

@@ -37,7 +37,7 @@ const Login = () => {
         Cookies.set('token', token, { expires: 7 }); // Set expiration as needed
 
         // Redirect to the dashboard after successful login
-        navigate('/dashboard');
+        navigate('/admin');
       } else {
         setError('Login failed. Token not received.');
       }

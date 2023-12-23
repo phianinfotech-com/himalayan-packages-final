@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import PreloaderWrapper from './components/PreloaderWrapper';
+// App.js
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PreloaderWrapper from "./components/PreloaderWrapper";
 import Home from "./components/pages/Home";
 import Blog from "./components/pages/Blog";
 import AddBlog from "./components/pages/AddBlog";
@@ -20,22 +21,22 @@ import PageDetails from "./components/pages/PageDetails";
 import ContactUs from "./components/pages/ContactUs";
 import AllPackages from "./components/pages/AllPackages";
 import SinglePackage from "./components/pages/SinglePackage";
-import MasterSearch from './components/MasterSearch';
+import MasterSearch from "./components/MasterSearch";
 import VisitorCount from "./components/VisitorCount";
+import TopPackages from "./components/pages/TopPackages";
+import SelectedPackages from "./components/pages/SelectedPackages";
+import Bestpackages from "./components/pages/Bestpackages";
+import ImageGrid from "./components/pages/ap/ImageGrid";
+import Login from "./components/sadmin/Login";
+import Dashboard from "./components/sadmin/Dashboard";
+import Layout from "./components/sadmin/Layout";
 
-import TopPackages from './components/pages/TopPackages';
-import SelectedPackages from './components/pages/SelectedPackages';
-import Bestpackages from './components/pages/Bestpackages'
-import ImageGrid from './components/pages/ap/ImageGrid';
-import Login from './components/sadmin/Login';
-import Dashboard from './components/sadmin/Dashboard';
-import Layout from './components/sadmin/Layout';
-
+import AllBlog from './components/admin/AllBlogs'
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = React.useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Simulate loading data (replace with your actual loading logic)
     setTimeout(() => {
       setLoading(false);
@@ -44,20 +45,16 @@ function App() {
 
   return (
     <div>
-       
       <BrowserRouter>
-      
         <Routes>
           <Route element={<PreloaderWrapper />}>
-         
             <Route index element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/upload" element={<Upload />} />
-            
             <Route path="/search/:id" element={<MasterSearch />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/AddBlog" element={<AddBlog />} />
+            
             <Route path="/blog/:id/" element={<BlogDetails />} />
             <Route path="/explore" element={<AddExplore />} />
             <Route path="/bestof" element={<AddBestOf />} />
@@ -74,18 +71,25 @@ function App() {
             <Route path="/tours/:id" element={<SinglePackage />} />
             <Route path="/collections/:id" element={<AllPackages />} />
             <Route path="/toppackages/:id" element={<TopPackages />} />
-            <Route path="/selectedpackages/:id" element={<SelectedPackages />} />
+            <Route
+              path="/selectedpackages/:id"
+              element={<SelectedPackages />}
+            />
             <Route path="/bestpackages/:id" element={<Bestpackages />} />
             <Route path="/count" element={<VisitorCount />} />
+
+            {/* Admin routes */}
             <Route path="/abhi" element={<ImageGrid />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Layout />} />\
-            
 
+            <Route path="/admin/*" element={<Layout />}>
+              {/* Nested route for Dashboard within the Layout */}
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="enquiry" element={<FetchEnquire />} />
+              <Route path="all-blog" element={<AllBlog />} />
+              <Route path="add-blog" element={<AddBlog />} />
 
-
-           
-
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
@@ -94,5 +98,3 @@ function App() {
 }
 
 export default App;
-
-

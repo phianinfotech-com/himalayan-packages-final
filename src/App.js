@@ -29,6 +29,7 @@ import Bestpackages from './components/pages/Bestpackages'
 import ImageGrid from './components/pages/ap/ImageGrid';
 import Login from './components/sadmin/Login';
 import Dashboard from './components/sadmin/Dashboard';
+import Layout from './components/sadmin/Layout';
 
 
 function App() {
@@ -65,7 +66,7 @@ function App() {
             <Route path="/page/:id" element={<Page />} />
             <Route path="/page/" element={<Page />} />
             <Route path="/addpage/" element={<Addpage />} />
-            <Route path="/viewEnquire/" element={<FetchEnquire />} />
+            <Route path="/viewenquire/" element={<FetchEnquire />} />
             <Route path="/addpackageform" element={<AddPackageForm />} />
             <Route path="/packageDetails" element={<PackageDetails />} />
             <Route path="/about-us" element={<PageDetails />} />
@@ -78,7 +79,8 @@ function App() {
             <Route path="/count" element={<VisitorCount />} />
             <Route path="/abhi" element={<ImageGrid />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Layout />} />\
+            
 
 
 

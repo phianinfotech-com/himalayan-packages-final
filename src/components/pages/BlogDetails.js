@@ -1,23 +1,32 @@
-
 import React, { useState, useEffect } from "react";
 
 import Footer from "../Footer";
 import axios from "axios";
 import Navbar from "../Navbar";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import moment from "moment";
-import SearchBar from '../SearchBar';
-import { FacebookShareButton, FacebookIcon , EmailShareButton, FacebookShareCount, EmailIcon , WhatsappShareButton ,WhatsappIcon, LinkedinShareButton  ,LinkedinIcon, InstapaperIcon, InstapaperShareButton } from 'react-share';
+import SearchBar from "../SearchBar";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  EmailShareButton,
+  FacebookShareCount,
+  EmailIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  InstapaperIcon,
+  InstapaperShareButton,
+} from "react-share";
 
 import { Link } from "react-router-dom";
 
-
 // BlogDetails component responsible for rendering a blog post details page
 const BlogDetails = () => {
-
   const currentURL = window.location.href;
-console.log(currentURL);
+  console.log(currentURL);
   const navigate = useNavigate();
 
   // State to store the blog post data
@@ -97,56 +106,48 @@ console.log(currentURL);
                       </span>
                     </a>
                     <div>
-      <FacebookShareButton
-     url={currentURL}
-        quote={data.BName}
-        image={data.image}
-       
-      >
-        <FacebookShareCount url={currentURL} />
-        <FacebookIcon size={40} round className="m-2" />
-      </FacebookShareButton>
+                      <FacebookShareButton
+                        url={currentURL}
+                        quote={data.BName}
+                        image={data.image}
+                      >
+                        <FacebookShareCount url={currentURL} />
+                        <FacebookIcon size={40} round className="m-2" />
+                      </FacebookShareButton>
 
-      <EmailShareButton
-     url={currentURL}
-        quote={data.BName}
-        image={data.image}
-     
-      >
-     <EmailIcon size={40} round className="m-2" />
-      </EmailShareButton>
+                      <EmailShareButton
+                        url={currentURL}
+                        quote={data.BName}
+                        image={data.image}
+                      >
+                        <EmailIcon size={40} round className="m-2" />
+                      </EmailShareButton>
 
-      <WhatsappShareButton
-     
-        url={currentURL}
-        quote={data.BName}
-        image={data.image}
-       
-      >
-        <WhatsappIcon size={40} round className="m-2" />
-      </WhatsappShareButton>
+                      <WhatsappShareButton
+                        url={currentURL}
+                        quote={data.BName}
+                        image={data.image}
+                      >
+                        <WhatsappIcon size={40} round className="m-2" />
+                      </WhatsappShareButton>
 
-      <LinkedinShareButton
-     
-        url={currentURL}
-        quote={data.BName}
-        image={data.image}
-       
-      >
-        <LinkedinIcon size={40} round className="m-2" />
-      </LinkedinShareButton>
-
-     
-
-
-    </div>
+                      <LinkedinShareButton
+                        url={currentURL}
+                        quote={data.BName}
+                        image={data.image}
+                      >
+                        <LinkedinIcon size={40} round className="m-2" />
+                      </LinkedinShareButton>
+                    </div>
                     <img
                       src={data.image}
                       alt={data.BAlt}
                       className="w-full  shadow-xl border-solid border-2 rounded-2xl mb-10"
                     />
                     {/* Render blog content using dangerouslySetInnerHTML */}
-                    <div dangerouslySetInnerHTML={{ __html: (data.content) }}></div>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: data.content }}
+                    ></div>
                   </div>
                 </div>
               ) : (
@@ -164,7 +165,7 @@ console.log(currentURL);
                       <label className="label">
                         <span className="label-text">Search Blog</span>
                       </label>
-                      
+
                       {/* Render the SearchBar component */}
                       <SearchBar handleBlogClick={handleBlogClick} />
                     </div>
@@ -175,32 +176,25 @@ console.log(currentURL);
 
                   {/* Render the list of popular blog posts */}
                   {blogPosts.map((post) => (
-                    
                     <div className="inline-flex items-center " key={post.BID}>
-                       {/* Render the link to individual blog post */}
-                       <Link
-                            to={`/blog/${post.slug}`}
-                            onClick={() => handleBlogClick(post.slug)}
-                            className="text-primary inline-flex items-center md:mb-2 lg:mb-0"
-                          >
-                      <div className="card w-auto bg-base-100 shadow-xl my-2">
-                        <figure>
-                          <img src={post.image} alt={post.BAlt} />
-                        </figure>
-                        <div className="card-body">
-                          <h2 className="card-title  ">{post.BName}</h2>
-
-                  
-                         
+                      {/* Render the link to individual blog post */}
+                      <Link
+                        to={`/blog/${post.slug}`}
+                        onClick={() => handleBlogClick(post.slug)}
+                        className="text-primary inline-flex items-center md:mb-2 lg:mb-0"
+                      >
+                        <div className="card w-auto bg-base-100 shadow-xl my-2">
+                          <figure>
+                            <img src={post.image} alt={post.BAlt} />
+                          </figure>
+                          <div className="card-body">
+                            <h2 className="card-title  ">{post.BName}</h2>
                             {post.title}
                             Learn More
-                         
-                          
+                          </div>
                         </div>
-                      </div>
                       </Link>
                     </div>
-                    
                   ))}
                 </div>
               </div>
@@ -209,7 +203,6 @@ console.log(currentURL);
         </div>
       </section>
       <Footer />
-
     </div>
   );
 };

@@ -1,13 +1,13 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Parser } from "html-to-react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-export default function Fetch() {
+export default function AllBlog() {
   const [blogPosts, setBlogPosts] = useState([]);
   const [postIdToDelete, setPostIdToDelete] = useState(null);
-  const MAX_LENGTH = 250;
 
   useEffect(() => {
     axios
@@ -21,17 +21,20 @@ export default function Fetch() {
   }, []);
 
   const handleDelete = (postId) => {
+    console.log("Handling delete for post ID:", postId);
     setPostIdToDelete(postId);
   };
 
   const confirmDelete = () => {
+    console.log("Confirming delete for post ID:", postIdToDelete);
+  
     if (postIdToDelete !== null) {
       axios
         .delete(
           `https://himalayanpackages.com/himalayan/api-delete-blog-post.php?id=${postIdToDelete}`
         )
         .then((response) => {
-          console.log("Blog post deleted successfully");
+          console.log("Blog post deleted successfully:", response.data);
           setBlogPosts((prevPosts) =>
             prevPosts.filter((post) => post.BID !== postIdToDelete)
           );
@@ -45,9 +48,9 @@ export default function Fetch() {
   };
 
   const cancelDelete = () => {
+    console.log("Cancelling delete");
     setPostIdToDelete(null);
   };
-
   return (
     <div>
       <div className="overflow-x-auto rounded-lg">
@@ -60,12 +63,11 @@ export default function Fetch() {
 
               <th>BDate</th>
               <th>Author</th>
-              
+
               <th>Image</th>
-              
+
               <th>View</th>
               <th>Action</th>
-              
             </tr>
           </thead>
           <tbody className="font-light">
@@ -75,11 +77,9 @@ export default function Fetch() {
                 <th>{post.CName}</th>
                 <th>{post.BName}</th>
 
-                <th>
-                {moment(post.BDate).format("DD-MMM-YY")}
-                  </th>
+                <th>{moment(post.BDate).format("DD-MMM-YY")}</th>
                 <th>{post.BlogBy}</th>
-                
+
                 <th>
                   <div className="avatar">
                     <div className="w-24 rounded">
@@ -87,11 +87,15 @@ export default function Fetch() {
                     </div>
                   </div>
                 </th>
-                
-                <th>
 
-                <Link>  <img className="w-8 h-auto image-filter " src="https://himalayanpackages.com/himalayan/uploads/assets/himalayan-packages.pnp" alt="" /></Link>
-                 
+                <th>
+                  <Link to={`/admin/updateblog/${post.slug}`}>
+                    <img
+                      className="w-8 h-auto image-filter "
+                      src="https://himalayanpackages.com/himalayan/uploads/assets/himalayan-packages.pnp"
+                      alt=""
+                    />
+                  </Link>
                 </th>
 
                 <th>
@@ -108,7 +112,7 @@ export default function Fetch() {
         </table>
       </div>
       {postIdToDelete !== null && (
-        <div className="confirmation-popup">
+        <div className="confirmation-popup ">
           <p>Are you sure you want to delete this blog post?</p>
           <button
             className="btn btn-outline btn-success"

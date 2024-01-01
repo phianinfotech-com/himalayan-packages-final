@@ -116,7 +116,7 @@ const AddBlogPage = () => {
           "https://himalayanpackages.com/himalayan/test.php",
           formData
         );
-
+          
         if (response.status === 200) {
           Swal.fire({
             icon: "success",

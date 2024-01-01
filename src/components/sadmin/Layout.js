@@ -12,6 +12,7 @@ import Dashboard from './Dashboard';
 import AllBlog from '../admin/AllBlogs';
 import FetchEnquire from '../admin/FetchEnquire';
 import AddBlog from '../pages/AddBlog';
+import UpdateBlog from '../admin/UpdateBlog';
 
 const Layout = () => {
   return (
@@ -29,6 +30,7 @@ const Layout = () => {
               <Route path="enquiry" element={<FetchEnquire />} />
               <Route path="all-blog" element={<AllBlog />} />
               <Route path="add-blog" element={<AddBlog />} />
+              <Route path="updateblog/*" element={<UpdateBlog />} />
             </Route>
           </Routes>
         </main>

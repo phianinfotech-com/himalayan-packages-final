@@ -32,6 +32,7 @@ import Dashboard from "./components/sadmin/Dashboard";
 import Layout from "./components/sadmin/Layout";
 
 import AllBlog from './components/admin/AllBlogs'
+import UpdateBlog from "./components/admin/UpdateBlog";
 
 function App() {
   const [loading, setLoading] = React.useState(true);
@@ -88,6 +89,7 @@ function App() {
               <Route path="enquiry" element={<FetchEnquire />} />
               <Route path="all-blog" element={<AllBlog />} />
               <Route path="add-blog" element={<AddBlog />} />
+              <Route path="updateblog/*" element={<UpdateBlog />} />
 
             </Route>
           </Route>
@@ -98,3 +100,5 @@ function App() {
 }
 
 export default App;
+
+

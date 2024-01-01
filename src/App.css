@@ -6,17 +6,17 @@
 }
 
 .confirmation-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    z-index: 1000;
-  }
+  position: fixed;
+  top: 20px; /* Adjust this value to set the distance from the top */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 999; /* Adjust the z-index as needed */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
   
   .confirmation-popup p {
     margin-bottom: 15px;

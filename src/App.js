@@ -31,8 +31,16 @@ import Login from "./components/sadmin/Login";
 import Dashboard from "./components/sadmin/Dashboard";
 import Layout from "./components/sadmin/Layout";
 
-import AllBlog from './components/admin/AllBlogs'
+import AllBlog from "./components/admin/AllBlogs";
 import UpdateBlog from "./components/admin/UpdateBlog";
+
+import AllPages from "./components/admin/AllPages";
+import AllExplore from "./components/admin/AllExplore";
+import AllBestOfPlace from "./components/admin/AllBestOfPlace";
+
+import AllPackagesList from "./components/admin/AllPackagesList";
+import UpdatePackageFrom from "./components/admin/UpdatePackageFrom";
+import AllDetailPackages from "./components/admin/AllDetailPackages";
 
 function App() {
   const [loading, setLoading] = React.useState(true);
@@ -52,21 +60,9 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/upload" element={<Upload />} />
+            {/* <Route path="/upload" element={<Upload />} /> */}
             <Route path="/search/:id" element={<MasterSearch />} />
             <Route path="/blog" element={<Blog />} />
-            
-            <Route path="/blog/:id/" element={<BlogDetails />} />
-            <Route path="/explore" element={<AddExplore />} />
-            <Route path="/bestof" element={<AddBestOf />} />
-            <Route path="/addpackages" element={<Addpackages />} />
-            <Route path="/bestplace" element={<AddBestOfPlace />} />
-            <Route path="/page/:id" element={<Page />} />
-            <Route path="/page/" element={<Page />} />
-            <Route path="/addpage/" element={<Addpage />} />
-            <Route path="/viewenquire/" element={<FetchEnquire />} />
-            <Route path="/addpackageform" element={<AddPackageForm />} />
-            <Route path="/packageDetails" element={<PackageDetails />} />
             <Route path="/about-us" element={<PageDetails />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/tours/:id" element={<SinglePackage />} />
@@ -79,6 +75,16 @@ function App() {
             <Route path="/bestpackages/:id" element={<Bestpackages />} />
             <Route path="/count" element={<VisitorCount />} />
 
+            <Route path="/blog/:id/" element={<BlogDetails />} />
+
+            <Route path="/bestof" element={<AddBestOf />} />
+            <Route path="/addpackages" element={<Addpackages />} />
+            
+            <Route path="/page/:id" element={<Page />} />
+            <Route path="/page/" element={<Page />} />
+
+            {/* <Route path="/viewenquire/" element={<FetchEnquire />} /> */}
+
             {/* Admin routes */}
             <Route path="/abhi" element={<ImageGrid />} />
             <Route path="/login" element={<Login />} />
@@ -90,7 +96,20 @@ function App() {
               <Route path="all-blog" element={<AllBlog />} />
               <Route path="add-blog" element={<AddBlog />} />
               <Route path="updateblog/*" element={<UpdateBlog />} />
+              <Route path="addpage/" element={<Addpage />} />
+              <Route path="all-pages/" element={<AllPages />} />
+              <Route path="all-expore/" element={<AllExplore />} />
+              <Route path="explore/" element={<AddExplore />} />
+              <Route path="allbestofplace/" element={<AllBestOfPlace />} />
+              
+              <Route path="addpackageform/" element={<AddPackageForm />} />
 
+              <Route path="updatepackageform/*" element={<UpdatePackageFrom />} />
+
+              <Route path="allpackages/" element={<AllPackagesList />} />
+
+              <Route path="packagedetails/" element={<PackageDetails />} />
+              <Route path="alldetailpackages/" element={<AllDetailPackages />} />
             </Route>
           </Route>
         </Routes>
@@ -100,5 +119,3 @@ function App() {
 }
 
 export default App;
-
-

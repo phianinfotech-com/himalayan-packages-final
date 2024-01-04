@@ -53,6 +53,120 @@ const Sidebar = () => {
             
           
         </li>
+
+        <li>
+          <details>
+            <summary>Pages</summary>
+            <ul>
+            <li>
+              <Link to="/admin/all-pages">All Pages</Link>
+              
+                
+              </li>
+              <li>
+                
+                <Link to="/admin/add-page">Add Pages</Link>
+              </li>
+              
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          <details>
+            <summary>Home Page</summary>
+            <ul>
+              <li>
+                
+              <details>
+            <summary>Explore</summary>
+            <ul>
+              <li>
+                
+                <Link to="/admin/all-Expore">All Explore</Link>
+              </li>
+              <li>
+              <Link to="/admin/add-Expore">Add Expore</Link>
+              
+                
+              </li>
+            </ul>
+          </details>
+              </li>
+              <li>
+              <details>
+            <summary>Best of Place</summary>
+            <ul>
+              <li>
+                
+                <Link to="/admin/allbestofplace">All Best of Place</Link>
+              </li>
+              <li>
+              <Link to="/admin/addbestofplace">Add Best of Place</Link>
+
+              
+                
+              </li>
+
+              
+            </ul>
+          </details>
+              
+                
+              </li>
+            </ul>
+          </details>
+        </li>
+
+        
+
+
+        <li>
+          <details>
+            <summary>Packages</summary>
+            <ul>
+              <li>
+                
+              <details>
+            <summary>Master Packages</summary>
+            <ul>
+            <li>
+              <Link to="/admin/allpackages">All Packages</Link>
+              
+                
+              </li>
+              <li>
+                
+                <Link to="/admin/addpackageform">Add Package</Link>
+              </li>
+            </ul>
+          </details>
+              </li>
+              <li>
+              <details>
+            <summary>Detailed Packages</summary>
+            <ul>
+            <li>
+              <Link to="/admin/alldetailpackages">All Packages</Link>
+              
+                
+              </li>
+              <li>
+                
+                <Link to="/admin/packagedetails">Add Package Details</Link>
+              </li>
+
+              
+            </ul>
+          </details>
+              
+                
+              </li>
+            </ul>
+          </details>
+        </li>
+
+        
       </ul>
     </aside>
   );

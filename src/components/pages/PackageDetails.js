@@ -136,19 +136,15 @@ const PackageDetails = () => {
   };
 
   return (
-    <div className=" bg-[#f3f9ed]">
+    <div className="  bg-white">
       <section className="text-gray-600 body-font relative">
         <div className="container px-10 py-10 mx-auto">
-          <div className="flex flex-col text-center w-full mb-12">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-              Add Package
-            </h1>
-          </div>
+        
           {/* <div className="lg:w-1/3 md:w-2/3 mx-auto"> */}
           <div className="mx-auto">
             <form>
               <div className="flex flex-wrap -m-2">
-                <div className="p-2 w-full">
+                <div className="p-2 w-1/2">
                   <div className="relative">
                     <label className="label">
                       <span className="label-text">
@@ -159,13 +155,18 @@ const PackageDetails = () => {
                       type="text"
                       id="Bnane"
                       placeholder="Package Title "
-                      className="input input-bordered w-full max-w-xl"
+                      className="input input-bordered input-primary  w-full max-w-xl"
                       value={Title}
                       onChange={handleTitleChange}
                     />
 
-                    <div className="flex flex-wrap -m-2">
-                      <div className="p-2 w-full">
+                  
+                  </div>
+
+                  
+                </div>
+                
+                      <div className="p-2 w-1/2">
                         <div className="relative">
                           <label className="label">
                             <span className="label-text">Duration</span>
@@ -174,32 +175,29 @@ const PackageDetails = () => {
                             type="text"
                             id="Bnane"
                             placeholder="Package Title "
-                            className="input input-bordered w-full max-w-xl"
+                            className="input input-bordered input-primary w-full max-w-xl"
                             value={Duration}
                             onChange={handleDurationChange}
                           />
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-
+                    
                 <div className="p-2 w-1/2">
                   <div className="relative">
                     <label className="label">
-                      <span className="label-text"> package pkg</span>
+                      <span className="label-text"> Select Master Packages</span>
                     </label>
                     <select
-                      className="select select-bordered w-full max-w-xs"
+                      className="select select-bordered w-full "
                       id="pkgId"
                       value={pkgId}
                       onChange={handlepkgIdChange}
+                      multiple={false} // Add this line if you want to allow multiple selections
                     >
                       <option disabled value={0}>
                         Select
                       </option>
-
-                      {Array.isArray(pkg) && // Add this conditional check
+                      {Array.isArray(pkg) &&
                         pkg.map((pkgItem) => (
                           <option key={pkgItem.PID} value={pkgItem.PID}>
                             {pkgItem.PTitle}
@@ -211,11 +209,11 @@ const PackageDetails = () => {
                 <div className="p-2 w-1/2">
                   <div className="relative">
                     <label className="label">
-                      <span className="label-text">type </span>
+                      <span className="label-text">Group Type </span>
                     </label>
                     <input
                       type="text"
-                      placeholder="Rs"
+                      placeholder="Group Type"
                       className="input input-bordered w-full max-w-xl"
                       id="type"
                       value={type}
@@ -230,7 +228,7 @@ const PackageDetails = () => {
                       htmlFor="message"
                       className="leading-7 text-sm text-gray-600"
                     >
-                      Message
+                      Content
                     </label>
 
                     <JoditEditor

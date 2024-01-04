@@ -22,7 +22,7 @@ const AddBestOfPlace = () => {
 
   function getcategory() {
     axios
-      .get("http://localhost/himalayan/api_fetch_category.php/")
+      .get("https://himalayanpackages.com/himalayan/api_fetch_category.php/")
       .then(function (response) {
         setCategory(response.data);
       });
@@ -30,7 +30,7 @@ const AddBestOfPlace = () => {
 
   function getbest_of() {
     axios
-      .get("http://localhost/himalayan/api-fetch_bestof.php/")
+      .get("https://himalayanpackages.com/himalayan/api-fetch_bestof.php/")
       .then(function (response) {
         setBest_of(response.data);
       });
@@ -38,7 +38,7 @@ const AddBestOfPlace = () => {
 
   function getpackages() {
     axios
-      .get("http://localhost/himalayan/api-fetch-package.php/")
+      .get("https://himalayanpackages.com/himalayan/api-fetch-package.php/")
       .then(function (response) {
         setPackages(response.data);
       });
@@ -63,7 +63,8 @@ const AddBestOfPlace = () => {
  
 
     axios
-    .post("http://localhost/himalayan/api-add-best-of-place.php", formData)
+    .post("https://himalayanpackages.com/himalayan/api-add-best-of-place.php", formData)
+
     .then((response) => {
       console.log(response.data);
 
@@ -83,7 +84,7 @@ const AddBestOfPlace = () => {
     .catch((error) => {
       console.error("Error while saving data:", error);
     });    axios
-      .post("http://localhost/himalayan/api-add-best-of-place.php", formData)
+      .post("https://himalayanpackages.com/himalayan/api-add-best-of-place.php", formData)
       .then((response) => {
         console.log(response.data);
       })
@@ -116,8 +117,8 @@ const AddBestOfPlace = () => {
   return (
     <>
       <div className="container mx-auto mt-8">
-        <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-          <form className="border rounded-lg shadow-lg p-4" onSubmit={handleSubmit}>
+        <div className="max-w-md mx-auto overflow-hidden">
+          <form onSubmit={handleSubmit}>
             <h2 className="text-2xl font-bold mb-4">
               Add Best Of Place / Best Packages
             </h2>
@@ -191,7 +192,7 @@ const AddBestOfPlace = () => {
                 {isChecked
                   ? packages.map((mypkg) => (
                       <option key={mypkg.PID} value={mypkg.PID}>
-                        {mypkg.PName}
+                        {mypkg.PTitle}
                       </option>
                     ))
                   : category.map((category) => (

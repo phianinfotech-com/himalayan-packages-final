@@ -12,12 +12,14 @@ export default function Fetch() {
     axios
       .get("https://himalayanpackages.com/himalayan/api-fetch-all-enq.php")
       .then((response) => {
+        console.log("Fetched data:", response.data);
         setEnqPosts(response.data);
       })
       .catch((error) => {
         console.error("Error fetching blog data:", error);
       });
   }, []);
+  console.log("Current state of enqPosts:", enqPosts);
 
 // Function to handle update action
 const handleUpdate = (enqId) => {

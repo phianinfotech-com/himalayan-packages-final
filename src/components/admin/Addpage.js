@@ -9,15 +9,12 @@ import slugify from "slugify";
 const Addpage = () => {
   // State to store the slug
 
-  
   const [Page_Name, setPageName] = useState("");
   const [Page_Content, setPageContent] = useState("");
   const [Page_Img, setPageImg] = useState("");
   const [Page_Slug, setPageSlug] = useState("");
-  
+
   const imageInputRef = useRef(null);
-
-
 
   const handlePageNameChange = (e) => {
     setPageName(e.target.value);
@@ -36,14 +33,11 @@ const Addpage = () => {
     setPageSlug(e.target.value);
   };
 
- 
-
   // Generate the slug from Page_Name and update it whenever Page_Name changes
   useEffect(() => {
     const generatedSlug = slugify(Page_Name, { lower: true });
     setPageSlug(generatedSlug);
   }, [Page_Name]);
-
 
   // Validation function for form fields
   const validateForm = () => {
@@ -77,18 +71,15 @@ const Addpage = () => {
     const errors = validateForm();
 
     if (Object.keys(errors).length === 0) {
-        const formData = new FormData();
-        formData.append("Page_Name", Page_Name);
-        formData.append("Page_Content", Page_Content);
-        formData.append("Page_Img", Page_Img);
-        formData.append("Page_Slug", Page_Slug);
-       
-  
-      
+      const formData = new FormData();
+      formData.append("Page_Name", Page_Name);
+      formData.append("Page_Content", Page_Content);
+      formData.append("Page_Img", Page_Img);
+      formData.append("Page_Slug", Page_Slug);
 
       try {
         const response = await axios.post(
-          "http://localhost/himalayan/api-addpage.php",
+          "https://himalayanpackages.com/himalayan/api-addpage.php",
           formData
         );
         console.log("Form Data:", formData);
@@ -97,8 +88,6 @@ const Addpage = () => {
         setPageContent("");
         setPageImg("");
         setPageSlug("");
-      
-
 
         if (imageInputRef.current) {
           imageInputRef.current.value = "";
@@ -130,115 +119,123 @@ const Addpage = () => {
 
   return (
     <div className="container mx-auto p-8">
-      <div className="max-w-md mx-auto bg-white border-2 border-gray-300 p-8 rounded-md shadow-lg">
-        <h1 className="text-2xl font-bold mb-4">Add Page</h1>
-        <form>
-          
-          {/* PName */}
-          <div className="mb-4">
-            <label
-              htmlFor="Page_Name"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-             Page Name
-            </label>
-            <input
-              type="text"
-              id="Page_Name"
-              name="Page_Name"
-              value={Page_Name}
-              onChange={handlePageNameChange}
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              required
-            />
-          </div>
+      <div className="container p-10 mx-auto">
+        <div className=" mx-auto">
+          <form>
+            {/* PName */}
+            <div className="flex flex-wrap -m-2">
+              <div className="p-2 w-2/6">
+                <div className="relative">
+                  <label
+                    htmlFor="Page_Name"
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                  >
+                    Page Name
+                  </label>
+                  <input
+                    type="text"
+                    id="Page_Name"
+                    name="Page_Name"
+                    value={Page_Name}
+                    onChange={handlePageNameChange}
+                    className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+              </div>
+            
+            {/* Page_Slug */}
 
-          {/* Page_Slug */}
-          <div className="mb-6">
-            <label
-              htmlFor="Page_Slug"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Page Slug
-            </label>
-            <input
-              type="text"
-              id="Page_Slug"
-              name="Page_Slug"
-              value={Page_Slug} // Use the Page_Slug state here
-              onChange={handlePageSlugChange} // Handle Page_Slug changes
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              required
-            />
-          </div>
-
-
-
-          {/* Page_Content */}
-          <div className="mb-4">
-            <label
-              htmlFor="Page_Content"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Page Content
-            </label>
-            <JoditEditor
-              value={Page_Content}
-              tabIndex={1}
-              onBlur={(newPageContent) => handlePageContentChange(newPageContent)}
-              onChange={handlePageContentChange}
-              style={{ width: "100%", height: "200px" }}
-            />
-          </div>
-
-          {/* Page_Img */}
-          <div className="mb-4">
-            <label
-              htmlFor="Page_Img"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Page Image
-            </label>
-            <input
-              type="file"
-              className="file-input file-input-bordered file-input-primary w-full max-w-xl"
-              id="Page_Img" // The id should be "Page_Img"
-              ref={imageInputRef}
-              onChange={handlePageImgChange}
-            />
-          </div>
-
-
-          
-
-          <div className="flex items-center justify-end mt-4">
-            <div className="p-2 w-full ">
-              <div className="flex ">
-                <button
-                  type="submit"
-                  className="btn btn-outline btn-primary m-2"
-                  onClick={handleSubmit}
+            <div className="p-2 w-2/6">
+              <div className="relative">
+                <label
+                  htmlFor="Page_Slug"
+                  className="block text-gray-700 text-sm font-bold mb-2"
                 >
-                  <HiPlusCircle className="h-6 w-6 " />
-                  Publish
-                </button>
-
-                <button
-                  className="btn btn-outline btn-secondary m-2 "
-                  type="reset"
-                >
-                  <HiExclamationCircle className="h-6 w-6 " />
-                  Cancel
-                </button>
+                  Page Slug
+                </label>
+                <input
+                  type="text"
+                  id="Page_Slug"
+                  name="Page_Slug"
+                  value={Page_Slug} // Use the Page_Slug state here
+                  onChange={handlePageSlugChange} // Handle Page_Slug changes
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  required
+                />
               </div>
             </div>
-          </div>
-        </form>
+
+            {/* Page_Img */}
+
+            <div className="p-2 w-2/6">
+              <div className="relative">
+                <label
+                  htmlFor="Page_Img"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  Page Image
+                </label>
+                <input
+                  type="file"
+                  className="file-input file-input-bordered file-input-primary w-full max-w-xl"
+                  id="Page_Img" // The id should be "Page_Img"
+                  ref={imageInputRef}
+                  onChange={handlePageImgChange}
+                />
+              </div>
+            </div>
+
+            {/* Page_Content */}
+
+            <div className="p-2 w-full">
+              <div className="relative">
+                <label
+                  htmlFor="Page_Content"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  Page Content
+                </label>
+                <JoditEditor
+                  value={Page_Content}
+                  tabIndex={1}
+                  onBlur={(newPageContent) =>
+                    handlePageContentChange(newPageContent)
+                  }
+                  onChange={handlePageContentChange}
+                  style={{ width: "100%", height: "200px" }}
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end mt-4">
+              <div className="p-2 w-full ">
+                <div className="flex ">
+                  <button
+                    type="submit"
+                    className="btn btn-outline btn-primary m-2"
+                    onClick={handleSubmit}
+                  >
+                    <HiPlusCircle className="h-6 w-6 " />
+                    Publish
+                  </button>
+
+                  <button
+                    className="btn btn-outline btn-secondary m-2 "
+                    type="reset"
+                  >
+                    <HiExclamationCircle className="h-6 w-6 " />
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Addpage;
-
-

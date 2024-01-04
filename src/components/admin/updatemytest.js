@@ -6,7 +6,7 @@ import JoditEditor from "jodit-react";
 import { HiPlusCircle, HiExclamationCircle } from "react-icons/hi";
 import slugify from "slugify";
 
-const AddPackageForm = () => {
+const UpdatePackageFrom = () => {
   const [slug, setSlug] = useState("");
   const [PTitle, setPTitle] = useState("");
 
@@ -290,7 +290,7 @@ const AddPackageForm = () => {
     <div>
       <div className="container mx-auto p-8">
         <div className=" mx-auto bg-white ">
-          
+          <h1 className="text-2xl font-bold mb-4">Add Packages</h1>
 
           <div className="flex flex-wrap -m-4">
             <div className="lg:w-1/2 md:w-1/2 p-4 w-full">
@@ -298,8 +298,7 @@ const AddPackageForm = () => {
                 htmlFor="PTitle"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                                Package Name
-
+                PTitle
               </label>
               <input
                 type="text"
@@ -633,4 +632,4 @@ const AddPackageForm = () => {
   );
 };
 
-export default AddPackageForm;
+export default UpdatePackageFrom;

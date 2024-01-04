@@ -1,17 +1,16 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Parser } from "html-to-react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-export default function AllBlog() {
+export default function AllPackages() {
   const [blogPosts, setBlogPosts] = useState([]);
   const [postIdToDelete, setPostIdToDelete] = useState(null);
 
   useEffect(() => {
     axios
-      .get("https://himalayanpackages.com/himalayan/API_fetch_all_blog.php")
+      .get("https://himalayanpackages.com/himalayan/api-fetch-all-packages.php")
       .then((response) => {
         setBlogPosts(response.data);
       })
@@ -27,7 +26,7 @@ export default function AllBlog() {
 
   const confirmDelete = () => {
     console.log("Confirming delete for post ID:", postIdToDelete);
-  
+
     if (postIdToDelete !== null) {
       axios
         .delete(
@@ -58,13 +57,10 @@ export default function AllBlog() {
           <thead className="font-light">
             <tr>
               <th>#</th>
-              <th>Category</th>
-              <th>Blog Name</th>
+              <th>Package Name</th>
+              <th> Image</th>
 
-              <th>BDate</th>
-              <th>Author</th>
-
-              <th>Image</th>
+              <th>Locations</th>
 
               <th>View</th>
               <th>Action</th>
@@ -72,26 +68,31 @@ export default function AllBlog() {
           </thead>
           <tbody className="font-light">
             {blogPosts.map((post) => (
-              <tr key={post.BID}>
-                <th>{post.BID}</th>
-                <th>{post.CName}</th>
-                <th>{post.BName}</th>
-
-                <th>{moment(post.BDate).format("DD-MMM-YY")}</th>
-                <th>{post.BlogBy}</th>
+              <tr key={post.PID}>
+                <th>{post.PID}</th>
+                <th>{post.PTitle}</th>
 
                 <th>
                   <div className="avatar">
                     <div className="w-24 rounded">
-                      <img src={post.image} alt={post.BAlt} />
+                      <img src={post.banner1} alt={post.banner_alt1} />
                     </div>
                   </div>
                 </th>
+                <th>{post.CName}</th>
 
                 <th>
-                  <Link to={`/admin/updateblog/${post.slug}`}>
+                  {/* <Link to={`/admin/updatepackageform/${post.slug}`}>
                     <img
-                      className="w-8 h-auto image-filter "
+                      className="w-8 h-auto image-filter"
+                      src="https://himalayanpackages.com/himalayan/uploads/assets/himalayan-packages.pnp"
+                      alt=""
+                    />
+                  </Link> */}
+
+                  <Link to={`/admin/updatepackageform/${post.slug}`}>
+                    <img
+                      className="w-8 h-auto image-filter"
                       src="https://himalayanpackages.com/himalayan/uploads/assets/himalayan-packages.pnp"
                       alt=""
                     />

@@ -60,6 +60,7 @@ const UpdateBlogPage = () => {
     // Fetch blog post data when the component mounts or the slug changes in the URL
     const urlSlug = window.location.pathname.split("/admin/updateblog/").pop();
     const withoutSlash = urlSlug.replace(/\/$/, "");
+    console.log("Current Slug:", withoutSlash); // Add this line to print the slug
     fetchDataBySlug(withoutSlash);
   }, [slug]);
 

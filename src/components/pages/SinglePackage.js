@@ -2,29 +2,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Parser } from "html-to-react";
 import Navbar from "../Navbar";
+
 import SearchAllBlog from "../SearchAllBlog";
 import Footer from "../Footer";
 import Enquire from "../Enquire";
-import AOS from 'aos';
+import AOS from "aos";
 import { Link } from "react-router-dom";
-import 'aos/dist/aos.css'; // Import AOS CSS
-
-
+import "aos/dist/aos.css"; // Import AOS CSS
 
 import TitleInCamelCase from "../TitleInCamelCase";
 import "photoswipe/dist/photoswipe.css";
 
 import { Gallery, Item } from "react-photoswipe-gallery";
 
-import {
-  
-  HiOutlineLocationMarker,
-} from "react-icons/hi";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 import { useNavigate, useParams } from "react-router-dom";
-
-
-
 
 export default function SinglePackage() {
   const slugToCamelCase = (slug) => {
@@ -35,6 +28,37 @@ export default function SinglePackage() {
   };
 
   const [policy, setpolicy] = useState([]); // for category
+
+  // Accordion component for the Day section
+  const AccordionDay = ({ dayIndex, activeDay, handleDayClick }) => {
+    const isOpen = activeDay === dayIndex;
+
+    return (
+      <div className="mb-2">
+        <button
+          className={`px-4 my-2 w-16 ${
+            isOpen ? "btn btn-outline btn-primary" : "btn btn-outline"
+          }`}
+          onClick={() => handleDayClick(dayIndex)}
+        >
+          Day {dayIndex + 1}
+        </button>
+        {isOpen && (
+          <div className="ml-4">
+            {/* Content for the selected day */}
+            {/* You can replace this with the actual content */}
+            <p>Content for Day {dayIndex + 1}</p>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const [accordionOpen, setAccordionOpen] = useState(null);
+
+  const handleAccordionClick = (index) => {
+    setAccordionOpen((prevIndex) => (prevIndex === index ? null : index));
+  };
 
   /// const [category, setcategory] = useState([]);
   useEffect(() => {
@@ -97,9 +121,26 @@ export default function SinglePackage() {
   const [currentTab, setCurrentTab] = useState("1");
 
   const [activeTab, setActiveTab] = useState(0);
+  const [activeDay, setActiveDay] = useState(null);
+  const [dayContent, setDayContent] = useState(null);
+
+  
+
+  const handleDayClick = (dayIndex) => {
+    setActiveDay(dayIndex);
+    setDayContent(data[0][`day${dayIndex + 1}`]);
+    setActiveDay((prevActiveDay) => (prevActiveDay === dayIndex ? null : dayIndex));
+
+  };
+
+  const handleAccordionDayClick = (dayIndex) => {
+    setActiveDay(dayIndex);
+    setDayContent(data[0][`day${dayIndex + 1}`]);
+  };
 
   const handleTabClick = (index) => {
-    setActiveTab(index);
+    // setActiveTab(index);
+    setActiveTab(index === activeTab ? null : index);
   };
 
   const handleTabClick1 = (e) => {
@@ -126,96 +167,104 @@ export default function SinglePackage() {
     setActiveAccordionTab(index === activeAccordionTab ? null : index);
   };
 
-  // 
+  //
 
   return (
     <div className=" bg-[#f3f9ed]">
-
-
-<div className="relative">
-     
-
-<Navbar />     
-<Gallery   className="w-full h-96 bg-cover bg-center ">
-
-        <div className="flex md:-mt-16 -mt-8">
-          <div className="w-1/2">
-            <div className=" w-full md:h-20 md:py-1  ">
-              <Item
-                original={data ? data[0].banner1 : ""}
-                thumbnail={data ? data[0].banner1 : ""}
-                width="923"
-                height="600"
-              >
-                {({ ref, open }) => (
-                  <img ref={ref} onClick={open} src={data ? data[0].banner1 : ""} />
-                )}
-              </Item>
-            </div>
-          </div>
-          <div className="w-1/2">
-            <div className="grid grid-cols-2">
-              <div className="w-full  py-1  pl-1  ">
-
-              <Item
-                  original={data ? data[0].banner2 : ""}
-                  thumbnail={data ? data[0].banner2 : ""}
-                  width="923"
-                  height="600"
-                >
-                  {({ ref, open }) => (
-                    <img ref={ref} onClick={open} src={data ? data[0].banner2 : ""} />
-                  )}
-                </Item>
-
-              
-              </div>
-              <div className="w-full py-1 pl-1">
+      <div className="relative">
+        <Navbar />
+        <Gallery className="w-full h-96 bg-cover bg-center ">
+          <div className="flex md:-mt-16 -mt-8">
+            <div className="w-1/2">
+              <div className=" w-full md:h-20 md:py-1  ">
                 <Item
-                  original={data ? data[0].banner3 : ""}
-                  thumbnail={data ? data[0].banner3 : ""}
+                  original={data ? data[0].banner1 : ""}
+                  thumbnail={data ? data[0].banner1 : ""}
                   width="923"
                   height="600"
                 >
                   {({ ref, open }) => (
-                    <img ref={ref} onClick={open} src={data ? data[0].banner3 : ""} />
-                  )}
-                </Item>
-              </div>
-              <div className="w-full pl-1">
-                <Item
-                  original={data ? data[0].banner4 : ""}
-                  thumbnail={data ? data[0].banner4 : ""}
-                  width="923"
-                  height="600"
-                >
-                  {({ ref, open }) => (
-                    <img ref={ref} onClick={open} src={data ? data[0].banner4 : ""} />
-                  )}
-                </Item>
-              </div>
-              <div className="w-full  pb-1 pl-1">
-                <Item
-                  original={data ? data[0].banner5 : ""}
-                  thumbnail={data ? data[0].banner5 : ""}
-                  width="923"
-                  height="600"
-                >
-                  {({ ref, open }) => (
-                    <img ref={ref} onClick={open} src={data ? data[0].banner5 : ""} />
+                    <img
+                      ref={ref}
+                      onClick={open}
+                      src={data ? data[0].banner1 : ""}
+                    />
                   )}
                 </Item>
               </div>
             </div>
+            <div className="w-1/2">
+              <div className="grid grid-cols-2">
+                <div className="w-full  py-1  pl-1  ">
+                  <Item
+                    original={data ? data[0].banner2 : ""}
+                    thumbnail={data ? data[0].banner2 : ""}
+                    width="923"
+                    height="600"
+                  >
+                    {({ ref, open }) => (
+                      <img
+                        ref={ref}
+                        onClick={open}
+                        src={data ? data[0].banner2 : ""}
+                      />
+                    )}
+                  </Item>
+                </div>
+                <div className="w-full py-1 pl-1">
+                  <Item
+                    original={data ? data[0].banner3 : ""}
+                    thumbnail={data ? data[0].banner3 : ""}
+                    width="923"
+                    height="600"
+                  >
+                    {({ ref, open }) => (
+                      <img
+                        ref={ref}
+                        onClick={open}
+                        src={data ? data[0].banner3 : ""}
+                      />
+                    )}
+                  </Item>
+                </div>
+                <div className="w-full pl-1">
+                  <Item
+                    original={data ? data[0].banner4 : ""}
+                    thumbnail={data ? data[0].banner4 : ""}
+                    width="923"
+                    height="600"
+                  >
+                    {({ ref, open }) => (
+                      <img
+                        ref={ref}
+                        onClick={open}
+                        src={data ? data[0].banner4 : ""}
+                      />
+                    )}
+                  </Item>
+                </div>
+                <div className="w-full  pb-1 pl-1">
+                  <Item
+                    original={data ? data[0].banner5 : ""}
+                    thumbnail={data ? data[0].banner5 : ""}
+                    width="923"
+                    height="600"
+                  >
+                    {({ ref, open }) => (
+                      <img
+                        ref={ref}
+                        onClick={open}
+                        src={data ? data[0].banner5 : ""}
+                      />
+                    )}
+                  </Item>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </Gallery>
-          
-        
+        </Gallery>
       </div>
 
-
-      
       {/* this is gallary code */}
       {/* Navbar and Hero Section */}
       {/* <div className="relative">
@@ -262,20 +311,15 @@ export default function SinglePackage() {
             <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden ">
               <div className="h-25 w-auto mx-auto py-4 h-auto">
                 <p className="text-2xl text-left	font-bold text-black pl-2  ">
-
-                <TitleInCamelCase title={data ? data[0].PTitle : ""} />
-                  
+                  <TitleInCamelCase title={data ? data[0].PTitle : ""} />
                 </p>
 
                 <div className="flex justify-center space-x-4 p-2 text-secondary">
                   <HiOutlineLocationMarker className="h-6 w-6 md:h-8 md:w-8 my-2" />
                   <div className="py-2">
                     <p className="md:text-xl">
-
-                    <TitleInCamelCase title={data ? data[0].CName : ""} />
-                      
-                      
-                      </p>
+                      <TitleInCamelCase title={data ? data[0].CName : ""} />
+                    </p>
                   </div>
                 </div>
                 {/* day-night-sun-moon-cycle */}
@@ -291,8 +335,7 @@ export default function SinglePackage() {
                             src={feature.Key_Img}
                           />
                           <div className="text-black text-center py-2 opacity-75">
-                          <TitleInCamelCase title={feature.Key_Name} />
-                            
+                            <TitleInCamelCase title={feature.Key_Name} />
                           </div>
                         </div>
                       </div>
@@ -301,9 +344,12 @@ export default function SinglePackage() {
               </div>
             </div>
 
-            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2  overflow-hidden mb-4 md:mb-6" data-aos="zoom-in-up">
+            <div
+              className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2 overflow-hidden mb-4 md:mb-6"
+              data-aos="zoom-in-up"
+            >
               <div className="h-25 w-auto mx-auto py-4 h-auto">
-                <p className="md:text-2xl text-left	font-bold  pl-2 my-4 sm:text-xl ">
+                <p className="md:text-2xl text-left font-bold pl-2 my-4 sm:text-xl ">
                   Select Package Options
                 </p>
 
@@ -320,8 +366,7 @@ export default function SinglePackage() {
                           }`}
                           onClick={() => handleTabClick(index)}
                         >
-                          <TitleInCamelCase title={tab.type}/>
-                         
+                          <TitleInCamelCase title={tab.type} />
                         </button>
                       ))}
                   </div>
@@ -335,23 +380,52 @@ export default function SinglePackage() {
                             activeTab === index ? "block" : "hidden"
                           }`}
                         >
-                          <div
-                            className="mx-4"
-                            dangerouslySetInnerHTML={{
-                              __html: tab.Content,
-                            }}
-                          />
+                          <div className="mx-4">
+                            <div
+                              dangerouslySetInnerHTML={{ __html: tab.Content }}
+                            />
+
+                            {/* Show days as tabs under the selected tab */}
+                            <div className="flex flex-wrap mt-4">
+                              {Array.from({ length: 10 }, (_, dayIndex) => (
+                                <button
+                                  key={dayIndex}
+                                  className={`px-4 my-2 mr-2 w-16 ${
+                                    activeDay === dayIndex
+                                      ? "btn btn-outline btn-primary"
+                                      : "btn btn-outline "
+                                  }`}
+                                  onClick={() => handleDayClick(dayIndex)}
+                                >
+                                  Day {dayIndex + 1}
+                                </button>
+                              ))}
+                            </div>
+
+                            {/* Display content for the selected day */}
+                            <div
+                              className={`md:mx-4 ${
+                                dayContent !== null ? "block" : "hidden"
+                              }`}
+                            >
+                              <div
+                                dangerouslySetInnerHTML={{ __html: dayContent }}
+                              />
+                            </div>
+                          </div>
                         </div>
                       ))}
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2 mb-10 md:mb-20" data-aos="zoom-in-up">
+            <div
+              className="card w-auto bg-base-100 shadow-xl md:my-4 md:mx-10 my-4 mx-4 h-full border-2 mb-10 md:mb-20"
+              data-aos="zoom-in-up"
+            >
               <div className="h-25 w-auto mx-auto py-4 h-auto">
                 <p className="text-2xl text-left	font-bold  pl-2 my-2 ">
-                Privacy & Policy 
+                  Privacy & Policy
                 </p>
 
                 <div className="container mx-auto px-4 ">
@@ -374,36 +448,29 @@ export default function SinglePackage() {
 
         {/* side bar code */}
         <div className="w-1/4 md:mt-3 md:mr-10 md:mb-20">
-          
-        <div
-        className="h-auto p-4 items-center mt-2 mx-auto card lg:shadow-xl lg:border-2 lg:rounded-xl overflow-hidden relative bg-white"
-        style={{
-          border: "1px solid #1a96cb",
-          boxShadow: "0 0 10px rgba(26,150,203.10)",
-        }}
-      >
-     
+          <div
+            className="h-auto p-4 items-center mt-2 mx-auto card lg:shadow-xl lg:border-2 lg:rounded-xl overflow-hidden relative bg-white"
+            style={{
+              border: "1px solid #1a96cb",
+              boxShadow: "0 0 10px rgba(26,150,203.10)",
+            }}
+          >
+            <h2 className="font-medium title-font mt-2 text-primary text-base	  text-center	 my-2">
+              <TitleInCamelCase title="Bigger Group? Get special offers upto 50% off! " />
+            </h2>
 
-        <h2 className="font-medium title-font mt-2 text-primary text-base	  text-center	 my-2">
-          <TitleInCamelCase title="Bigger Group? Get special offers upto 50% off! " />
-        </h2>
-
-        <p className="text-sm text-center	">
-          <TitleInCamelCase
-            title="We create unforgettable adventures, customised for your group."
-          />
-        </p>
-        <div className="my-2">
+            <p className="text-sm text-center	">
+              <TitleInCamelCase title="We create unforgettable adventures, customised for your group." />
+            </p>
+            <div className="my-2">
               <button className="btn btn-active btn-primary">
                 <Link to={`tel:9518337299`}>Call Now</Link>
               </button>
             </div>
-      </div>
-<div className="hidden xl:flex sticky top-0 h-screen ">
-
-<Enquire />
-</div>
-         
+          </div>
+          <div className="hidden xl:flex sticky top-0 h-screen ">
+            <Enquire />
+          </div>
         </div>
         {/* side bar code */}
       </div>

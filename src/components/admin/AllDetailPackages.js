@@ -218,20 +218,21 @@
       // Fetch groups based on the selected package
       getPkgGrpup(selectedPkgId);
 
-      setUpdatedTitle("");
-      setUpdatedContent("");
-      setUpdatedDuration("");
-      setUpdatedday1("");
-      setUpdatedday2("");
-      setUpdatedday3("");
-      setUpdatedday4("");
-      setUpdatedday5("");
-      setUpdatedday6("");
-      setUpdatedday7("");
-      setUpdatedday8("");
-      setUpdatedday9("");
-      setUpdatedday10("");
+
       
+    setUpdatedTitle("");  // Reset the state variables
+    setUpdatedContent("");
+    setUpdatedDuration("");
+    setUpdatedday1("");
+    setUpdatedday2("");
+    setUpdatedday3("");
+    setUpdatedday4("");
+    setUpdatedday5("");
+    setUpdatedday6("");
+    setUpdatedday7("");
+    setUpdatedday8("");
+    setUpdatedday9("");
+    setUpdatedday10("");
       
     };
 
@@ -247,81 +248,79 @@
     //     fetchDataBypdid(selectedPkgGRPId);
     //   };
 
-    const validateForm = () => {
-      const errors = {};
+   
 
-      if (Title.trim() === "") {
-        errors.Title = "Title is required";
-      }
-
-      if (content.trim() === "") {
-        errors.content = "Content is required";
-      }
-
-      if (type.trim() === "") {
-        errors.type = "Type is required";
-      }
-
-      return errors;
-    };
-
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const errors = validateForm();
-
-      if (Object.keys(errors).length === 0) {
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+      
         const formData = new FormData();
-        formData.append("title", Title);
-        formData.append("content", content);
-        formData.append("Duration", Duration);
-        formData.append("type", type);
-        formData.append("PID", pkgId);
-        formData.append("GRPId", grpId);
 
+        
+        
+        formData.append("PDID", pkgdetails.PDID);
+        formData.append("title", updatedTitle);
+        formData.append("content", updatedContent);
+        formData.append("Duration", updatedDuration);
+        
+        formData.append("day1", updatedday1);
+        formData.append("day2", updatedday2);
+        formData.append("day3", updatedday3);
+        formData.append("day4", updatedday4);
+        formData.append("day5", updatedday5);
+        formData.append("day6", updatedday6);
+        formData.append("day7", updatedday7);
+        formData.append("day8", updatedday8);
+        formData.append("day9", updatedday9);
+        formData.append("day10", updatedday10);
+       
+        
         try {
-          // Send the data to the PHP API
           const response = await axios.post(
-            "https://himalayanpackages.com/himalayan/api-add-pkg-details.php",
-            formData
+            `https://himalayanpackages.com/himalayan/api-package-details-update.php`,
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
           );
+      
+          if (response.data.success) {
+            Swal.fire({
+              icon: "success",
+              title: "Success!",
+              text: "Package Details updated successfully",
+            });
 
-          // Reset the form fields
-          setTitle("");
-          setContent("");
-          setType("");
-          setGrpId(""); // Reset the selected group
-
-          // Reset the image input
-          if (imageInputRef.current) {
-            imageInputRef.current.value = "";
+            setUpdatedTitle("");
+        setUpdatedContent("");
+        setUpdatedDuration("");
+        setUpdatedday1("");
+        setUpdatedday2("");
+        setUpdatedday3("");
+        setUpdatedday4("");
+        setUpdatedday5("");
+        setUpdatedday6("");
+        setUpdatedday7("");
+        setUpdatedday8("");
+        setUpdatedday9("");
+        setUpdatedday10("");
+       
+            // navigate("/admin/all-blog"); 
+          
           }
-
-          // Show success message with SweetAlert2
-          Swal.fire({
-            icon: "success",
-            title: "Success!",
-            text: "Package added successfully",
-          });
         } catch (error) {
-          console.error(error);
-          // Show error message with SweetAlert2
+          console.error("Error updating Package Details:", error);
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Failed to add Package",
+            text: "Failed to update Package Details",
           });
         }
-      } else {
-        // Show validation error messages with SweetAlert2
-        Swal.fire({
-          icon: "error",
-          title: "Submission Error",
-          html: Object.values(errors)
-            .map((error) => `<p>${error}</p>`)
-            .join(""),
-        });
-      }
+     
     };
+    
 
     const uniquePgrp = pgrp.filter(
       (grpItem, index, self) =>
@@ -394,6 +393,8 @@
                         className="input input-bordered w-full max-w-xl"
                         id="pkgtitle"
                         value={updatedTitle}
+                        name="Title"  // Ensure this matches the expected key in PHP
+
                         onChange={(e) => setUpdatedTitle(e.target.value)}
                       />
                     </div>
@@ -409,6 +410,7 @@
                         placeholder="Duration"
                         className="input input-bordered w-full max-w-xl"
                         id="pkgduration"
+                        name="Duration" 
                         value={updatedDuration}
                         onChange={(e) => setUpdatedDuration(e.target.value)}
                         //     const [updatedDuration, setUpdatedDuration] = useState("");
@@ -425,6 +427,7 @@
                         Content
                       </label>
                       <JoditEditor
+                       name="Content" 
                       value={updatedContent}
                       onChange={(newContent) => setUpdatedContent(newContent)}
                       />
@@ -438,9 +441,10 @@
                         className="leading-7 text-sm text-gray-600"
                       >
                         Day1
+
                       </label>
                       <JoditEditor
-                      
+                      name="day1"
                         value={updatedday1}
                         onChange={(newContent) => setUpdatedday1(newContent)}
                       />
@@ -456,11 +460,10 @@
                         Day2
                       </label>
                       <JoditEditor
-                        ref={editor2}
-                        tabIndex={1}
-                        onBlur={(newContent) => setContent(newContent)}
+               
+                           name="day2"
                         value={updatedday2}
-                        onChange={(e) => setUpdatedday2(e.target.value)}
+                        onChange={(newContent) => setUpdatedday2(newContent)}
                       />
                     </div>
                   </div>
@@ -474,11 +477,9 @@
                         Day3
                       </label>
                       <JoditEditor
-                        ref={editor3}
-                        tabIndex={1}
-                        onBlur={(newContent) => setContent(newContent)}
+                     name="day3"
                         value={updatedday3}
-                        onChange={(e) => setUpdatedday3(e.target.value)}
+                        onChange={(newContent) => setUpdatedday3(newContent)}
                       />
                     </div>
                   </div>
@@ -492,11 +493,9 @@
                         Day4
                       </label>
                       <JoditEditor
-                        ref={editor4}
-                        tabIndex={1}
-                        onBlur={(newContent) => setContent(newContent)}
-                        value={updatedday4}
-                        onChange={(e) => setUpdatedday4(e.target.value)}
+                          nam="day4"
+                          value={updatedday4}
+                          onChange={(newContent) => setUpdatedday4(newContent)}
                       />
                     </div>
                   </div>
@@ -510,11 +509,9 @@
                         Day5
                       </label>
                       <JoditEditor
-                        ref={editor5}
-                        tabIndex={1}
-                        onBlur={(newContent) => setContent(newContent)}
+                        
                         value={updatedday5}
-                        onChange={(e) => setUpdatedday5(e.target.value)}
+                        onChange={(newContent) => setUpdatedday5(newContent)}
                       />
                     </div>
                   </div>
@@ -528,11 +525,9 @@
                         Day6
                       </label>
                       <JoditEditor
-                        ref={editor6}
-                        tabIndex={1}
-                        onBlur={(newContent) => setContent(newContent)}
-                        value={updatedday6}
-                        onChange={(e) => setUpdatedday6(e.target.value)}
+                          
+                          value={updatedday6}
+                          onChange={(newContent) => setUpdatedday6(newContent)}
                       />
                     </div>
                   </div>
@@ -546,11 +541,9 @@
                         Day7
                       </label>
                       <JoditEditor
-                        ref={editor7}
-                        tabIndex={1}
-                        onBlur={(newContent) => setContent(newContent)}
-                        value={updatedday7}
-                        onChange={(e) => setUpdatedday7(e.target.value)}
+                          
+                          value={updatedday7}
+                          onChange={(newContent) => setUpdatedday7(newContent)}
                       />
                     </div>
                   </div>
@@ -564,11 +557,9 @@
                         Day8
                       </label>
                       <JoditEditor
-                        ref={editor8}
-                        tabIndex={1}
-                        onBlur={(newContent) => setContent(newContent)}
-                        value={updatedday8}
-                        onChange={(e) => setUpdatedday8(e.target.value)}
+                          
+                          value={updatedday8}
+                          onChange={(newContent) => setUpdatedday8(newContent)}
                       />
                     </div>
                   </div>
@@ -582,11 +573,9 @@
                         Day9
                       </label>
                       <JoditEditor
-                        ref={editor9}
-                        tabIndex={1}
-                        onBlur={(newContent) => setContent(newContent)}
-                        value={updatedday9}
-                        onChange={(e) => setUpdatedday9(e.target.value)}
+                         
+                         value={updatedday9}
+                         onChange={(newContent) => setUpdatedday9(newContent)}
                       />
                     </div>
                   </div>
@@ -600,11 +589,9 @@
                         Day 10
                       </label>
                       <JoditEditor
-                        ref={editor10}
-                        tabIndex={1}
-                        onBlur={(newContent) => setContent(newContent)}
-                        value={updatedday10}
-                        onChange={(e) => setUpdatedday10(e.target.value)}
+                           
+                           value={updatedday10}
+                           onChange={(newContent) => setUpdatedday10(newContent)}
                       />
                     </div>
                   </div>

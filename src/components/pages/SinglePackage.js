@@ -124,13 +124,9 @@ export default function SinglePackage() {
   const [activeDay, setActiveDay] = useState(null);
   const [dayContent, setDayContent] = useState(null);
 
-  
-
   const handleDayClick = (dayIndex) => {
     setActiveDay(dayIndex);
     setDayContent(data[0][`day${dayIndex + 1}`]);
-    setActiveDay((prevActiveDay) => (prevActiveDay === dayIndex ? null : dayIndex));
-
   };
 
   const handleAccordionDayClick = (dayIndex) => {
@@ -385,32 +381,32 @@ export default function SinglePackage() {
                               dangerouslySetInnerHTML={{ __html: tab.Content }}
                             />
 
-                            {/* Show days as tabs under the selected tab */}
-                            <div className="flex flex-wrap mt-4">
+                            <div className="mt-2">
                               {Array.from({ length: 10 }, (_, dayIndex) => (
-                                <button
-                                  key={dayIndex}
-                                  className={`px-4 my-2 mr-2 w-16 ${
-                                    activeDay === dayIndex
-                                      ? "btn btn-outline btn-primary"
-                                      : "btn btn-outline "
-                                  }`}
-                                  onClick={() => handleDayClick(dayIndex)}
-                                >
-                                  Day {dayIndex + 1}
-                                </button>
+                                <div key={dayIndex} className="mb-2 ">
+                                  <div
+                                    className={` w-full ${
+                                      activeDay === dayIndex
+                                        ? "btn btn-outline btn-primary"
+                                        : "btn btn-outline"
+                                    }`}
+                                    onClick={() => handleDayClick(dayIndex)}
+                                  >
+                                    Day {dayIndex + 1}
+                                  </div>
+                                  {activeDay === dayIndex && (
+                                    <div className="ml-4">
+                                      {/* Content for the selected day */}
+                                      {/* You can replace this with the actual content */}
+                                      <div
+                                        dangerouslySetInnerHTML={{
+                                          __html: data[0][`day${dayIndex + 1}`],
+                                        }}
+                                      />
+                                    </div>
+                                  )}
+                                </div>
                               ))}
-                            </div>
-
-                            {/* Display content for the selected day */}
-                            <div
-                              className={`md:mx-4 ${
-                                dayContent !== null ? "block" : "hidden"
-                              }`}
-                            >
-                              <div
-                                dangerouslySetInnerHTML={{ __html: dayContent }}
-                              />
                             </div>
                           </div>
                         </div>
